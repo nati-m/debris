@@ -11,8 +11,12 @@ public class Main {
         System.out.println("User " + jack.getName() + "'s address is " + jack.getAddress());
         Company trojan = new Company("Trojan");
         Company biffa = new Company("Biffa");
-        System.out.println("Company " + biffa.getName() + " has Id number " + biffa.getIDString());
-
+        System.out.println("Company " + biffa.getName() + " has ID number " + biffa.getIDString());
+        Company coolSkips = new Company("CoolSkips", true, true, false);
+        System.out.println("Company " + coolSkips.getName() + " - is it a skip company? " + coolSkips.checkIfSkipCo());
+        System.out.println("Now we'll run coolSkips.isntSkipCo()");
+        coolSkips.isntSkipCo();
+        System.out.println("Company " + coolSkips.getName() + " - is it a skip company? " + coolSkips.checkIfSkipCo());
     }
     boolean ooo;
 

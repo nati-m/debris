@@ -23,6 +23,12 @@ public class PublicUser extends User {
         PUBLIC_USER_LIST.add(this);
     }
 
+    public void placeOrder(Company skipCo, Company haulCo, Company tipCo, String address, boolean permitRequired){
+        Order order = new Order(this, skipCo, haulCo, tipCo, address, permitRequired);
+        hasCurrentOrder = true;
+    }
+
+
 
     public static ArrayList<PublicUser> getPublicUserList() {
         return PUBLIC_USER_LIST;
