@@ -12,18 +12,20 @@ public class Order {
     private String address;
     private boolean permitRequired;
     //private Permit permit;
+    private Council localCouncil;
 
     protected Order(){
         orderID = new OrderID(this);
         ORDERS_AND_THEIR_IDS.put(orderID, this);
     }
 
-    protected Order(PublicUser user, Company skipCo, Company haulCo, Company tipCo, String address, boolean permitRequired){
+    protected Order(PublicUser user, Company skipCo, Company haulCo, Company tipCo, String address, boolean permitRequired, Council council){
         publicUser = user;
         this.skipCo = skipCo;
         this.haulCo = haulCo;
         this.tipCo = tipCo;
         this.address = address;
+        localCouncil = council;
 
         orderID = new OrderID(this);
         ORDERS_AND_THEIR_IDS.put(orderID, this);
@@ -37,9 +39,17 @@ public class Order {
         return orderID.getId();
     }
 
+    protected PublicUser getPublicUser(){
+        return publicUser;
+    }
 
+    protected Council getLocalCouncil(){
+        return localCouncil;
+    }
 
-
+    protected String getAddress(){
+        return address;
+    }
 
 
     protected static Map<OrderID, Order> get_ORDERS_AND_THEIR_IDS(){
