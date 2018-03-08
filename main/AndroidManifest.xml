@@ -38,6 +38,14 @@
         <activity
             android:name=".FrontPageLoggedInActivity"
             android:label="@string/title_activity_front_page_logged_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HireHomePageActivity"
+            android:label="@string/title_activity_hire_home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HireSingleDayViewActivity"
+            android:label="@string/title_activity_hire_single_day_view"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

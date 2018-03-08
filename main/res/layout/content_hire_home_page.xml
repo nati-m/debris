@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.debris1_1.HireHomePageActivity"
+    tools:showIn="@layout/activity_hire_home_page"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:text="I want a Skip!"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="32dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:textSize="18sp"
+                android:text="This Skip Size:"
+                android:layout_weight="1" />
+
+            <!-- needs SpinnerAdapter in Java to populate with options -->
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_weight="1"></Spinner>
+
+            <!-- Information. OnClick should display info about skip sizes in popup-->
+            <Button
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="16dp"
+                android:text="i"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="To This Poscode:"
+                android:layout_weight="1" />
+
+            <!-- Set hint to the User's Postcode in Java!!!!!!!! -->
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="NE1 1AA"
+                android:layout_marginRight="32dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="On This Date:"
+                android:layout_weight="1" />
+
+            <!-- http://abhiandroid.com/ui/datepicker https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext -->
+            <EditText
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:hint="01/01/2019"
+                android:layout_marginRight="32dp"
+                android:layout_marginLeft="26dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="220dp"
+            android:layout_marginTop="8dp"
+            android:text="Get a skip!"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
