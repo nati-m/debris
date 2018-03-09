@@ -46,6 +46,10 @@
         <activity
             android:name=".HireSingleDayViewActivity"
             android:label="@string/title_activity_hire_single_day_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HireConfirmOrderActivity"
+            android:label="@string/title_activity_hire_confirm_order"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
