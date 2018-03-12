@@ -1,5 +1,6 @@
 package com.example.android.debris1_1;
 
+import com.example.android.debris1_1.backend.Order;
 import com.example.android.debris1_1.backend.PublicUser;
 
 /**
@@ -17,6 +18,7 @@ public class Control {
     protected static Control CONTROL = new Control();
 
     private PublicUser currentUser;
+    private Order currentOrder;
 
     private Control(){}
 
@@ -24,8 +26,35 @@ public class Control {
         return currentUser;
     }
 
+    protected Order getCurrentOrder(){
+        return currentOrder;
+    }
+
+    /*
+    This returns the address the order will be sent to as a String
+    The String will include 1 or 2 address lines and a postcode.
+    The String is presented with each piece of the address on a separate line.
+     */
+    protected String getCurrentOrderAddressAsString(){
+        String toReturn;
+        toReturn = currentOrder.getAddressLine1();
+
+        //Address line 2 is not required, this just adds it if it isn't "". Shouldn't be null but check.
+        if(!currentOrder.getAddressLine2().equals("")){
+            toReturn += "\n" + currentOrder.getAddressLine2();
+        }
+
+        toReturn += "\n" + currentOrder.getPostCode();
+
+        return toReturn;
+    }
+
     protected void setCurrentUser(PublicUser publicUser){
         currentUser = publicUser;
+    }
+
+    protected void setCurrentOrder(Order order){
+        currentOrder = order;
     }
 
 

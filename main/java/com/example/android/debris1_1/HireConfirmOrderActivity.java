@@ -6,8 +6,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class HireConfirmOrderActivity extends AppCompatActivity {
+
+    TextView address;
+    TextView date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +21,17 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hire_confirm_order);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        address = (TextView) findViewById(R.id.hire_confirm_address);
+        date = (TextView) findViewById(R.id.hire_confirm_date);
+
+        String fullAddress = (Control.CONTROL.getCurrentOrderAddressAsString());
+        address.setText(fullAddress);
+        date.setText(Control.CONTROL.getCurrentOrder().getTempDateString());
+
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

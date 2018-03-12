@@ -12,7 +12,9 @@ public class Order {
     //Now we're using databases this won't work but it's here as a reminder
 
 
-    private String address;
+    private String addressLine1;
+    private String addressLine2;
+    private String postcode;
     private Date date;
     private PublicUser user;
     //private Company skipCo;
@@ -20,12 +22,39 @@ public class Order {
     //private Company tipCo;
     //private boolean permitRequired;
     //private Permit permit;
-    //private Council localCouncil;
+    private Council localCouncil;
+
+
+    private String tempDateString;
+
 
     public Order (PublicUser user){
         this.user = user;
     }
 
+    //Temp constructor including tempDateString
+    public Order (PublicUser user, String addressLine1, String addressLine2, String postcode, String tempDateString){
+        this.user = user;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2; //This may be "" but won't be null.
+        this.postcode = postcode;
+        this.tempDateString = tempDateString;
+    }
 
+    public String getAddressLine1(){
+        return addressLine1;
+    }
+
+    public String getAddressLine2(){
+        return addressLine2;
+    }
+
+    public String getPostCode(){
+        return postcode;
+    }
+
+    public String getTempDateString(){
+        return tempDateString;
+    }
 
 }

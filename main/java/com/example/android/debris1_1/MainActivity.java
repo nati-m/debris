@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
 
-                PublicUser dummyUserForShortcutToWork = new PublicUser("Shortcut Alan", "NE1 1AA", "alan@nala.com");
+                PublicUser dummyUserForShortcutToWork = new PublicUser("Shortcut Alan", "NE6 5SQ", "alan@nala.com");
                 Control.CONTROL.setCurrentUser(dummyUserForShortcutToWork);
 
 

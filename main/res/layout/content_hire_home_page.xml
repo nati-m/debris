@@ -25,8 +25,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,12 +46,65 @@
 
             <!-- Information. OnClick should display info about skip sizes in popup-->
             <ImageButton
+                android:id="@+id/information_image_button_hire_home_page"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="16dp"
                 android:src="@drawable/ic_info_outline_black_24px"
                 />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:textSize="18sp"
+            android:text=""/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="Address Line 1:"
+                android:layout_weight="1" />
+
+            <!-- Set hint to the User's Postcode in Java!!!!!!!! -->
+            <EditText
+                android:id="@+id/enter_address_line_1_hire_home_page"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:hint="1 Oak Street"
+                android:layout_marginRight="32dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="Address Line 2:"
+                android:layout_weight="1" />
+
+
+            <EditText
+                android:id="@+id/enter_address_line_2_hire_home_page"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:layout_weight="1"/>
 
         </LinearLayout>
 
@@ -66,11 +118,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:textSize="18sp"
-                android:text="To This Poscode:"
+                android:text="Poscode:"
                 android:layout_weight="1" />
 
             <!-- Set hint to the User's Postcode in Java!!!!!!!! -->
             <EditText
+                android:id="@+id/enter_postcode_hire_home_page"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:hint="NE1 1AA"
@@ -94,6 +147,7 @@
 
             <!-- http://abhiandroid.com/ui/datepicker https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext -->
             <EditText
+                android:id="@+id/enter_date_hire_home_page"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:hint="01/01/2019"
