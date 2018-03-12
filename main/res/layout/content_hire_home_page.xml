@@ -34,23 +34,24 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginTop="32dp"
                 android:textSize="18sp"
-                android:text="This Skip Size:"
+                android:text="Skip Size:"
                 android:layout_weight="1" />
 
             <!-- needs SpinnerAdapter in Java to populate with options -->
             <Spinner
+                android:id="@+id/skip_size_spinner_hire_home_page"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_weight="1"></Spinner>
 
             <!-- Information. OnClick should display info about skip sizes in popup-->
-            <Button
+            <ImageButton
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginRight="16dp"
-                android:text="i"
+                android:src="@drawable/ic_info_outline_black_24px"
                 />
 
         </LinearLayout>
@@ -70,7 +71,7 @@
 
             <!-- Set hint to the User's Postcode in Java!!!!!!!! -->
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:hint="NE1 1AA"
                 android:layout_marginRight="32dp"
@@ -103,6 +104,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/button_get_a_skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="220dp"

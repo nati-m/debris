@@ -14,7 +14,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="64dp"
         android:paddingBottom="32dp">
 
         <TextView
@@ -35,7 +34,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="64dp"
         android:paddingBottom="32dp">
 
         <TextView
@@ -58,7 +56,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="64dp"
         android:paddingBottom="32dp">
 
         <TextView
@@ -80,7 +77,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="64dp"
         android:paddingBottom="32dp">
 
         <TextView
@@ -101,7 +97,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="64dp"
         android:paddingBottom="32dp">
 
         <!--- Debit card, credit card, Paypal -->
@@ -115,6 +110,21 @@
             android:layout_alignParentRight="true"
             android:text="Total: £-999"
             android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_confirm_order_to_banks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            />
 
     </RelativeLayout>
 

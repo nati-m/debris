@@ -69,6 +69,7 @@
                 android:paddingBottom="9dp"/>
 
             <Button
+                android:id="@+id/button_confirm_hire_day_view"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

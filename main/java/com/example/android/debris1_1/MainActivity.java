@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.android.debris1_1.backend.PublicUser;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -35,6 +37,21 @@ public class MainActivity extends AppCompatActivity {
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
                 Intent nextPageIntent = new Intent(MainActivity.this, FrontPageNotSignedIn.class);
+                startActivity(nextPageIntent);
+            }
+        });
+
+        Button shortcut = (Button) findViewById(R.id.shortcut_to_logged_in_homepage);
+        shortcut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //This code will be run when the button is clicked on.
+            public void onClick(View view) {
+
+                PublicUser dummyUserForShortcutToWork = new PublicUser("Shortcut Alan", "NE1 1AA", "alan@nala.com");
+                Control.CONTROL.setCurrentUser(dummyUserForShortcutToWork);
+
+
+                Intent nextPageIntent = new Intent(MainActivity.this, FrontPageLoggedInActivity.class);
                 startActivity(nextPageIntent);
             }
         });

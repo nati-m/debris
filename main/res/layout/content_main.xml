@@ -32,6 +32,17 @@
         android:layout_height="wrap_content"
         android:text="Next Page"/>
 
+    <Button
+        android:id="@+id/shortcut_to_logged_in_homepage"
+        android:background="@color/softerAmber"
+        app:layout_constraintTop_toBottomOf="@id/debris_title_text_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shortcut to logged in front page"/>
+
 
 
 </android.support.constraint.ConstraintLayout>
