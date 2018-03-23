@@ -9,6 +9,12 @@
     tools:showIn="@layout/activity_main"
     android:background="@color/background">
 
+    <TextView
+        android:id="@+id/testTestTestTestTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Not yet..."/>
+
     <!--TextAppearance Small is predefined as 14sp. It also affects the colour if unedited-->
     <TextView
         android:id="@+id/debris_title_text_view"
@@ -23,6 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+
         android:id="@+id/front_page_button"
         android:background="@color/softerAmber"
         app:layout_constraintBottom_toTopOf="@id/debris_title_text_view"

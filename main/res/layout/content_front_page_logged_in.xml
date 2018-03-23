@@ -19,6 +19,7 @@
         android:id="@+id/hire_and_track_buttons_linear_layout">
 
     <Button
+        style="@style/YellowButton"
         android:id="@+id/hire_button_front_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
         android:text="Hire"/>
 
     <Button
+        style="@style/YellowButton"
         android:id="@+id/track_button_front_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

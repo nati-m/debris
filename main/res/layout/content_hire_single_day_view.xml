@@ -16,25 +16,29 @@
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
             >
-            <Button
-                android:layout_width="64dp"
+            <ImageButton
+                android:id="@+id/back_one_day_hire_single_day_view"
+                android:src="@drawable/arrow_left_black_24px"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back A Day"/>
+                android:background="@color/background"/>
 
             <TextView
+                android:id="@+id/date_text_view_string_single_day_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Friday 1st January 1970"
-                android:layout_marginTop="16dp"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 android:layout_centerHorizontal = "true"/>
 
-            <Button
-                android:layout_width="64dp"
+            <ImageButton
+                android:id="@+id/forward_one_day_hire_single_day_view"
+                android:src="@drawable/arrow_right_black_24px"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next Day"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:background="@color/background"/>
         </RelativeLayout>
 
         <TextView

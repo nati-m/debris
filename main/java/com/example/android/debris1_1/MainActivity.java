@@ -1,5 +1,6 @@
 package com.example.android.debris1_1;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,8 +11,20 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import com.example.android.debris1_1.backend.AddressLookup;
 import com.example.android.debris1_1.backend.PublicUser;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,6 +68,55 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(nextPageIntent);
             }
         });
+
+        //TESTING GETTING A JSON OBJECT
+
+        TextView testTextView = (TextView) findViewById(R.id.testTestTestTestTest);
+
+        AddressLookup addressLookup = new AddressLookup();
+        int dist = -99;
+        dist = addressLookup.findDistanceBetweenTwoPostcodesInKM("NE4 9EN", "NE77XA"); //won't work yet
+        String addressText = "It didn't work";
+
+        try {
+            addressText = addressLookup.getAddressFromPostcode("NE4 5AB");
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        testTextView.setText(addressText);
+
+
+//        try {
+//            dist = addressLookup.findDistanceBetweenTwoPostcodesInKM("NE4 9EN", "NE77XA");
+//        } catch (JSONException e){
+//            e.printStackTrace();
+//        }
+
+        //testTextView.setText("" + dist);
+
+
+//        JsonObjectRequest JSONRequest = new JsonObjectRequest
+//                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//
+//
+//
+//
+//
+//                        testTextView.setText(response.toString());
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // TODO: Handle error
+//
+//                    }
+//                });
 
     }
 

@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="26sp"
+            android:textStyle="bold"
             android:text="I want a Skip!"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginLeft="32dp"
@@ -27,16 +28,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- needs SpinnerAdapter in Java to populate with options -->
+            <Spinner
+                android:id="@+id/number_of_skips_wanted_spinner_hire_home_page"
+                android:layout_width="64dp"
+                android:layout_marginTop="32dp"
+                android:layout_height="wrap_content"
+                ></Spinner>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginTop="32dp"
                 android:textSize="18sp"
-                android:text="Skip Size:"
+                android:text="Skip of Size:"
                 android:layout_weight="1" />
 
-            <!-- needs SpinnerAdapter in Java to populate with options -->
+
+
             <Spinner
                 android:id="@+id/skip_size_spinner_hire_home_page"
                 android:layout_width="wrap_content"
@@ -46,6 +56,7 @@
 
             <!-- Information. OnClick should display info about skip sizes in popup-->
             <ImageButton
+                style="@style/YellowButton"
                 android:id="@+id/information_image_button_hire_home_page"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -145,19 +156,31 @@
                 android:text="On This Date:"
                 android:layout_weight="1" />
 
-            <!-- http://abhiandroid.com/ui/datepicker https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext -->
-            <EditText
-                android:id="@+id/enter_date_hire_home_page"
-                android:layout_width="64dp"
+            <Button
+                style="@style/YellowButton"
+                android:id="@+id/date_display_button_hire_home_page"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="01/01/2019"
-                android:layout_marginRight="32dp"
-                android:layout_marginLeft="26dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:layout_marginRight="32dp"/>
+
+            <!--<DatePicker-->
+                <!--android:id="@+id/date_picker_hire_home_page"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginRight="32dp"-->
+                <!--android:layout_marginLeft="26dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:datePickerMode="spinner"-->
+                <!--android:calendarViewShown="true"/>-->
+
+            <!-- http://abhiandroid.com/ui/datepicker https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext -->
+
 
         </LinearLayout>
 
         <Button
+            style="@style/YellowButton"
             android:id="@+id/button_get_a_skip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

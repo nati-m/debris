@@ -14,28 +14,33 @@ public class Company {
     private int mini_skip_maximum;
     private int dumpy_bag_maximum;
 
+    private double defaultPriceForSkip;
+
     public Company (String name){
         this.name = name;
         maxi_skip_maximum=0;
         midi_skip_maximum=0;
         mini_skip_maximum=0;
         dumpy_bag_maximum=0;
+        defaultPriceForSkip = 0;
     }
 
-    public Company (String name, String email, String phoneNumber){
+    public Company (String name, String email, String phoneNumber, double defaultPriceForSkip){
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.defaultPriceForSkip = defaultPriceForSkip;
         maxi_skip_maximum=0;
         midi_skip_maximum=0;
         mini_skip_maximum=0;
         dumpy_bag_maximum=0;
     }
 
-    public Company (String name, String email, String phoneNumber, int maxi_skip_maximum, int midi_skip_maximum, int mini_skip_maximum, int dumpy_bag_maximum){
+    public Company (String name, String email, String phoneNumber, double defaultPriceForSkip, int maxi_skip_maximum, int midi_skip_maximum, int mini_skip_maximum, int dumpy_bag_maximum){
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.defaultPriceForSkip = defaultPriceForSkip;
         this.maxi_skip_maximum = maxi_skip_maximum;
         this.midi_skip_maximum = midi_skip_maximum;
         this.mini_skip_maximum = mini_skip_maximum;
@@ -62,6 +67,10 @@ public class Company {
 
     public void setDumpy_bag_maximum(int newMaximum){
         dumpy_bag_maximum = newMaximum;
+    }
+
+    public void setDefaultPriceForSkip(double newDefaultPriceForSkip){
+        defaultPriceForSkip = newDefaultPriceForSkip;
     }
 
 

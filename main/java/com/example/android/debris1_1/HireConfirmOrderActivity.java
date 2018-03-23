@@ -10,10 +10,13 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Calendar;
+
 public class HireConfirmOrderActivity extends AppCompatActivity {
 
-    TextView address;
-    TextView date;
+    TextView addressTextView;
+    TextView dateTextView;
+    TextView skipTypeAndNumberTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,25 +25,21 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        address = (TextView) findViewById(R.id.hire_confirm_address);
-        date = (TextView) findViewById(R.id.hire_confirm_date);
+        addressTextView = (TextView) findViewById(R.id.hire_confirm_address);
+        dateTextView = (TextView) findViewById(R.id.hire_confirm_date);
+        skipTypeAndNumberTextView = (TextView) findViewById(R.id.hire_confirm_skip_type_and_number);
 
         String fullAddress = (Control.CONTROL.getCurrentOrderAddressAsString());
-        address.setText(fullAddress);
-        date.setText(Control.CONTROL.getCurrentOrder().getTempDateString());
+        addressTextView.setText(fullAddress);
+        dateTextView.setText(Control.CONTROL.getCurrentOrder().getDateOfSkipArrivalAsAString());
+
+        String skipTypeAndNumber = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size() + " x " + Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().get(0).getSkipType();
+        skipTypeAndNumberTextView.setText(skipTypeAndNumber);
 
 
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 }

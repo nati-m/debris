@@ -7,4 +7,6 @@
     <color name="textDarkAmber">#FF8F00</color>
     <color name="softerAmber">#FFD54F</color>
     <color name="background">#E1F5FE</color>
+
+    <color name="calendarBackground">#FFCDD2</color>
 </resources>

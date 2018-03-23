@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Debris 1.1</string>
     <string name="action_settings">Settings</string>
-    <string name="app_version_number">Debris 1.1, March 2018</string>
+    <string name="app_version_number">Debris 1.1, April 2018</string>
     <string name="title_activity_login">Sign in to your Debris Account</string>
 
     <!-- Strings related to login -->
@@ -18,9 +18,9 @@
         completions."
     </string>
     <string name="title_activity_front_page_not_signed_in">Sign In or Sign Up to Debris</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
-    <string name="title_activity_front_page_logged_in">FrontPageLoggedInActivity</string>
+    <string name="title_activity_sign_up">Sign Up</string>
+    <string name="title_activity_front_page_logged_in">Debris Home</string>
     <string name="title_activity_hire_home_page">Hire Homepage</string>
     <string name="title_activity_hire_single_day_view">Skip Services Available On ____</string>
-    <string name="title_activity_hire_confirm_order">HireConfirmOrderActivity</string>
+    <string name="title_activity_hire_confirm_order">Confirm Your Order</string>
 </resources>

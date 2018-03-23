@@ -1,7 +1,12 @@
 package com.example.android.debris1_1;
 
+import com.example.android.debris1_1.backend.Company;
 import com.example.android.debris1_1.backend.Order;
 import com.example.android.debris1_1.backend.PublicUser;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Paaat VII on 12/03/2018.
@@ -19,8 +24,35 @@ public class Control {
 
     private PublicUser currentUser;
     private Order currentOrder;
+    private ArrayList<Company> currentCompanies;
+    private Calendar calendar;
+    private SimpleDateFormat simpleDateFormat;
 
-    private Control(){}
+    private Control(){
+        currentCompanies = new ArrayList<>();
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("EEE d MMMM yyyy");
+    }
+
+
+    protected void setCurrentUser(PublicUser publicUser){
+        currentUser = publicUser;
+    }
+
+    protected void setCurrentOrder(Order order){
+        currentOrder = order;
+    }
+
+    /*
+    This adds a company object to the currentCompanies ArrayList.
+    This could also be achieved by typing CONTROL.getCurrentCompanies().add(newCompanyObject),
+    but this method is just here as a shortcut.
+     */
+    protected void addCompanyToCurrentCompaniesArrayList(Company company){
+        currentCompanies.add(company);
+    }
+
+
 
     protected PublicUser getCurrentUser(){
         return currentUser;
@@ -49,13 +81,24 @@ public class Control {
         return toReturn;
     }
 
-    protected void setCurrentUser(PublicUser publicUser){
-        currentUser = publicUser;
+    protected String getDateAsAStringInFormat08NOV2018(int year, int month, int day){
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+        String toReturn= simpleDateFormat.format(c.getTime());
+        return toReturn;
     }
 
-    protected void setCurrentOrder(Order order){
-        currentOrder = order;
+    protected ArrayList<Company> getCurrentCompanies(){
+        return currentCompanies;
     }
 
+    protected SimpleDateFormat getSimpleDateFormat(){
+        return simpleDateFormat;
+    }
+
+    protected Calendar calendar(){
+        return calendar;
+    }
 
 }
