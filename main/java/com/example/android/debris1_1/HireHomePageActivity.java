@@ -121,6 +121,7 @@ public class HireHomePageActivity extends AppCompatActivity {
         dataAdapterForSkipSizeSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
+        numberOfSkipsWantedSpinner.setAdapter(dateAdapterForNumberOfSkipsWantedSpinner);
         skipSizeSpinner.setAdapter(dataAdapterForSkipSizeSpinner);
 
         //Setting a toast for the info button
@@ -253,13 +254,14 @@ public class HireHomePageActivity extends AppCompatActivity {
 
         if (!cancel) {
             //create an ArrayList of Skip objects of the skip size the user chose in the skip size
-            //spinner, and the number of them chosen in the drop down menu
-            //TODO Spinner For How Many Skips To Order
-            int numberOfSkips = 1; //TEMP
+            //spinner, and populate the ArrayList with the number of Skips chosen in the drop down menu.
+            //In practice, this will usually be 1.
+            String numberOfSkips = numberOfSkipsWantedSpinner.getSelectedItem().toString();
+            int numberOfSkipsInt = Integer.parseInt(numberOfSkips);
             ArrayList<Skip> skipArrayList = new ArrayList<>();
             String skipSizeString = skipSizeSpinner.getSelectedItem().toString();
 
-            for(int i = 0; i < numberOfSkips; i++){
+            for(int i = 0; i < numberOfSkipsInt; i++){
                 Skip skip = new Skip(skipSizeString);
                 skipArrayList.add(skip);
             }

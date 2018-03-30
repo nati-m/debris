@@ -23,4 +23,7 @@
     <string name="title_activity_hire_home_page">Hire Homepage</string>
     <string name="title_activity_hire_single_day_view">Skip Services Available On ____</string>
     <string name="title_activity_hire_confirm_order">Confirm Your Order</string>
+
+
+<string name="sort_by">Sort by...</string>
 </resources>

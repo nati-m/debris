@@ -31,7 +31,9 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
 
         String fullAddress = (Control.CONTROL.getCurrentOrderAddressAsString());
         addressTextView.setText(fullAddress);
-        dateTextView.setText(Control.CONTROL.getCurrentOrder().getDateOfSkipArrivalAsAString());
+
+        Calendar skipArrivalDate = Control.CONTROL.getCurrentOrder().getDateOfSkipArrival();
+        dateTextView.setText(Control.CONTROL.getDateAsAStringInFormatWed18JUN2018(skipArrivalDate.get(Calendar.YEAR), skipArrivalDate.get(Calendar.MONTH), skipArrivalDate.get(Calendar.DAY_OF_MONTH)));
 
         String skipTypeAndNumber = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size() + " x " + Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().get(0).getSkipType();
         skipTypeAndNumberTextView.setText(skipTypeAndNumber);

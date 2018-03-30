@@ -2,8 +2,6 @@ package com.example.android.debris1_1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,6 +20,7 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         TextView welcomeUserName = (TextView) findViewById(R.id.welcome_user_name_front_page_logged_in);
+
         welcomeUserName.setText("Welcome, " + CONTROL.getCurrentUser().getName() + ".");
 
         Button toHireSection = (Button) findViewById(R.id.hire_button_front_page);

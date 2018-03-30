@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <TextView
+            style="@style/HeaderText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="26sp"
@@ -24,28 +25,55 @@
             android:layout_marginLeft="32dp"
             />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="380dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- needs SpinnerAdapter in Java to populate with options -->
+
             <Spinner
                 android:id="@+id/number_of_skips_wanted_spinner_hire_home_page"
-                android:layout_width="64dp"
-                android:layout_marginTop="32dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="32dp"
                 ></Spinner>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginLeft="16dp"
                 android:textSize="18sp"
-                android:text="Skip of Size:"
+                android:text="Skip(s)"
                 android:layout_weight="1" />
 
 
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="Size"
+                android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/skip_size_spinner_hire_home_page"
@@ -64,6 +92,7 @@
                 android:layout_marginRight="16dp"
                 android:src="@drawable/ic_info_outline_black_24px"
                 />
+
 
         </LinearLayout>
 
@@ -179,12 +208,12 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+    </ScrollView>
+
         <Button
-            style="@style/YellowButton"
+            style="@style/BigRedButton"
             android:id="@+id/button_get_a_skip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="220dp"
             android:layout_marginTop="8dp"
             android:text="Get a skip!"/>
 

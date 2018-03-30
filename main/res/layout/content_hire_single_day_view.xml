@@ -8,44 +8,76 @@
     tools:context="com.example.android.debris1_1.HireSingleDayViewActivity"
     tools:showIn="@layout/activity_hire_single_day_view"
     android:background="@color/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/linear_layout_single_day_view">
 
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="8dp"
             >
             <ImageButton
                 android:id="@+id/back_one_day_hire_single_day_view"
-                android:src="@drawable/arrow_left_black_24px"
+                android:src="@drawable/arrow_left_black_32px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:background="@color/background"/>
 
             <TextView
                 android:id="@+id/date_text_view_string_single_day_view"
+                style="@style/HeaderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Friday 1st January 1970"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:layout_centerHorizontal = "true"/>
 
             <ImageButton
                 android:id="@+id/forward_one_day_hire_single_day_view"
-                android:src="@drawable/arrow_right_black_24px"
+                android:src="@drawable/arrow_right_black_32px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:layout_alignParentRight="true"
                 android:background="@color/background"/>
+
+
+
         </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:text="THIS IS WHERE THE SKIPCOS WILL BE DISPLAYED, DEPENDING ON WHAT IS AVAILABLE FOR THE USER SPECIFIED POSTCODE."/>
+            android:layout_marginTop="4dp"
+            android:text="Sort by:"
+            android:layout_toLeftOf="@id/sort_companies_by_spinner_single_day_view"/>
+
+    <Spinner
+        android:id="@+id/sort_companies_by_spinner_single_day_view"
+        android:layout_alignParentRight="true"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        />
+    </RelativeLayout>
+
+        <ListView
+            android:id="@+id/list_view_companies_single_day_view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:choiceMode="singleChoice"
+            android:clickable="true"
+            android:drawSelectorOnTop="false"
+            android:divider="@null"
+            android:dividerHeight="0.0sp"
+            android:listSelector="@android:color/darker_gray"></ListView>
 
 
         <RelativeLayout
@@ -63,16 +95,18 @@
                 android:text="Requires Permit (i)"/>
 
             <TextView
-                android:id="@+id/Subtotal_text_view"
+                android:id="@+id/subtotal_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="Subtotal: £-1.00"
+                android:text="Subtotal: £-999"
                 android:textStyle="bold"
                 android:paddingBottom="9dp"/>
 
-            <Button
+            <ImageButton
+                android:src="@drawable/shopping_cart_black_32px"
+                style="@style/YellowButton"
                 android:id="@+id/button_confirm_hire_day_view"
                 android:layout_width="64dp"
                 android:layout_height="wrap_content"

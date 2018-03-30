@@ -72,7 +72,9 @@ public class Order {
         this.price = price;
     }
 
-
+    public void setDateOfSkipArrival(Calendar newDateOfSkipArrival){
+        dateOfSkipArrival = newDateOfSkipArrival;
+    }
 
 
     public String getAddressLine1(){
