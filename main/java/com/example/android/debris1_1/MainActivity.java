@@ -22,11 +22,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.android.debris1_1.backend.AddressLookup;
+import com.example.android.debris1_1.backend.GetAndHandlePostcodeData;
+import com.example.android.debris1_1.backend.GetPostcodeData;
 import com.example.android.debris1_1.backend.PublicUser;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    public static TextView testTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +77,34 @@ public class MainActivity extends AppCompatActivity {
 
         //TESTING GETTING A JSON OBJECT
 
-        TextView testTextView = (TextView) findViewById(R.id.testTestTestTestTest);
+//        testTextView = (TextView) findViewById(R.id.testTestTestTestTest);
+//        String JSONData = "Not this time pal";
+//
+//        URL url = null;
+//        try {
+//            url = new URL("http://www.simplylookupadmin.co.uk/JSONservice/JSONSearchForPostZonData.aspx?datakey=W_B7C4975860B64332998F4398F8DBA0&postcode=NE30%202AY&homepostcode=NE4%209EN");
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        GetPostcodeData getPostcodeData = new GetPostcodeData(url);
+//
+//        GetAndHandlePostcodeData getAndHandlePostcodeData = new GetAndHandlePostcodeData("NE4 5AB", "NE6 5SQ");
+//        JSONData = getAndHandlePostcodeData.getDistanceBetweenTwoPostcodesAsAString();
+//        testTextView.setText(JSONData);
 
-        AddressLookup addressLookup = new AddressLookup();
-        int dist = -99;
-        dist = addressLookup.findDistanceBetweenTwoPostcodesInKM("NE4 9EN", "NE77XA"); //won't work yet
-        String addressText = "It didn't work";
-
-        try {
-            addressText = addressLookup.getAddressFromPostcode("NE4 5AB");
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        testTextView.setText(addressText);
+//        AddressLookup addressLookup = new AddressLookup();
+//        int dist = -99;
+//        dist = addressLookup.findDistanceBetweenTwoPostcodesInKM("NE4 9EN", "NE77XA"); //won't work yet
+//        String addressText = "It didn't work";
+//
+//        try {
+//            addressText = addressLookup.getAddressFromPostcode("NE4 5AB");
+//
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        testTextView.setText(addressText);
 
 
 //        try {

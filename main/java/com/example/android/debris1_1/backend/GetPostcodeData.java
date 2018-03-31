@@ -2,6 +2,12 @@ package com.example.android.debris1_1.backend;
 
 import android.os.AsyncTask;
 
+import com.example.android.debris1_1.MainActivity;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,11 +23,34 @@ import java.net.URL;
 public class GetPostcodeData extends AsyncTask<Void, Void, Void> {
 
     String jsonData = "";
+    URL url;
+    boolean complete;
+    boolean failed;
+    GetAndHandlePostcodeData getAndHandlePostcodeData;
+    String distanceBetweenTwoPostcodes = "-999";
+
+    public GetPostcodeData(URL url, GetAndHandlePostcodeData getAndHandlePostcodeData) {
+        this.url = url;
+        complete = false;
+        failed = false;
+        this.getAndHandlePostcodeData = getAndHandlePostcodeData;
+    }
+
+    public GetPostcodeData(URL url) {
+        this.url = url;
+        complete = false;
+        failed = false;
+    }
+
+    public String getDistanceBetweenTwoPostcodesString(){
+        return distanceBetweenTwoPostcodes;
+    }
+
 
     @Override
     protected Void doInBackground(Void... voids) {
         try {
-            URL url = new URL("https://api.myjson.com/bins/pyu07");
+            //URL LocalUrl = new URL("https://api.myjson.com/bins/pyu07");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             InputStream inputStream = httpURLConnection.getInputStream();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -32,11 +61,30 @@ public class GetPostcodeData extends AsyncTask<Void, Void, Void> {
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            failed = true;
         } catch (IOException e) {
             e.printStackTrace();
+            failed = true;
         }
 
 
+
+        try {
+            JSONArray jsonArray = new JSONArray(jsonData);
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                //Object geoDistance = jsonObject.get("pz_geodistancetohomepostcode");
+                distanceBetweenTwoPostcodes = jsonObject.getString("pz_geodistancetohomepostcode");
+                }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            failed = true;
+        }
+
+
+
+        complete = true;
         return null;
     }
 
@@ -44,7 +92,16 @@ public class GetPostcodeData extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
+        getAndHandlePostcodeData.setDistanceBetweenTwoPostcodes(distanceBetweenTwoPostcodes);
+        //MainActivity.testTextView.setText(jsonData);
         //MainActivity.getTextViewForJSON().setText(this.jsonData);
     }
 
+    protected String getJsonData(){
+        return jsonData;
+    }
+
+    protected boolean isComplete(){
+        return complete;
+    }
 }

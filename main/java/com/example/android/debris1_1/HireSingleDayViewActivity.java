@@ -82,7 +82,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         ArrayAdapter<Company> TEMPARRAYADAPT = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, companyArrayList);
 
         companyListView = (ListView) findViewById(R.id.list_view_companies_single_day_view);
-        companyListView.setAdapter(companyArrayAdapter);
+        companyListView.setAdapter(TEMPARRAYADAPT);
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override

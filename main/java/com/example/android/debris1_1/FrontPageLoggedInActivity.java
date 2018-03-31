@@ -19,11 +19,11 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView welcomeUserName = (TextView) findViewById(R.id.welcome_user_name_front_page_logged_in);
+        TextView welcomeUserName = findViewById(R.id.welcome_user_name_front_page_logged_in);
 
         welcomeUserName.setText("Welcome, " + CONTROL.getCurrentUser().getName() + ".");
 
-        Button toHireSection = (Button) findViewById(R.id.hire_button_front_page);
+        Button toHireSection = findViewById(R.id.hire_button_front_page);
         toHireSection.setOnClickListener(new View.OnClickListener() {
             @Override
             //This code will be run when the button is clicked on.
@@ -33,6 +33,15 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
             }
         });
 
+        Button toOrderSection = findViewById(R.id.track_button_front_page);
+        toOrderSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //This code will be run when the button is clicked on.
+            public void onClick(View view) {
+                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, TrackOrdersActivity.class);
+                startActivity(nextPageIntent);
+            }
+        });
     }
 
 }

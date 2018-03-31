@@ -1,5 +1,6 @@
 package com.example.android.debris1_1.backend;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -23,6 +24,8 @@ public class Company {
     private double rating;
     private double defaultPriceForSkip;
     private boolean isSelectedInCompanyList;
+    //private ArrayList<UserFeedback> = new ArrayList<UserFeedback>();
+
 
     public Company (String name, String postcode){
         this.name = name;

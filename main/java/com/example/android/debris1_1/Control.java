@@ -27,7 +27,8 @@ public class Control {
     private ArrayList<Company> currentCompanies;
     private Calendar calendar;
     private SimpleDateFormat simpleDateFormat;
-    SimpleDateFormat dayOfWeek;
+    private SimpleDateFormat dayOfWeek;
+    private ArrayList<Order> ordersFromThisUser;
 
     private Control(){
         currentCompanies = new ArrayList<>();
@@ -55,7 +56,13 @@ public class Control {
         currentCompanies.add(company);
     }
 
+    public ArrayList<Order> getOrdersFromThisUser() {
+        return ordersFromThisUser;
+    }
 
+    public void setOrdersFromThisUser(ArrayList<Order> ordersFromThisUser) {
+        this.ordersFromThisUser = ordersFromThisUser;
+    }
 
     protected PublicUser getCurrentUser(){
         return currentUser;

@@ -27,6 +27,8 @@ public class Order {
     //private Permit permit;
     private Council localCouncil;
     private ArrayList<Skip> skipsOrdered;
+    private Calendar dateSkipWillBePickedUp = null;
+    private UserFeedback userFeedback;
 
 
     private String tempDateString;
@@ -105,12 +107,28 @@ public class Order {
         return toReturn;
     }
 
-    public Company getSkipCo(){
+    public Company getCompany(){
         return skipCo;
     }
 
     public double getPrice(){
         return price;
+    }
+
+    public Calendar getDateSkipWillBePickedUp() {
+        return dateSkipWillBePickedUp;
+    }
+
+    public void setDateSkipWillBePickedUp(Calendar dateSkipWillBePickedUp) {
+        this.dateSkipWillBePickedUp = dateSkipWillBePickedUp;
+    }
+
+    public UserFeedback getUserFeedback() {
+        return userFeedback;
+    }
+
+    public void setUserFeedback(UserFeedback userFeedback) {
+        this.userFeedback = userFeedback;
     }
 
 
