@@ -38,16 +38,18 @@ public class Control {
     }
 
     private void initDummyOrders(){
-        Skip dummyMaxiSkip = new Skip("Maxi Skip (8yd)");
-        Skip dummyDumpyBag = new Skip("Dumpy Bag");
 
         ArrayList<Skip> dummyArrayList1 = new ArrayList<>();
-        dummyArrayList1.add(dummyMaxiSkip);
-        dummyArrayList1.add(dummyMaxiSkip);
-        dummyArrayList1.add(dummyMaxiSkip);
+        dummyArrayList1.add(Skip.getMaxiSkip()); dummyArrayList1.add(Skip.getMaxiSkip()); dummyArrayList1.add(Skip.getMaxiSkip());
 
         ArrayList<Skip> dummyArrayList2 = new ArrayList<>();
-        dummyArrayList2.add(dummyDumpyBag);
+        dummyArrayList2.add(Skip.getDumpyBag());
+
+        ArrayList<Skip> dummyArrayList3 = new ArrayList<>();
+        dummyArrayList3.add(Skip.getMidiSkip()); dummyArrayList3.add(Skip.getMidiSkip());
+
+        ArrayList<Skip> dummyArrayList4 = new ArrayList<>();
+        dummyArrayList4.add(Skip.getMaxiSkip());
 
         Calendar skipArrival3DaysAgo = Calendar.getInstance();
         skipArrival3DaysAgo.add(Calendar.DAY_OF_YEAR, -3);
@@ -55,11 +57,22 @@ public class Control {
         Calendar skipArrivalIn10Days = Calendar.getInstance();
         skipArrivalIn10Days.add(Calendar.DAY_OF_YEAR, 10);
 
+        Calendar skipArrival6MonthsAgo = Calendar.getInstance();
+        skipArrival6MonthsAgo.add(Calendar.MONTH, -6);
+
+        Calendar skipPickedUp10DaysAfter6MonthsAgo = Calendar.getInstance();
+        skipPickedUp10DaysAfter6MonthsAgo.add(Calendar.DAY_OF_MONTH, 10);
+        skipPickedUp10DaysAfter6MonthsAgo.add(Calendar.MONTH, -6);
+
         Order dummyOrder1 = new Order(getCurrentUser(), "1 Willow Street", "", "NE4 5AB", dummyArrayList1, skipArrival3DaysAgo);
         Order dummyOrder2 = new Order(getCurrentUser(), "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList2, skipArrivalIn10Days);
+        Order dummyOrder3 = new Order(getCurrentUser(), "1 Willow Street", "", "NE4 5AB", dummyArrayList3, skipArrival6MonthsAgo, skipPickedUp10DaysAfter6MonthsAgo);
 
         ordersFromThisUser.add(dummyOrder1);
         ordersFromThisUser.add(dummyOrder2);
+        ordersFromThisUser.add(dummyOrder3);
+
+
 
 
     }

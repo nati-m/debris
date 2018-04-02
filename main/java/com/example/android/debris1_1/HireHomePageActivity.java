@@ -257,9 +257,22 @@ public class HireHomePageActivity extends AppCompatActivity {
             int numberOfSkipsInt = Integer.parseInt(numberOfSkips);
             ArrayList<Skip> skipArrayList = new ArrayList<>();
             String skipSizeString = skipSizeSpinner.getSelectedItem().toString();
+            int skipSize = 0;
+
+            if (skipSizeString == "Maxi Skip (8yd)"){
+                skipSize = Skip.MAXI_SKIP_8YD;
+            } else if (skipSizeString == "Midi Skip (4yd") {
+                skipSize = Skip.MIDI_SKIP_4YD;
+            } else if (skipSizeString == "Mini Skip (2yd)") {
+                skipSize = Skip.MINI_SKIP_2YD;
+            } else if (skipSizeString == "Dumpy Bag"){
+                skipSize = Skip.DUMPY_BAG_SMALLEST;
+            }
+
+
 
             for(int i = 0; i < numberOfSkipsInt; i++){
-                Skip skip = new Skip(skipSizeString);
+                Skip skip = Skip.getSkipByIntSize(skipSize);
                 skipArrayList.add(skip);
             }
 

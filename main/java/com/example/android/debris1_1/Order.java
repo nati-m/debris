@@ -50,15 +50,6 @@ public class Order {
         this.user = user;
     }
 
-//    //Temp constructor including tempDateString
-//    public Order (PublicUser user, String addressLine1, String addressLine2, String postcode){
-//        this.user = user;
-//        this.addressLine1 = addressLine1;
-//        this.addressLine2 = addressLine2; //This may be "" but won't be null.
-//        this.postcode = postcode;
-//        //this.tempDateString = tempDateString;
-//
-//    }
 
     public Order (PublicUser user, String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival){
         this.user = user;
@@ -67,8 +58,16 @@ public class Order {
         this.postcode = postcode;
         this.skipsOrdered = skipsOrdered;
         dateOfSkipArrival = calendarWithDateOfSkipArrival;
-        //this.tempDateString = tempDateString;
+    }
 
+    public Order (PublicUser user, String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival, Calendar optionalCalenderWithDateSkipPickedUp){
+        this.user = user;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2; //This may be "" but won't be null.
+        this.postcode = postcode;
+        this.skipsOrdered = skipsOrdered;
+        dateOfSkipArrival = calendarWithDateOfSkipArrival;
+        dateSkipWillBePickedUp = optionalCalenderWithDateSkipPickedUp;
     }
 
 
