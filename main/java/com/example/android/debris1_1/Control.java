@@ -1,9 +1,5 @@
 package com.example.android.debris1_1;
 
-import com.example.android.debris1_1.backend.Company;
-import com.example.android.debris1_1.backend.Order;
-import com.example.android.debris1_1.backend.PublicUser;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +31,37 @@ public class Control {
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
         dayOfWeek = new SimpleDateFormat("EE dd MMM yyyy");
+        ordersFromThisUser = new ArrayList<>();
         initCompanyDummyData();
+        initDummyOrders();
+
+    }
+
+    private void initDummyOrders(){
+        Skip dummyMaxiSkip = new Skip("Maxi Skip (8yd)");
+        Skip dummyDumpyBag = new Skip("Dumpy Bag");
+
+        ArrayList<Skip> dummyArrayList1 = new ArrayList<>();
+        dummyArrayList1.add(dummyMaxiSkip);
+        dummyArrayList1.add(dummyMaxiSkip);
+        dummyArrayList1.add(dummyMaxiSkip);
+
+        ArrayList<Skip> dummyArrayList2 = new ArrayList<>();
+        dummyArrayList2.add(dummyDumpyBag);
+
+        Calendar skipArrival3DaysAgo = Calendar.getInstance();
+        skipArrival3DaysAgo.add(Calendar.DAY_OF_YEAR, -3);
+
+        Calendar skipArrivalIn10Days = Calendar.getInstance();
+        skipArrivalIn10Days.add(Calendar.DAY_OF_YEAR, 10);
+
+        Order dummyOrder1 = new Order(getCurrentUser(), "1 Willow Street", "", "NE4 5AB", dummyArrayList1, skipArrival3DaysAgo);
+        Order dummyOrder2 = new Order(getCurrentUser(), "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList2, skipArrivalIn10Days);
+
+        ordersFromThisUser.add(dummyOrder1);
+        ordersFromThisUser.add(dummyOrder2);
+
+
     }
 
 

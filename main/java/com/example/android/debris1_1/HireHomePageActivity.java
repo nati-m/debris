@@ -16,9 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
-import com.example.android.debris1_1.backend.Order;
-import com.example.android.debris1_1.backend.Skip;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/indigoLight"
     >
 
     <TextView
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:id="@+id/number_and_type_of_skips_track_order_expandable_list"
         android:layout_width="190dp"
         android:textStyle="bold"
@@ -16,11 +17,14 @@
 
     <TextView
         android:layout_marginTop="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
         android:id="@+id/date_of_delivery_or_picked_up_track_order_expandable_list"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
         android:text="DUE TO ARRIVE 23.08.18"/>
 
 
-</LinearLayout>
+</RelativeLayout>

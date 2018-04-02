@@ -10,6 +10,7 @@
     android:orientation="vertical"
     android:background="@color/background">
 
+
     <TextView
         style="@style/HeaderText"
         android:layout_width="wrap_content"
@@ -17,17 +18,42 @@
         android:layout_margin="32dp"
         android:text="Track Your Orders"/>
 
+
     <TextView
+        android:id="@+id/you_have_no_orders_track_orders"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"
         android:text="You have no current or past orders to view."
         />
 
-    <ExpandableListView
-        android:id="@+id/orders_list_view_track_orders"
-        android:layout_margin="32dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"></ExpandableListView>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/sort_by_date_of_skip_arrival_track_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_toLeftOf="@id/spinner_sort_orders_by_track_orders"
+            android:text="Sort by Date of Skip Arrival:"/>
+
+        <Spinner
+            android:id="@+id/spinner_sort_orders_by_track_orders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+
+
+    <ExpandableListView
+        android:id="@+id/orders_expandable_list_view_track_orders"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"/>
 
 </LinearLayout>

@@ -13,22 +13,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import com.example.android.debris1_1.backend.AddressLookup;
-import com.example.android.debris1_1.backend.GetAndHandlePostcodeData;
-import com.example.android.debris1_1.backend.GetPostcodeData;
-import com.example.android.debris1_1.backend.PublicUser;
-
-import java.net.MalformedURLException;
-import java.net.URL;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
 
-                PublicUser dummyUserForShortcutToWork = new PublicUser("Shortcut Alan", "NE6 5SQ", "alan@nala.com");
+                PublicUser dummyUserForShortcutToWork = new PublicUser("Shortcut Alan", "NE6 5SQ", "alan@nala.com", Control.CONTROL.getOrdersFromThisUser());
                 Control.CONTROL.setCurrentUser(dummyUserForShortcutToWork);
 
 

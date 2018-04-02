@@ -15,11 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.debris1_1.backend.Company;
-import com.example.android.debris1_1.backend.CompanyArrayAdapter;
-
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -42,6 +38,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     ArrayList<String> spinnerSortCompaniesByCategories;
     ArrayAdapter<String> sortCompaniesArrayAdapter;
     AdapterView.OnItemSelectedListener onItemSelectedListener;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -170,12 +167,6 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
                 if (pos == 1){
                     orderCompaniesByPrice();
                     }
-
-
-//                if(spinnerSortCompaniesByCategories.size() > sizeOfArrayListThisIsUsedToRemoveTheFirstOption){
-//                    spinnerSortCompaniesByCategories.remove(0);
-//
-//                }
 
             }
             public void onNothingSelected(AdapterView<?> parent) {

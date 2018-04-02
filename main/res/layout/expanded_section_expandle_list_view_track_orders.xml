@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@color/yellowLighter">
 
     <TextView
-        android:id="@+id/status_message_expandable_list_view_track_orders"
+        android:id="@+id/status_message_expandable_list_view_child_track_orders"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="You have 12 days remaining until your skip(s) must be picked up. Choose your pick up date now."/>
 
     <Button
-        android:id="@+id/button_track_orders_expandable_list_view"
+        android:id="@+id/button_track_orders_expandable_list_view_child"
         android:layout_margin="16dp"
         style="@style/YellowButton"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Choose
 Date"/>

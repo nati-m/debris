@@ -2,17 +2,11 @@ package com.example.android.debris1_1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.android.debris1_1.backend.Order;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
@@ -49,7 +43,7 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Order currentOrder = Control.CONTROL.getCurrentOrder();
                 Control.CONTROL.getOrdersFromThisUser().add(currentOrder);
-                Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, HireHomePageActivity.class);
+                Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, FrontPageLoggedInActivity.class);
                 startActivity(nextPageIntent);
             }
         });
