@@ -68,16 +68,12 @@
         />
     </RelativeLayout>
 
-        <ListView
-            android:id="@+id/list_view_companies_single_day_view"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:choiceMode="singleChoice"
-            android:clickable="true"
-            android:drawSelectorOnTop="false"
-            android:divider="@null"
-            android:dividerHeight="0.0sp"
-            android:listSelector="@android:color/darker_gray"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_companies_single_day_view"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
 
    <RelativeLayout
        android:layout_width="match_parent"

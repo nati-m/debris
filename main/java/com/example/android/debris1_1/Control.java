@@ -154,6 +154,10 @@ public class Control {
         return currentCompanies;
     }
 
+    protected void setCurrentCompanies(ArrayList<Company> newCurrentCompanies){
+        currentCompanies = newCurrentCompanies;
+    }
+
     protected SimpleDateFormat getSimpleDateFormat(){
         return simpleDateFormat;
     }
@@ -190,6 +194,5 @@ public class Control {
 
     protected void setCompanySelectedInRecyclerView(Company companySelectedInRecyclerView) {
         this.companySelectedInRecyclerView = companySelectedInRecyclerView;
-        //TODO set price on SingleDayView
     }
 }

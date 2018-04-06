@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
@@ -34,14 +35,16 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     int year;
     ArrayList<Company> allCompanyArrayList = Control.CONTROL.getCurrentCompanies();
     ArrayList<Company> companyArrayList;
-    CompanyArrayAdapter companyArrayAdapter;
-    ListView companyListView;
+    //CompanyArrayAdapter companyArrayAdapter;
+    //ListView companyListView;
+    RecyclerView companyRecyclerView;
+    CompanyRecyclerViewArrayAdapter companyRecyclerViewArrayAdapter = new CompanyRecyclerViewArrayAdapter(getRelevantCompaniesArrayList(), this);
     Spinner sortCompaniesBySpinner;
     ArrayList<String> spinnerSortCompaniesByCategories;
     ArrayAdapter<String> sortCompaniesArrayAdapter;
     AdapterView.OnItemSelectedListener onItemSelectedListener;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
-    //RecyclerView recyclerView = new RecyclerView();
+    Skip skipType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         priceSubtotal = (TextView) findViewById(R.id.subtotal_text_view);
         priceSubtotal.setText("OOO");
         dateOfPage = Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime();
+        skipType = Control.CONTROL.getCurrentOrder().getSkipType();
 
         //This sets the date displayed at the top of the page to the date the user chose on the previous page
         updateDateDisplayedAtTop();
@@ -78,81 +82,31 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
 
         companyArrayList = getRelevantCompaniesArrayList();
 
-        companyArrayAdapter = new CompanyArrayAdapter(this, android.R.layout.simple_list_item_single_choice, companyArrayList);
 
-        //ArrayAdapter<Company> TEMPARRAYADAPT = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, companyArrayList);
+        companyRecyclerView = findViewById(R.id.recycler_view_companies_single_day_view);
 
-        companyListView = (ListView) findViewById(R.id.list_view_companies_single_day_view);
-        companyListView.setAdapter(companyArrayAdapter);
+        companyRecyclerView.setHasFixedSize(true);
+        companyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        companyRecyclerView.setAdapter(companyRecyclerViewArrayAdapter);
 
-        AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        companyRecyclerViewArrayAdapter.setClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(HireSingleDayViewActivity.this, "Yous  ", Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                int pos = companyRecyclerView.getChildViewHolder(v).getAdapterPosition();
+                Control.CONTROL.setCompanySelectedInRecyclerView(companyArrayList.get(pos));
 
-                Company selectedCompany = (Company) parent.getItemAtPosition(position);
+                String priceString = "£" + Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceDifferentDependingOnSkipType(skipType) + "0";
+                priceSubtotal.setText(priceString);
 
-                parent.setBackgroundColor(Color.BLACK);
-            }
-        };
-
-
-
-        onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
-                Toast.makeText(HireSingleDayViewActivity.this, "You select item is  ", Toast.LENGTH_SHORT).show();
-
-                //Company companySelectedByUser = (Company) parent.getAdapter().getItem(pos);
-                TextView price = findViewById(R.id.company_price_list_item_company);
-                //priceSubtotal.setText("Subtotal: £" + companySelectedByUser.getDefaultPriceForSkip() + "0");
-                priceSubtotal.setText(price.getText());
-                parent.setBackgroundColor(Color.BLACK);
-
-
-                for(int i = 0; i < companyArrayList.size(); i++){ //TODO should this be <= ????
-                    companyArrayList.get(i).setIsSelectedInCompanyList(false);
+                for (int i = 0; i < companyRecyclerViewArrayAdapter.getViewsArrayList().size(); i++){
+                    if (i == pos){
+                        companyRecyclerViewArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
+                    }
+                    else companyRecyclerViewArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
                 }
-                companyArrayList.get(pos).setIsSelectedInCompanyList(true);
-                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-
-
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-                priceSubtotal.setText("Vague success");
-            }
-        };
-
-        companyListView.setOnItemClickListener(onItemClickListener);
-        companyListView.setOnItemSelectedListener(onItemSelectedListener);
-        companyListView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //Toast.makeText(HireSingleDayViewActivity.this, "ontouchlistener", Toast.LENGTH_LONG).show();
-
-                return false;
             }
         });
 
-//        companyListView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(HireSingleDayViewActivity.this, "onclick", Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-
-
-//        companyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int arg2,
-//                                    long arg3) {
-//                ListView listView = (ListView) adapterView;
-//                View selectedView = listView.getChildAt(arg2);
-//
-//                String s = tv.getText().toString();
-//                Toast.makeText(HireSingleDayViewActivity.this, "Clicked item is"+s, Toast.LENGTH_LONG).show();
-//            } });
 
         sortCompaniesBySpinner = (Spinner) findViewById(R.id.sort_companies_by_spinner_single_day_view);
         spinnerSortCompaniesByCategories = new ArrayList<>();
@@ -166,10 +120,16 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 
                 if(pos == 0){
-                    orderCompaniesByRating();
+                    ArrayList<Company> ratingOrderArrayList = getRelevantCompaniesArrayList();
+                    Control.CONTROL.setCurrentCompanies(ratingOrderArrayList);
+                    Collections.sort(ratingOrderArrayList, Company.ratingComparator);
+                    reOrderCompanies(ratingOrderArrayList);
                 }
                 if (pos == 1){
-                    orderCompaniesByPrice();
+                    ArrayList<Company> priceOrderArrayList = getRelevantCompaniesArrayList();
+                    Control.CONTROL.setCurrentCompanies(priceOrderArrayList);
+                    Collections.sort(priceOrderArrayList, Company.priceComparator);
+                    reOrderCompanies(priceOrderArrayList);
                     }
 
             }
@@ -196,7 +156,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
 
     private ArrayList<Company> getRelevantCompaniesArrayList(){
         ArrayList<Company> toReturn = new ArrayList<>();
-        Skip skipType = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().get(0);
+        Skip skipType = Control.CONTROL.getCurrentOrder().getSkipType();
         //Only 4 Skip instances exist so this will be equal to any other skip the same size
         int numberOfSkipsWanted = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size();
 
@@ -208,24 +168,35 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         return toReturn;
     }
 
-    private void orderCompaniesByPrice(){
-        ArrayList<Company> priceOrderArrayList = getRelevantCompaniesArrayList();
+    /*
+    This re-orders the list of companies on the page to the order specified in the ArrayList<Company>
+    newOrder. It does so by resetting the Company RecyclerView's Array Adapter with the newly ordered
+    ArrayList.
+     */
+    private void reOrderCompanies(ArrayList<Company> newOrder){
+        companyRecyclerViewArrayAdapter = new CompanyRecyclerViewArrayAdapter(newOrder, this);
+        companyRecyclerView.setAdapter(companyRecyclerViewArrayAdapter);
 
-        Collections.sort(priceOrderArrayList, Company.priceComparator);
+        //TODO Set the selected company, if any, to Cyan
 
-        companyArrayAdapter = new CompanyArrayAdapter(this, android.R.layout.simple_list_item_single_choice, priceOrderArrayList);
-        companyListView.setAdapter(companyArrayAdapter);
-        companyListView.setOnItemSelectedListener(onItemSelectedListener);
-    }
+        companyRecyclerViewArrayAdapter.setClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = companyRecyclerView.getChildViewHolder(v).getAdapterPosition();
+                Control.CONTROL.setCompanySelectedInRecyclerView(Control.CONTROL.getCurrentCompanies().get(pos));
 
-    private void orderCompaniesByRating(){
-        ArrayList<Company> ratingOrderArrayList = getRelevantCompaniesArrayList();
+                //TODO make priceString method including if thingy is checked
+                String priceString = "£" + Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceDifferentDependingOnSkipType(skipType) + "0";
+                priceSubtotal.setText(priceString);
 
-        Collections.sort(ratingOrderArrayList, Company.ratingComparator);
-
-        companyArrayAdapter = new CompanyArrayAdapter(this, android.R.layout.simple_list_item_single_choice, ratingOrderArrayList);
-        companyListView.setAdapter(companyArrayAdapter);
-        companyListView.setOnItemSelectedListener(onItemSelectedListener);
+                for (int i = 0; i < companyRecyclerViewArrayAdapter.getViewsArrayList().size(); i++){
+                    if (i == pos){
+                        companyRecyclerViewArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
+                    }
+                    else companyRecyclerViewArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
+                }
+            }
+        });
     }
 
     /*

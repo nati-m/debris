@@ -1,5 +1,6 @@
 package com.example.android.debris1_1;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,7 +18,7 @@ public class ThrowAwayCompanyListTest extends AppCompatActivity {
 
     RecyclerView companyRecyclerView;
     RecyclerView.LayoutManager layoutManager;
-    List<Company> companyList;
+    ArrayList<Company> companyList;
     TextView price;
 
     @Override
@@ -61,7 +62,14 @@ public class ThrowAwayCompanyListTest extends AppCompatActivity {
                 String priceString = "£" + Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceForSkip() + "0";
                 price.setText(priceString);
 
+                //v.setBackgroundColor(Color.CYAN);
 
+                for (int i = 0; i < adapter.getViewsArrayList().size(); i++){
+                    if (i == pos){
+                        adapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
+                    }
+                    else adapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
+                }
             }
         });
 

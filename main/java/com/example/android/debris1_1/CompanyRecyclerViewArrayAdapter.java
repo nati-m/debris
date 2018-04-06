@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -40,14 +41,24 @@ class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickLi
 
 public class CompanyRecyclerViewArrayAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
-    List<Company> companyList;
+    ArrayList<Company> companyList;
     Context context;
     int indexOfRow; //this will be changed
     View.OnClickListener mClickListener;
+    ArrayList<View> viewsArrayList;
+    //This ArrayList keeps all the views, as in all the columns, in one place. This allows for
+    //the views to be accessed to, for example, change the background color of the selected view
+    //and restore all the other views to the normal background colour.
 
-    public CompanyRecyclerViewArrayAdapter(List<Company> companyList, Context context) {
+    public ArrayList<View> getViewsArrayList(){
+        return viewsArrayList;
+    }
+
+
+    public CompanyRecyclerViewArrayAdapter(ArrayList<Company> companyList, Context context) {
         this.companyList = companyList;
         this.context = context;
+        viewsArrayList = new ArrayList<>();
     }
 
     @Override
@@ -64,8 +75,8 @@ public class CompanyRecyclerViewArrayAdapter extends RecyclerView.Adapter<Custom
             }
         });
 
-//        LayoutInflater inflater = LayoutInflater.from(context);
-//        View companyView = inflater.inflate(R.layout.list_item_company, parent, false);
+        viewsArrayList.add(customViewHolder.itemView);
+
         return customViewHolder;
     }
 
@@ -80,29 +91,7 @@ public class CompanyRecyclerViewArrayAdapter extends RecyclerView.Adapter<Custom
         holder.price.setText(priceString);
         float rating = (float) companyList.get(position).getRating();
         holder.ratingBar.setRating(rating);
-       // final CustomViewHolder theSameHolder = holder;
 
-//        holder.setItemClickListener(new ItemClickListener() {
-//            @Override
-//            public void onClick(View view, int position) {
-//                indexOfRow = position;
-//                Control.CONTROL.setCompanySelectedInRecyclerView(companyList.get(position));
-//                notifyDataSetChanged(); //this
-//
-//
-//                int selectedCompanyPositionInArrayList = Control.CONTROL.getCurrentCompanies().indexOf(Control.CONTROL.getCompanySelectedInRecyclerView());
-//
-//                for(int i = 0; i < companyList.size(); i++){
-//                if (indexOfRow == selectedCompanyPositionInArrayList) {
-//                    view.setBackgroundColor(Color.BLUE);}
-//                    else {
-//                        view.setBackgroundColor(Color.YELLOW);
-//                    }
-//
-//                }
-//            }
-//
-//        });
 
 
     }
