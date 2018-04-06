@@ -1,5 +1,6 @@
 package com.example.android.debris1_1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -55,11 +57,93 @@ public class TrackOrdersActivity extends AppCompatActivity {
         if (ordersFromThisUser.size() > 0) {
 
             youHaveNoOrders.setVisibility(GONE);
-            if (ordersFromThisUser.size() > 1) {
                 Collections.sort(ordersFromThisUser, Order.dateLatestFirstComparator);
                 expandableListAdapter = new ExpandableListTrackOrdersAdapter(this, ordersFromThisUser, stringArrayListHashMap);
 
                 expandableListView.setAdapter(expandableListAdapter);
+
+
+                expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+                    @Override
+                    public void onGroupExpand(int groupPosition) {
+
+                        Button button = findViewById(R.id.button_track_orders_expandable_list_view_child);
+                        Order order = ordersFromThisUser.get(groupPosition);
+                        View.OnClickListener toReturn = new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //a blank one to fill with an option below
+                            }
+                        };
+
+                        if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_EDIT_ORDER_ONLY_BEFORE_SKIP_IS_DELIVERED) {
+                            button.setText("Edit\nOrder");
+                            toReturn = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
+                                    startActivity(nextPageIntent);
+                                }
+                            };
+                        }
+
+
+                        if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_CHOOSE_DATE_OF_SKIP_PICKUP) {
+                            button.setText("Choose\nDate");
+                            toReturn = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
+                                    startActivity(nextPageIntent);
+
+                                    //TODO
+                                }
+                            };
+                        }
+
+                        if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_EDIT_DATE) {
+                            button.setText("Edit\nDate");
+                            toReturn = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
+                                    startActivity(nextPageIntent);
+
+                                    //TODO
+                                }
+                            };
+                        }
+
+                        if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_LEAVE_FEEDBACK_NOW) {
+                            button.setText("Leave\nFeedback");
+                            toReturn = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent nextPageIntent = new Intent(TrackOrdersActivity.this, LeaveFeedbackActivity.class);
+                                    startActivity(nextPageIntent);
+                                }
+                            };
+                        }
+
+                        if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_VIEW_FEEDBACK) {
+                            button.setText("View\nFeedback");
+                            toReturn = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
+                                    startActivity(nextPageIntent);
+
+                                    //TODO
+                                }
+                            };
+                        }
+                        if(button != null) {
+                            button.setOnClickListener(toReturn);
+                        }
+                    }
+                });
+
+
 
                 spinnerSortByOptions.add("Latest First");
                 spinnerSortByOptions.add("Earliest First");
@@ -86,9 +170,11 @@ public class TrackOrdersActivity extends AppCompatActivity {
 
             }
 
-        }
 
 
+    }
+
+    private void bla(){
 
     }
 

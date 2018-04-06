@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class HireConfirmOrderActivity extends AppCompatActivity {
@@ -16,6 +19,7 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
     TextView dateTextView;
     TextView skipTypeAndNumberTextView;
     Button confirmOrder;
+    Spinner paymentOptionsSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,13 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
             }
         });
 
+        paymentOptionsSpinner = findViewById(R.id.spinner_payment_method_confirm_orders);
+
+        ArrayList<String> spinnerOptions = new ArrayList<>();
+        spinnerOptions.add("Credit Card"); spinnerOptions.add("Debit Card"); spinnerOptions.add("PayPal");
+        ArrayAdapter<String> arrayAdapterString = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerOptions);
+        arrayAdapterString.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        paymentOptionsSpinner.setAdapter(arrayAdapterString);
 
 
     }

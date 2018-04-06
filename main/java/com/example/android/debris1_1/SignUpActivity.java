@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 import static com.example.android.debris1_1.Control.CONTROL;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -128,7 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         if(!cancel){
             //creates a user object
-            currentUser = new PublicUser(name, postcode, email);
+            currentUser = new PublicUser(name, postcode, email, new ArrayList<Order>());
 
             //sets this to the current user using the app in CONTROL
             CONTROL.setCurrentUser(currentUser);

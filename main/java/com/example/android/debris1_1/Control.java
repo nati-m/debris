@@ -24,20 +24,19 @@ public class Control {
     private Calendar calendar;
     private SimpleDateFormat simpleDateFormat;
     private SimpleDateFormat dayOfWeek;
-    private ArrayList<Order> ordersFromThisUser;
+    private Company companySelectedInRecyclerView;
 
     private Control(){
         currentCompanies = new ArrayList<>();
         calendar = Calendar.getInstance();
         simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
         dayOfWeek = new SimpleDateFormat("EE dd MMM yyyy");
-        ordersFromThisUser = new ArrayList<>();
         initCompanyDummyData();
-        initDummyOrders();
+        //initDummyOrders(); This is now done when I press shortcut to logged in front page
 
     }
 
-    private void initDummyOrders(){
+    protected void initDummyOrders(){
 
         ArrayList<Skip> dummyArrayList1 = new ArrayList<>();
         dummyArrayList1.add(Skip.getMaxiSkip()); dummyArrayList1.add(Skip.getMaxiSkip()); dummyArrayList1.add(Skip.getMaxiSkip());
@@ -64,15 +63,21 @@ public class Control {
         skipPickedUp10DaysAfter6MonthsAgo.add(Calendar.DAY_OF_MONTH, 10);
         skipPickedUp10DaysAfter6MonthsAgo.add(Calendar.MONTH, -6);
 
+        Calendar skipArrival1MonthAgo = Calendar.getInstance();
+        skipArrival1MonthAgo.add(Calendar.MONTH, -1);
+
+        Calendar skipPickedUp2WeeksAgo = Calendar.getInstance();
+        skipPickedUp2WeeksAgo.add(Calendar.WEEK_OF_YEAR, -2);
+
         Order dummyOrder1 = new Order(getCurrentUser(), "1 Willow Street", "", "NE4 5AB", dummyArrayList1, skipArrival3DaysAgo);
         Order dummyOrder2 = new Order(getCurrentUser(), "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList2, skipArrivalIn10Days);
         Order dummyOrder3 = new Order(getCurrentUser(), "1 Willow Street", "", "NE4 5AB", dummyArrayList3, skipArrival6MonthsAgo, skipPickedUp10DaysAfter6MonthsAgo);
+        Order dummyOrder4 = new Order(getCurrentUser(), "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList4, skipArrival1MonthAgo, skipPickedUp2WeeksAgo);
 
-        ordersFromThisUser.add(dummyOrder1);
-        ordersFromThisUser.add(dummyOrder2);
-        ordersFromThisUser.add(dummyOrder3);
-
-
+        currentUser.getThisUsersOrders().add(dummyOrder1);
+        currentUser.getThisUsersOrders().add(dummyOrder2);
+        currentUser.getThisUsersOrders().add(dummyOrder3);
+        currentUser.getThisUsersOrders().add(dummyOrder4);
 
 
     }
@@ -96,11 +101,11 @@ public class Control {
     }
 
     public ArrayList<Order> getOrdersFromThisUser() {
-        return ordersFromThisUser;
+        return currentUser.getThisUsersOrders();
     }
 
     public void setOrdersFromThisUser(ArrayList<Order> ordersFromThisUser) {
-        this.ordersFromThisUser = ordersFromThisUser;
+        currentUser.setThisUsersOrders(ordersFromThisUser);
     }
 
     protected PublicUser getCurrentUser(){
@@ -179,4 +184,12 @@ public class Control {
         currentCompanies.add(company1); currentCompanies.add(company2); currentCompanies.add(company3); currentCompanies.add(company4); currentCompanies.add(company5); currentCompanies.add(company6); currentCompanies.add(company7); currentCompanies.add(company8); currentCompanies.add(company9);
     }
 
+    protected Company getCompanySelectedInRecyclerView() {
+        return companySelectedInRecyclerView;
+    }
+
+    protected void setCompanySelectedInRecyclerView(Company companySelectedInRecyclerView) {
+        this.companySelectedInRecyclerView = companySelectedInRecyclerView;
+        //TODO set price on SingleDayView
+    }
 }

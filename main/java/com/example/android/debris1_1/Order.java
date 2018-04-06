@@ -26,10 +26,12 @@ public class Order {
     private boolean permitRequired;
     //private Permit permit;
     private Council localCouncil;
-    private ArrayList<Skip> skipsOrdered;
+    private ArrayList<Skip> skipsOrdered = new ArrayList<>();
     private Calendar dateSkipWillBePickedUp = null;
     private UserFeedback userFeedback;
     private int buttonTypeForTrackOrders = -999;
+    private int parentTypeForExpandleListView;
+    private int childTypeForExpandableListView;
 
     //These are used in constructing the "track your orders" page, to choose what the button should do.
     public static final int BUTTON_TYPE_EDIT_ORDER_ONLY_BEFORE_SKIP_IS_DELIVERED = 1;
@@ -174,5 +176,36 @@ public class Order {
             }
         }
     };
+
+    public int getParentTypeForExpandleListView() {
+        return parentTypeForExpandleListView;
+    }
+
+    public void setParentTypeForExpandleListView(int parentTypeForExpandleListView) {
+        this.parentTypeForExpandleListView = parentTypeForExpandleListView;
+    }
+
+    public int getChildTypeForExpandableListView() {
+        return childTypeForExpandableListView;
+    }
+
+    public void setChildTypeForExpandableListView(int childTypeForExpandableListView) {
+        this.childTypeForExpandableListView = childTypeForExpandableListView;
+    }
+
+    //As only skips of the same type can be ordered at at least 1 is always ordered, the skip
+    //returned will be indicative of all the skips ordered
+    public Skip getSkipType(){
+        return skipsOrdered.get(0);
+    }
+
+    public int getNumberOfSkipsOrdered(){
+        return skipsOrdered.size();
+    }
+
+    public void setSkipsOrdered(ArrayList<Skip> skipsOrdered){
+        this.skipsOrdered.clear();
+        this.skipsOrdered.addAll(skipsOrdered);
+    }
 
 }

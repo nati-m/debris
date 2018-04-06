@@ -56,14 +56,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="2dp"
             android:text="Sort by:"
             android:layout_toLeftOf="@id/sort_companies_by_spinner_single_day_view"/>
 
     <Spinner
         android:id="@+id/sort_companies_by_spinner_single_day_view"
         android:layout_alignParentRight="true"
-        android:layout_width="40dp"
+        android:layout_width="115dp"
         android:layout_height="wrap_content"
         />
     </RelativeLayout>
@@ -77,7 +77,25 @@
             android:drawSelectorOnTop="false"
             android:divider="@null"
             android:dividerHeight="0.0sp"
-            android:listSelector="@android:color/darker_gray"></ListView>
+            android:listSelector="@android:color/darker_gray"/>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="48dp">
+
+       <CheckBox
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerInParent="true"
+       android:layout_marginRight="32dp"
+       android:layout_marginTop="8dp"
+       android:layout_alignParentBottom="true"
+       android:textSize="12sp"
+       android:checked="true"
+       android:text="Skip(s) will be placed on a public highway"/>
+
+
+   </RelativeLayout>
 
 
         <RelativeLayout
@@ -86,13 +104,6 @@
             android:layout_marginLeft="32dp"
             android:layout_marginBottom="32dp"
             android:layout_marginRight="32dp">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:textSize="8sp"
-                android:text="Requires Permit (i)"/>
 
             <TextView
                 android:id="@+id/subtotal_text_view"

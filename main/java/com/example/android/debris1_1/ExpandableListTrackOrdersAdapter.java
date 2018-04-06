@@ -1,6 +1,7 @@
 package com.example.android.debris1_1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,11 +64,13 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
         String message;
         Calendar c = Calendar.getInstance(); //This contains today's date
 
-//        //If the skip is being delivered today
-//        if(c.DAY_OF_YEAR == order.getDateOfSkipArrival().DAY_OF_YEAR && c.YEAR == order.getDateOfSkipArrival().YEAR){
-//            message = "DUE TO ARRIVE TODAY";
-//            return message;
-//        }
+        //order.setParentTypeForExpandleListView(1); //1 means red text. It'll change to 2 if it's green text.
+
+        //If the skip is being delivered today
+        if(c.getTime() == order.getDateOfSkipArrival().getTime()){
+            message = "DUE TO ARRIVE TODAY";
+            return message;
+        }
 
         //If the skip(s) have not yet been delivered
         if(c.before(order.getDateOfSkipArrival())){
@@ -95,7 +98,10 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
 
         //if the order has been completed
         message = "ORDER\nCOMPLETED";
-        textView.setTextColor(GREEN);
+        //order.setParentTypeForExpandleListView(2);
+        //textView.setTextColor(GREEN);
+        //This is commented out for now as it was causing the wrong text to become green and the reason
+        //could not be found
 
         return message;
     }
@@ -110,19 +116,20 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
         }
 
 
-        TextView messageTextView = (TextView) convertView.findViewById(R.id.status_message_expandable_list_view_child_track_orders);
+
         Button buttonOfManyFunctions = convertView.findViewById(R.id.button_track_orders_expandable_list_view_child);
 
         String message = sortOutWhichChildViewMessageIsNeeded(currentOrder);
+        TextView messageTextView = (TextView) convertView.findViewById(R.id.status_message_expandable_list_view_child_track_orders);
         messageTextView.setText(message);
 
-        if(currentOrder.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_NO_BUTTON){
-            buttonOfManyFunctions.setVisibility(View.GONE);
-        } else {
-            View.OnClickListener buttonOnClickListener;
-            buttonOnClickListener = sortOutWhichChildViewButtonIsNeeded(currentOrder, buttonOfManyFunctions);
-            //This sets the correct text on the button too
-        }
+//        if(currentOrder.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_NO_BUTTON){
+//            buttonOfManyFunctions.setVisibility(View.GONE);
+//        } else {
+//            View.OnClickListener buttonOnClickListener;
+//            buttonOnClickListener = sortOutWhichChildViewButtonIsNeeded(currentOrder, buttonOfManyFunctions);
+//            //This sets the correct text on the button too
+//        }
 
 
         return convertView;
@@ -138,10 +145,11 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
             toReturn = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent nextPageIntent = new Intent(v.getContext(), EditOrderActivity.class);
+                    context.startActivity(nextPageIntent);
                 }
             };
-
+            return toReturn;
         }
 
         if(order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_CHOOSE_DATE_OF_SKIP_PICKUP){
@@ -149,9 +157,13 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
             toReturn = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent nextPageIntent = new Intent(v.getContext(), EditOrderActivity.class);
+                    context.startActivity(nextPageIntent);
 
+                    //TODO
                 }
             };
+            return toReturn;
         }
 
         if(order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_EDIT_DATE){
@@ -159,10 +171,13 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
             toReturn = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent nextPageIntent = new Intent(v.getContext(), EditOrderActivity.class);
+                    context.startActivity(nextPageIntent);
 
-
+                    //TODO
                 }
             };
+            return toReturn;
         }
 
         if(order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_LEAVE_FEEDBACK_NOW){
@@ -170,10 +185,11 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
             toReturn = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
+                    Intent nextPageIntent = new Intent(v.getContext(), LeaveFeedbackActivity.class);
+                    context.startActivity(nextPageIntent);
                 }
             };
+            return toReturn;
         }
 
         if(order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_VIEW_FEEDBACK){
@@ -181,10 +197,13 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
             toReturn = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent nextPageIntent = new Intent(v.getContext(), EditOrderActivity.class);
+                    context.startActivity(nextPageIntent);
 
-
+                    //TODO
                 }
             };
+            return toReturn;
         }
 
 
@@ -210,6 +229,11 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
      */
     private String sortOutWhichChildViewMessageIsNeeded(Order order) {
         Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_YEAR, -1);
+        //For some reason this is necessary to make all of the dates sync up.
+        //It may have something to do with a timezone or comparison error but nevertheless
+        //it makes everything work as it should so is a good patch for now.
+
         Calendar skipArrival = order.getDateOfSkipArrival();
         String message;
 
@@ -397,7 +421,8 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return listHashMap.get(ordersArrayList.get(groupPosition)).get(childPosition);
+        //return ordersArrayList.get(groupPosition);
+       return listHashMap.get(ordersArrayList.get(groupPosition)).get(childPosition);
     }
 
     @Override
@@ -420,4 +445,31 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+    @Override
+    public int getChildTypeCount() {
+        return 2;
+        //TODO real number
+    }
+
+    @Override
+    public int getGroupTypeCount() {
+        return 2;
+        //TODO real number
+    }
+
+    @Override
+    public int getChildType(int groupPosition, int childPosition) {
+        //this just returns 0, needs to change
+        Order currentOrder = (Order) getGroup(groupPosition);
+        //int type = currentOrder.getChildTypeForExpandableListView();
+        return super.getChildType(groupPosition, childPosition);
+    }
+
+//    @Override
+//    public int getGroupType(int groupPosition) {
+//        //this just returns 0, needs to change
+//        Order currentOrder = (Order) getGroup(groupPosition);
+//        //return currentOrder.getParentTypeForExpandleListView();
+//    }
 }

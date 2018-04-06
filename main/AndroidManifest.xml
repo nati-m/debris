@@ -55,6 +55,18 @@
         <activity
             android:name=".TrackOrdersActivity"
             android:label="@string/title_activity_track_orders"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditOrderActivity"
+            android:label="@string/title_activity_edit_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LeaveFeedbackActivity"
+            android:label="@string/title_activity_leave_feedback"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ThrowAwayCompanyListTest"
+            android:label="@string/title_activity_throw_away_company_list_test"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -27,4 +27,7 @@
 
     <string name="sort_by">Sort by...</string>
     <string name="title_activity_track_orders">TrackOrdersActivity</string>
+    <string name="title_activity_edit_order">EditOrderActivity</string>
+    <string name="title_activity_leave_feedback">LeaveFeedbackActivity</string>
+    <string name="title_activity_throw_away_company_list_test">ThrowAwayCompanyListTest</string>
 </resources>

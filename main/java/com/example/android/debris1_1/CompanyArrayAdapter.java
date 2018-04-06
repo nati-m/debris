@@ -48,8 +48,12 @@ public class CompanyArrayAdapter extends ArrayAdapter<Company> {
             companyHeading.setText("Company " + companyNumber);
         }
 
+        //THIS WORKS OUT THE PRICE, MULTIPLYING THE PRICE FOR ONE SKIP OF THE SELECTED TYPE
+        //BY HOW MANY THE USER SELECTED.
         price = (TextView) listItemView.findViewById(R.id.company_price_list_item_company);
-        price.setText(getCurrency() + currentCompany.getDefaultPriceForSkip() + "0");
+        double thePrice = currentCompany.getDefaultPriceDifferentDependingOnSkipType(Control.CONTROL.getCurrentOrder().getSkipType());
+        thePrice = thePrice * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
+        price.setText(getCurrency() + thePrice + "0");
 
         ratingBar = (RatingBar) listItemView.findViewById(R.id.rating_company_list_item);
         float rating = (float) currentCompany.getRating();

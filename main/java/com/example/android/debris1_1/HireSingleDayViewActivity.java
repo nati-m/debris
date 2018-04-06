@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,6 +32,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     int day;
     int month;
     int year;
+    ArrayList<Company> allCompanyArrayList = Control.CONTROL.getCurrentCompanies();
     ArrayList<Company> companyArrayList;
     CompanyArrayAdapter companyArrayAdapter;
     ListView companyListView;
@@ -39,6 +41,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     ArrayAdapter<String> sortCompaniesArrayAdapter;
     AdapterView.OnItemSelectedListener onItemSelectedListener;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+    //RecyclerView recyclerView = new RecyclerView();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +76,14 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
             }
         });
 
-        companyArrayList = Control.CONTROL.getCurrentCompanies();
+        companyArrayList = getRelevantCompaniesArrayList();
+
         companyArrayAdapter = new CompanyArrayAdapter(this, android.R.layout.simple_list_item_single_choice, companyArrayList);
 
-        ArrayAdapter<Company> TEMPARRAYADAPT = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, companyArrayList);
+        //ArrayAdapter<Company> TEMPARRAYADAPT = new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, companyArrayList);
 
         companyListView = (ListView) findViewById(R.id.list_view_companies_single_day_view);
-        companyListView.setAdapter(TEMPARRAYADAPT);
+        companyListView.setAdapter(companyArrayAdapter);
 
         AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
             @Override
@@ -124,7 +128,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         companyListView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                Toast.makeText(HireSingleDayViewActivity.this, "ontouchlistener", Toast.LENGTH_LONG).show();
+                //Toast.makeText(HireSingleDayViewActivity.this, "ontouchlistener", Toast.LENGTH_LONG).show();
 
                 return false;
             }
@@ -190,9 +194,22 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     }
     //TODO http://www.egscomics.com/index.php?id=493
 
+    private ArrayList<Company> getRelevantCompaniesArrayList(){
+        ArrayList<Company> toReturn = new ArrayList<>();
+        Skip skipType = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().get(0);
+        //Only 4 Skip instances exist so this will be equal to any other skip the same size
+        int numberOfSkipsWanted = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size();
+
+        for (int i = 0; i < allCompanyArrayList.size(); i++){
+            if (allCompanyArrayList.get(i).isThisKindOfSkipAvailable(skipType, numberOfSkipsWanted)){
+                toReturn.add(allCompanyArrayList.get(i));
+            }
+        }
+        return toReturn;
+    }
+
     private void orderCompaniesByPrice(){
-        ArrayList<Company> priceOrderArrayList = new ArrayList<>();
-        priceOrderArrayList.addAll(companyArrayList);
+        ArrayList<Company> priceOrderArrayList = getRelevantCompaniesArrayList();
 
         Collections.sort(priceOrderArrayList, Company.priceComparator);
 
@@ -202,8 +219,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     }
 
     private void orderCompaniesByRating(){
-        ArrayList<Company> ratingOrderArrayList = new ArrayList<>();
-        ratingOrderArrayList.addAll(companyArrayList);
+        ArrayList<Company> ratingOrderArrayList = getRelevantCompaniesArrayList();
 
         Collections.sort(ratingOrderArrayList, Company.ratingComparator);
 

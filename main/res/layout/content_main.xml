@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,49 +7,93 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.android.debris1_1.MainActivity"
     tools:showIn="@layout/activity_main"
-    android:background="@color/background">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/testTestTestTestTest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Not yet..."/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!--TextAppearance Small is predefined as 14sp. It also affects the colour if unedited-->
-    <TextView
-        android:id="@+id/debris_title_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_version_number"
-        android:textAppearance="?android:textAppearanceSmall"
-        android:paddingTop="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/skipicon"
+            />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/big_title_main_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/HeaderText"
+            android:textSize="35sp"
+            android:textColor="@android:color/black"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="DEBRIS"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--TextAppearance Small is predefined as 14sp. It also affects the colour if unedited-->
+        <TextView
+            android:id="@+id/debris_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_version_number"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:paddingTop="1dp"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
     <Button
 
         android:id="@+id/front_page_button"
         android:background="@color/softerAmber"
-        app:layout_constraintBottom_toTopOf="@id/debris_title_text_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="Next Page"/>
+        android:text="Log In Or Sign Up"/>
+
+</RelativeLayout>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="32dp">
 
     <Button
         android:id="@+id/shortcut_to_logged_in_homepage"
         android:background="@color/softerAmber"
-        app:layout_constraintTop_toBottomOf="@id/debris_title_text_view"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="64dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shortcut to logged in front page"/>
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:text="Temp Test Button: auto Login\n And Generate 4 Test Orders"/>
+
+</RelativeLayout>
 
 
 
-</android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

@@ -15,12 +15,6 @@ public class PublicUser {
 
     private ArrayList<Order> thisUsersOrders;
 
-    public PublicUser(String name, String postCode, String email){
-        this.name = name;
-        this.postCode = postCode;
-        this.email = email;
-    }
-
     public PublicUser(String name, String postCode, String email, ArrayList<Order> thisUsersOrders){
         this.name = name;
         this.postCode = postCode;
@@ -29,12 +23,12 @@ public class PublicUser {
 
     }
 
-    public PublicUser(String name, String address, String postCode, String email) {
-        this.name = name;
-        this.address = address;
-        this.postCode = postCode;
-        this.email = email;
-    }
+//    public PublicUser(String name, String address, String postCode, String email) {
+//        this.name = name;
+//        this.address = address;
+//        this.postCode = postCode;
+//        this.email = email;
+//    }
 
 
 
@@ -55,6 +49,7 @@ public class PublicUser {
     public String getEmail(){
         return email;
     }
+
     public ArrayList<Order> getThisUsersOrders() {
         return thisUsersOrders;
     }

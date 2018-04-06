@@ -34,7 +34,7 @@ public class Company {
         midi_skip_maximum=0;
         mini_skip_maximum=0;
         dumpy_bag_maximum=0;
-        defaultPriceForSkip = 0;
+        defaultPriceForSkip = 200;
         rating = 2.5;
         isSelectedInCompanyList = false;
 
@@ -83,15 +83,37 @@ public class Company {
     This is called during construction but can also be used to reset if need be.
     Be warned that this effect is irreversible.
      */
-    public void resetEachSkipTypeNumberToMaximum(){
+    private void resetEachSkipTypeNumberToMaximum(){
         maxiSkips = maxi_skip_maximum;
         midiSkips = midi_skip_maximum;
         miniSkips = mini_skip_maximum;
         dumpyBags = dumpy_bag_maximum;
     }
 
+    /*
+    This asks if the type of skip passed is available in the number required.
+    It allows for any type of skip to be asked about using the same method, which is useful for abstraction.
+     */
+    protected boolean isThisKindOfSkipAvailable(Skip skip, int numberRequired){
+        if (skip.equals(Skip.MAXI_SKIP)){
+            return areMaxiSkipsAvailable(numberRequired);
+        }
+        if (skip.equals(Skip.MIDI_SKIP)){
+            return areMidiSkipsAvailable(numberRequired);
+        }
+        if (skip.equals(Skip.MINI_SKIP)){
+            return areMiniSkipsAvailable(numberRequired);
+        }
+        if (skip.equals(Skip.DUMPY_BAG)){
+            return areDumpyBangsAvailable(numberRequired);
+        }
+
+
+        return false;
+    }
+
     //TODO Make these again but include date!!!
-    public boolean areMaxiSkipsAvailable(int numberOfMaxiSkipsWanted){
+    protected boolean areMaxiSkipsAvailable(int numberOfMaxiSkipsWanted){
         int number = maxiSkips;
         number -= numberOfMaxiSkipsWanted;
         if (number >= 0){
@@ -175,6 +197,19 @@ public class Company {
         return defaultPriceForSkip;
     }
 
+    public double getDefaultPriceDifferentDependingOnSkipType(Skip skip){
+        if (skip.equals(Skip.MIDI_SKIP)){
+            return defaultPriceForSkip - 15;
+        }
+        if (skip.equals(Skip.MINI_SKIP)){
+            return defaultPriceForSkip - 30;
+        }
+        if (skip.equals(Skip.DUMPY_BAG)){
+            return defaultPriceForSkip - 50;
+        }
+        return defaultPriceForSkip;
+    }
+
     public static Comparator<Company> priceComparator = new Comparator<Company>() {
         @Override
         public int compare(Company c1, Company c2) {
@@ -200,15 +235,15 @@ public class Company {
     };
 
 
-    public void setRating(double rating){
+    protected void setRating(double rating){
         this.rating = rating;
     }
 
-    public double getRating(){
+    protected double getRating(){
         return rating;
     }
 
-    public boolean getIsSelectedInCompanyList(){
+    protected boolean getIsSelectedInCompanyList(){
         return isSelectedInCompanyList;
     }
 

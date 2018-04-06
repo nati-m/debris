@@ -117,14 +117,15 @@
 
         <!--- Debit card, credit card, Paypal -->
         <Spinner
+            android:id="@+id/spinner_payment_method_confirm_orders"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Total: £-999"
+            android:text="Total: £----"
             android:textSize="18sp"/>
 
     </RelativeLayout>

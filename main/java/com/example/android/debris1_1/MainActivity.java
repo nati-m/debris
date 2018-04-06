@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
 
-                PublicUser dummyUserForShortcutToWork = new PublicUser("Shortcut Alan", "NE6 5SQ", "alan@nala.com", Control.CONTROL.getOrdersFromThisUser());
+                PublicUser dummyUserForShortcutToWork = new PublicUser("Test Profile Johnson", "NE6 5SQ", "pattest@mail.com", new ArrayList<Order>());
                 Control.CONTROL.setCurrentUser(dummyUserForShortcutToWork);
-
+                Control.CONTROL.initDummyOrders(); //This makes there be 4 dummy orders in various stages of completion to test with
 
                 Intent nextPageIntent = new Intent(MainActivity.this, FrontPageLoggedInActivity.class);
                 startActivity(nextPageIntent);
