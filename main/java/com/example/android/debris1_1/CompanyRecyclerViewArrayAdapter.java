@@ -87,11 +87,14 @@ public class CompanyRecyclerViewArrayAdapter extends RecyclerView.Adapter<Custom
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         holder.companyName.setText(companyList.get(position).getName());
-        String priceString = "£" + companyList.get(position).getDefaultPriceForSkip() + "0";
+
+        Skip skipType = Control.CONTROL.getCurrentOrder().getSkipType();
+        double priceDouble = companyList.get(position).getDefaultPriceDifferentDependingOnSkipType(skipType) * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
+        String priceString = "£" + priceDouble + "0";
         holder.price.setText(priceString);
+
         float rating = (float) companyList.get(position).getRating();
         holder.ratingBar.setRating(rating);
-
 
 
     }

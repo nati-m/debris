@@ -13,8 +13,7 @@
     <TextView
         android:id="@+id/testTestTestTestTest"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Not yet..."/>
+        android:layout_height="wrap_content"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -66,9 +65,9 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="120dp">
-    <Button
+    android:layout_height="80dp">
 
+    <Button
         android:id="@+id/front_page_button"
         android:background="@color/softerAmber"
         android:layout_centerInParent="true"
@@ -77,19 +76,29 @@
         android:text="Log In Or Sign Up"/>
 
 </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:textAlignment="center"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, mi sed semper fermentum, elit lacus finibus nibh, eu vehicula nibh massa in lacus. Cras quis ex eget neque vestibulum venenatis. Aenean facilisis nulla quis laoreet pellentesque. Sed eget faucibus nunc."/>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="32dp">
 
     <Button
-        android:id="@+id/shortcut_to_logged_in_homepage"
+        android:id="@+id/go_to_test_town"
         android:background="@color/softerAmber"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="64dp"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
-        android:text="Temp Test Button: auto Login\n And Generate 4 Test Orders"/>
+        android:textColor="@color/colorPrimary"
+        android:text="Go To Test Town"/>
 
 </RelativeLayout>
 

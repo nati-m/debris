@@ -21,7 +21,7 @@ public class Order {
     //private Date date;
     private Calendar dateOfSkipArrival;
     private PublicUser user;
-    private double price;
+    private double price = -999;
     private Company skipCo;
     private boolean permitRequired;
     //private Permit permit;
@@ -30,8 +30,9 @@ public class Order {
     private Calendar dateSkipWillBePickedUp = null;
     private UserFeedback userFeedback;
     private int buttonTypeForTrackOrders = -999;
-    private int parentTypeForExpandleListView;
+    private int parentTypeForExpandableListView;
     private int childTypeForExpandableListView;
+    private String orderID = "ORD999999999";
 
     //These are used in constructing the "track your orders" page, to choose what the button should do.
     public static final int BUTTON_TYPE_EDIT_ORDER_ONLY_BEFORE_SKIP_IS_DELIVERED = 1;
@@ -44,7 +45,6 @@ public class Order {
     //Choose Date of Skip Pickup, Edit Date of Skip Pickup, Leave Feedback Now, View Feedback
 
 
-    private String tempDateString;
     //private Company haulCo;
     //private Company tipCo;
 
@@ -74,19 +74,21 @@ public class Order {
 
 
 
-    public void setChosenSkipCo(Company company){
+    protected void setChosenSkipCo(Company company){
         skipCo = company;
     }
 
-    public void setifPermitRequired(boolean permitRequired){
+    protected void setifPermitRequired(boolean permitRequired){
         this.permitRequired = permitRequired;
     }
 
-    public void setPrice(double price){
+    protected void setPrice(double price){
         this.price = price;
     }
 
-    public void setDateOfSkipArrival(Calendar newDateOfSkipArrival){
+
+
+    protected void setDateOfSkipArrival(Calendar newDateOfSkipArrival){
         dateOfSkipArrival = newDateOfSkipArrival;
     }
 
@@ -178,11 +180,11 @@ public class Order {
     };
 
     public int getParentTypeForExpandleListView() {
-        return parentTypeForExpandleListView;
+        return parentTypeForExpandableListView;
     }
 
     public void setParentTypeForExpandleListView(int parentTypeForExpandleListView) {
-        this.parentTypeForExpandleListView = parentTypeForExpandleListView;
+        this.parentTypeForExpandableListView = parentTypeForExpandleListView;
     }
 
     public int getChildTypeForExpandableListView() {
@@ -207,5 +209,10 @@ public class Order {
         this.skipsOrdered.clear();
         this.skipsOrdered.addAll(skipsOrdered);
     }
+
+    public String getOrderID(){
+        return orderID;
+    }
+
 
 }

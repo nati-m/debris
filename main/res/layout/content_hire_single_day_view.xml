@@ -33,7 +33,7 @@
                 style="@style/HeaderText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Friday 1st January 1970"
+                android:text="Fri 1st Jan 1970"
                 android:layout_centerHorizontal = "true"/>
 
             <ImageButton
@@ -80,6 +80,7 @@
        android:layout_height="48dp">
 
        <CheckBox
+       android:id="@+id/check_box_permit_needed_single_day_view"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_centerInParent="true"
@@ -102,12 +103,20 @@
             android:layout_marginRight="32dp">
 
             <TextView
+                android:id="@+id/permit_price_text_view_single_day_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="9dp"
+                android:text="Permit: £20"/>
+
+            <TextView
                 android:id="@+id/subtotal_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:text="Subtotal: £-999"
+                android:text="Subtotal: £0.00"
                 android:textStyle="bold"
                 android:paddingBottom="9dp"/>
 

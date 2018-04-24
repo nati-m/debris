@@ -57,6 +57,7 @@ public class GetPostcodeData extends AsyncTask<Void, Void, Void> {
                 line = bufferedReader.readLine();
                 jsonData = jsonData + line;
             }
+            JSONArray records;; //TODO GET RECORDS ARRAY
         } catch (MalformedURLException e) {
             e.printStackTrace();
             failed = true;
@@ -66,19 +67,19 @@ public class GetPostcodeData extends AsyncTask<Void, Void, Void> {
         }
 
 
-
-        try {
-            JSONArray jsonArray = new JSONArray(jsonData);
-            for(int i = 0; i < jsonArray.length(); i++){
-                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-                //Object geoDistance = jsonObject.get("pz_geodistancetohomepostcode");
-                distanceBetweenTwoPostcodes = jsonObject.getString("pz_geodistancetohomepostcode");
-                }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            failed = true;
-        }
+//          THIS IS ALL 2 POSTCODE STUFF WHICH I'M NOT TEST RIGHT NOW
+//        try {
+//            JSONArray jsonArray = new JSONArray(jsonData);
+//            for(int i = 0; i < jsonArray.length(); i++){
+//                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                //Object geoDistance = jsonObject.get("pz_geodistancetohomepostcode");
+//                distanceBetweenTwoPostcodes = jsonObject.getString("pz_geodistancetohomepostcode");
+//                }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            failed = true;
+//        }
 
 
 
@@ -90,7 +91,8 @@ public class GetPostcodeData extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        getAndHandlePostcodeData.setDistanceBetweenTwoPostcodes(distanceBetweenTwoPostcodes);
+        HTTPTestActivity.textView.setText(jsonData);
+        //getAndHandlePostcodeData.setDistanceBetweenTwoPostcodes(distanceBetweenTwoPostcodes);
         //MainActivity.testTextView.setText(jsonData);
         //MainActivity.getTextViewForJSON().setText(this.jsonData);
     }

@@ -10,7 +10,7 @@ public class Distance {
     private int distanceAsInt;
 
     public Distance(){
-        distanceAsInt = -404; //An error value
+        distanceAsInt = -999; //An error value
     }
 
     public String getDistanceAsString(){

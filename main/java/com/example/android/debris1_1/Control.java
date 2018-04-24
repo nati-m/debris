@@ -1,5 +1,10 @@
 package com.example.android.debris1_1;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,9 +23,22 @@ public class Control {
 
     protected static Control CONTROL = new Control();
 
+    //FIREBASE
+    public static final int RC_SIGN_IN = 777; //For use in Firebase Database
+    //Firebase Auth variables
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+
+    //Firebase Database variables
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference usersDatabaseReference;
+    private ChildEventListener childEventListener;
+
+
     private PublicUser currentUser;
     private Order currentOrder;
     private ArrayList<Company> currentCompanies;
+    private ArrayList<Company> singleDayViewCompanies;
     private Calendar calendar;
     private SimpleDateFormat simpleDateFormat;
     private SimpleDateFormat dayOfWeek;
@@ -33,7 +51,6 @@ public class Control {
         dayOfWeek = new SimpleDateFormat("EE dd MMM yyyy");
         initCompanyDummyData();
         //initDummyOrders(); This is now done when I press shortcut to logged in front page
-
     }
 
     protected void initDummyOrders(){
@@ -194,5 +211,13 @@ public class Control {
 
     protected void setCompanySelectedInRecyclerView(Company companySelectedInRecyclerView) {
         this.companySelectedInRecyclerView = companySelectedInRecyclerView;
+    }
+
+    protected ArrayList<Company> getSingleDayViewCompanies() {
+        return singleDayViewCompanies;
+    }
+
+    protected void setSingleDayViewCompanies(ArrayList<Company> singleDayViewCompanies) {
+        this.singleDayViewCompanies = singleDayViewCompanies;
     }
 }

@@ -13,12 +13,18 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
     public static TextView testTextView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,39 +33,27 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         Button nextPageButton = (Button) findViewById(R.id.front_page_button);
         nextPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
-                Intent nextPageIntent = new Intent(MainActivity.this, FrontPageNotSignedIn.class);
+                Intent nextPageIntent = new Intent(MainActivity.this, FirebaseAuthCheckerActivity.class);
                 startActivity(nextPageIntent);
             }
         });
 
-        Button shortcut = (Button) findViewById(R.id.shortcut_to_logged_in_homepage);
-        shortcut.setOnClickListener(new View.OnClickListener() {
+        Button toTestTown = findViewById(R.id.go_to_test_town);
+        toTestTown.setOnClickListener(new View.OnClickListener() {
             @Override
-            //This code will be run when the button is clicked on.
-            public void onClick(View view) {
-
-                PublicUser dummyUserForShortcutToWork = new PublicUser("Test Profile Johnson", "NE6 5SQ", "pattest@mail.com", new ArrayList<Order>());
-                Control.CONTROL.setCurrentUser(dummyUserForShortcutToWork);
-                Control.CONTROL.initDummyOrders(); //This makes there be 4 dummy orders in various stages of completion to test with
-
-                Intent nextPageIntent = new Intent(MainActivity.this, FrontPageLoggedInActivity.class);
+            public void onClick(View v) {
+                Intent nextPageIntent = new Intent(MainActivity.this, TestTownActivity.class);
                 startActivity(nextPageIntent);
             }
         });
+
+
 
         //TESTING GETTING A JSON OBJECT
 

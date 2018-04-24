@@ -57,11 +57,11 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
             }
         });
 
-        Button TEMPtoCompanyRecyclerView = findViewById(R.id.TEMPBUTTON);
-        TEMPtoCompanyRecyclerView.setOnClickListener(new View.OnClickListener() {
+        Button TEMPtoHTTPTest = findViewById(R.id.TEMPBUTTON);
+        TEMPtoHTTPTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, ThrowAwayCompanyListTest.class);
+                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, HTTPTestActivity.class);
                 startActivity(nextPageIntent);
             }
         });

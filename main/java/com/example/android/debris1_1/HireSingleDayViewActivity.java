@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -28,23 +29,19 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     ImageButton leftADay;
     ImageButton rightADay;
     TextView displayDateTextView;
+    TextView permitPrice;
     TextView priceSubtotal;
     Date dateOfPage;
     int day;
     int month;
     int year;
-    ArrayList<Company> allCompanyArrayList = Control.CONTROL.getCurrentCompanies();
-    ArrayList<Company> companyArrayList;
-    //CompanyArrayAdapter companyArrayAdapter;
-    //ListView companyListView;
     RecyclerView companyRecyclerView;
-    CompanyRecyclerViewArrayAdapter companyRecyclerViewArrayAdapter = new CompanyRecyclerViewArrayAdapter(getRelevantCompaniesArrayList(), this);
+    CompanyRecyclerViewArrayAdapter companyRecyclerViewArrayAdapter;
     Spinner sortCompaniesBySpinner;
     ArrayList<String> spinnerSortCompaniesByCategories;
     ArrayAdapter<String> sortCompaniesArrayAdapter;
-    AdapterView.OnItemSelectedListener onItemSelectedListener;
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
     Skip skipType;
+    CheckBox permitCheckBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +50,27 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        leftADay = (ImageButton) findViewById(R.id.back_one_day_hire_single_day_view);
-        rightADay = (ImageButton) findViewById(R.id.forward_one_day_hire_single_day_view);
-        displayDateTextView = (TextView) findViewById(R.id.date_text_view_string_single_day_view);
-        priceSubtotal = (TextView) findViewById(R.id.subtotal_text_view);
-        priceSubtotal.setText("OOO");
+        leftADay = findViewById(R.id.back_one_day_hire_single_day_view);
+        rightADay = findViewById(R.id.forward_one_day_hire_single_day_view);
+        displayDateTextView = findViewById(R.id.date_text_view_string_single_day_view);
+        permitPrice = findViewById(R.id.permit_price_text_view_single_day_view);
+        priceSubtotal = findViewById(R.id.subtotal_text_view);
         dateOfPage = Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime();
         skipType = Control.CONTROL.getCurrentOrder().getSkipType();
+        permitCheckBox = findViewById(R.id.check_box_permit_needed_single_day_view);
+
+        //This means whenever the permit check box is checked, the price updates
+        permitCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updatePriceAndAddToTextViewAndCurrentOrder();
+            }
+        });
+
+        //Populates Control's ArrayList of relevant companies for single day view
+        //First it sets to new ArrayList to initialise or delete any leftover data
+        Control.CONTROL.setSingleDayViewCompanies(new ArrayList<Company>());
+        Control.CONTROL.setSingleDayViewCompanies(getRelevantCompaniesArrayList());
 
         //This sets the date displayed at the top of the page to the date the user chose on the previous page
         updateDateDisplayedAtTop();
@@ -69,22 +80,47 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
             @Override
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
-                leftOrRightADay(false);
+                Calendar c = Calendar.getInstance();
+                c.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
+                c.add(Calendar.DAY_OF_YEAR, -1);
+
+                //check that the date the user wants to navigate to is between tomorrow and a year
+                //from today. If not, the action cancels.
+                if(!isDateWithinRange(c)){
+                    return;
+                }
+
+                Control.CONTROL.getCurrentOrder().setDateOfSkipArrival(c);
+
+                Intent refreshThisPageAtNewDate = new Intent(HireSingleDayViewActivity.this, HireSingleDayViewActivity.class);
+                startActivity(refreshThisPageAtNewDate);
+
             }
         });
         rightADay.setOnClickListener(new View.OnClickListener() {
             @Override
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
-                leftOrRightADay(true);
+                Calendar c = Calendar.getInstance();
+                c.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
+                c.add(Calendar.DAY_OF_YEAR, 1);
+
+                //check that the date the user wants to navigate to is between tomorrow and a year
+                //from today. If not, the action cancels.
+                if(!isDateWithinRange(c)){
+                    return;
+                }
+
+                Control.CONTROL.getCurrentOrder().setDateOfSkipArrival(c);
+
+                Intent refreshThisPageAtNewDate = new Intent(HireSingleDayViewActivity.this, HireSingleDayViewActivity.class);
+                startActivity(refreshThisPageAtNewDate);
             }
         });
 
-        companyArrayList = getRelevantCompaniesArrayList();
-
+        companyRecyclerViewArrayAdapter = new CompanyRecyclerViewArrayAdapter(getRelevantCompaniesArrayList(), this);
 
         companyRecyclerView = findViewById(R.id.recycler_view_companies_single_day_view);
-
         companyRecyclerView.setHasFixedSize(true);
         companyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         companyRecyclerView.setAdapter(companyRecyclerViewArrayAdapter);
@@ -93,7 +129,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int pos = companyRecyclerView.getChildViewHolder(v).getAdapterPosition();
-                Control.CONTROL.setCompanySelectedInRecyclerView(companyArrayList.get(pos));
+                Control.CONTROL.setCompanySelectedInRecyclerView(Control.CONTROL.getSingleDayViewCompanies().get(pos));
 
                 String priceString = "£" + Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceDifferentDependingOnSkipType(skipType) + "0";
                 priceSubtotal.setText(priceString);
@@ -121,13 +157,13 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
 
                 if(pos == 0){
                     ArrayList<Company> ratingOrderArrayList = getRelevantCompaniesArrayList();
-                    Control.CONTROL.setCurrentCompanies(ratingOrderArrayList);
+                    Control.CONTROL.setSingleDayViewCompanies(ratingOrderArrayList);
                     Collections.sort(ratingOrderArrayList, Company.ratingComparator);
                     reOrderCompanies(ratingOrderArrayList);
                 }
                 if (pos == 1){
                     ArrayList<Company> priceOrderArrayList = getRelevantCompaniesArrayList();
-                    Control.CONTROL.setCurrentCompanies(priceOrderArrayList);
+                    Control.CONTROL.setSingleDayViewCompanies(priceOrderArrayList);
                     Collections.sort(priceOrderArrayList, Company.priceComparator);
                     reOrderCompanies(priceOrderArrayList);
                     }
@@ -145,6 +181,11 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
                 setOrderDateToDateSelectedOnThisPage(dateOfPage);
+                Control.CONTROL.getCurrentOrder().setifPermitRequired(permitCheckBox.isChecked());
+                Control.CONTROL.getCurrentOrder().setChosenSkipCo(Control.CONTROL.getCompanySelectedInRecyclerView());
+                //the price in current Order will still be set from last time user clicked a
+                //company column or the permit required checkbox
+
                 Intent nextPageIntent = new Intent(HireSingleDayViewActivity.this, HireConfirmOrderActivity.class);
                 startActivity(nextPageIntent);
             }
@@ -156,9 +197,9 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
 
     private ArrayList<Company> getRelevantCompaniesArrayList(){
         ArrayList<Company> toReturn = new ArrayList<>();
-        Skip skipType = Control.CONTROL.getCurrentOrder().getSkipType();
         //Only 4 Skip instances exist so this will be equal to any other skip the same size
         int numberOfSkipsWanted = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size();
+        ArrayList<Company> allCompanyArrayList = Control.CONTROL.getCurrentCompanies();
 
         for (int i = 0; i < allCompanyArrayList.size(); i++){
             if (allCompanyArrayList.get(i).isThisKindOfSkipAvailable(skipType, numberOfSkipsWanted)){
@@ -179,15 +220,30 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
 
         //TODO Set the selected company, if any, to Cyan
 
+//        int positionOfCurrentlyHighlightedCompany;
+//        if (Control.CONTROL.getCompanySelectedInRecyclerView() == null){
+//            positionOfCurrentlyHighlightedCompany = -1;
+//            //This won't change the colour of any columns to cyan as no column has a negative index
+//        } else {
+//            positionOfCurrentlyHighlightedCompany = Control.CONTROL.getSingleDayViewCompanies().indexOf(Control.CONTROL.getCompanySelectedInRecyclerView());
+//        }
+//
+//        for (int i = 0; i < companyRecyclerViewArrayAdapter.getViewsArrayList().size(); i++){
+//            if (i == positionOfCurrentlyHighlightedCompany){
+//                companyRecyclerViewArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
+//            }
+//            else companyRecyclerViewArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
+//        }
+//
+
         companyRecyclerViewArrayAdapter.setClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int pos = companyRecyclerView.getChildViewHolder(v).getAdapterPosition();
-                Control.CONTROL.setCompanySelectedInRecyclerView(Control.CONTROL.getCurrentCompanies().get(pos));
+                Control.CONTROL.setCompanySelectedInRecyclerView(Control.CONTROL.getSingleDayViewCompanies().get(pos));
 
-                //TODO make priceString method including if thingy is checked
-                String priceString = "£" + Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceDifferentDependingOnSkipType(skipType) + "0";
-                priceSubtotal.setText(priceString);
+                //This updates the price stored in currentOrder and displayed on the screen to reflect selection
+                updatePriceAndAddToTextViewAndCurrentOrder();
 
                 for (int i = 0; i < companyRecyclerViewArrayAdapter.getViewsArrayList().size(); i++){
                     if (i == pos){
@@ -197,6 +253,37 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /*
+    This finds the current price without a permit by getting the price of the selected skip company's
+    skips of the user-selected size, then multiplying it by how many they want.
+    It then checks if a permit is required (i.e. the checkbox about the skip being on a public
+    highway is checked). If one is required, the price of the permit is added.
+    This will differ per region as each local council is different.
+    It then updates the current order to have the price of the current selection stored. If the
+    user changes their mind it will change, but if not this will be the price they pay if they
+    confirm their order.
+    It then updates the price/subtotal TextView to reflect the user's selection.
+     */
+    private void updatePriceAndAddToTextViewAndCurrentOrder(){
+        if (Control.CONTROL.getCompanySelectedInRecyclerView() == null){
+            return;
+        }
+        //This stops the app crashing if no company is selected, and leaves the price unchanged
+
+        double priceDouble = Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceDifferentDependingOnSkipType(skipType)
+                * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
+
+        //TODO make a separate amount for each council, depending on which postcode the order is going to
+        if(permitCheckBox.isChecked()){
+            priceDouble += 20;
+        }
+
+        Control.CONTROL.getCurrentOrder().setPrice(priceDouble);
+
+        String priceString = "£" + priceDouble + "0";
+        priceSubtotal.setText(priceString);
     }
 
     /*
@@ -224,34 +311,6 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         displayDateTextView.setText(dateToSetAtTop);
     }
 
-    private void leftOrRightADay(boolean isItRight){
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(dateOfPage);
-
-        //this adds a day or subtracts a day to the date of page depending on which button was pressed
-        //Calendar.add https://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html#add-int-int-
-        if(isItRight){
-            c.add(Calendar.DATE, 1);
-        } else {
-            c.add(Calendar.DATE, -1);
-        }
-
-
-        //This makes sure the proposed new date is within the range between tomorrow and 1 year from now.
-        //If it is not, the function aborts.
-        if(!isDateWithinRange(c)){
-            return;
-        }
-
-        //This sets the date of the page to Calendar c, i.e. adds 1 or takes 1 day from the date
-        dateOfPage = c.getTime();
-        updateDateDisplayedAtTop();
-
-        //todo initCompaniesForThisDate();
-
-
-    }
 
     /*
     This checks that the date is in the range from tomorrow to a year from today.

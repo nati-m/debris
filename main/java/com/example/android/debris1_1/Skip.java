@@ -35,7 +35,7 @@ public class Skip {
         setSkipTypeStringFromIntType();
     }
 
-    protected static Skip getSkipByIntSize(int skipType){
+    public static Skip getSkipByIntSize(int skipType){
         if (skipType == MAXI_SKIP_8YD){
             return MAXI_SKIP;
         }
@@ -51,19 +51,19 @@ public class Skip {
         return null;
     }
 
-    protected static Skip getMaxiSkip(){
+    public static Skip getMaxiSkip(){
         return MAXI_SKIP;
     }
 
-    protected static Skip getMidiSkip(){
+    public static Skip getMidiSkip(){
         return MIDI_SKIP;
     }
 
-    protected static Skip getMiniSkip(){
+    public static Skip getMiniSkip(){
         return MINI_SKIP;
     }
 
-    protected static Skip getDumpyBag(){
+    public static Skip getDumpyBag(){
         return DUMPY_BAG;
     }
 
@@ -87,6 +87,22 @@ public class Skip {
 
     public String getSkipTypeAsString(){
         return skipTypeString;
+    }
+
+    public String getSkipTypeAsSimplerString(){
+        if (skipType == MAXI_SKIP_8YD){
+            return "Maxi Skip";
+        }
+        if (skipType == MIDI_SKIP_4YD){
+            return "Midi Skip";
+        }
+        if (skipType == MINI_SKIP_2YD){
+            return "Mini Skip";
+        }
+        if (skipType == DUMPY_BAG_SMALLEST){
+            return "Skip Bag";
+        }
+        return "No real size selected";
     }
 
 

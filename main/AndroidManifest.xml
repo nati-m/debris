@@ -64,9 +64,19 @@
             android:name=".LeaveFeedbackActivity"
             android:label="@string/title_activity_leave_feedback"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".HTTPTestActivity" />
         <activity
-            android:name=".ThrowAwayCompanyListTest"
-            android:label="@string/title_activity_throw_away_company_list_test"
+            android:name=".CompanyUserActivities.CompanyHomePageLoggedInActivity"
+            android:label="@string/title_activity_company_home_page_logged_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TestTownActivity" />
+        <activity
+            android:name=".FirebaseAuthCheckerActivity"
+            android:label="@string/title_activity_firebase_auth_checker"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FirstTimeUserEnterAddressPostcode"
+            android:label="@string/title_activity_first_time_user_enter_address_postcode"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

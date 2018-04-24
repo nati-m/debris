@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:choiceMode="singleChoice"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:id="@+id/number_and_type_of_skips_orders_from_public_list"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="4 x Maxi Skip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/to_this_postcode_orders_from_public_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To: NE12 8RS"/>
+
+            <TextView
+                android:id="@+id/to_deliver_skip_date_orders_from_public_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delivery: 10-12, 18th Sep 18"/>
+
+            <TextView
+                android:id="@+id/collection_date_list_orders_from_public"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Collection: 10-12, 18th Sep 18"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/payment_amount_list_orders_from_public"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:text="£200.50" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="as per terms"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Order Expires:"/>
+
+            <TextView
+                android:id="@+id/expires_by_time_list_orders_from_public"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:text="TOMORROW, 5pm"/>
+
+            <TextView
+                android:id="@+id/order_id_orders_from_public"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ORD999999999"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/confirm_order_button_list_orders_from_public"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@color/greenConfirm"
+                android:text="CONFIRM"/>
+
+            <Button
+                android:id="@+id/decline_order_button_list_orders_from_public"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorPrimary"
+                android:text="Decline"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -15,4 +15,11 @@
     <color name="yellowLighter">#FFF9C4</color>
 
     <color name="calendarBackground">#FFCDD2</color>
+
+    <color name="greenConfirm">#66BB6A</color>
+    <color name="greenConfirmLight">#A5D6A7</color>
+
+    <color name="blueListBackground">#81D4FA</color>
+
+    <color name="black">#000000</color>
 </resources>

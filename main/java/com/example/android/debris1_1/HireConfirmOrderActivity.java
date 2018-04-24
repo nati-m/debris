@@ -18,6 +18,8 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
     TextView addressTextView;
     TextView dateTextView;
     TextView skipTypeAndNumberTextView;
+    TextView companyChosenTextView;
+    TextView totalPrice;
     Button confirmOrder;
     Spinner paymentOptionsSpinner;
 
@@ -31,6 +33,8 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         addressTextView = (TextView) findViewById(R.id.hire_confirm_address);
         dateTextView = (TextView) findViewById(R.id.hire_confirm_date);
         skipTypeAndNumberTextView = (TextView) findViewById(R.id.hire_confirm_skip_type_and_number);
+        companyChosenTextView = findViewById(R.id.chosen_company_confirm_order);
+        totalPrice = findViewById(R.id.total_price_confirm_orders);
 
         String fullAddress = (Control.CONTROL.getCurrentOrderAddressAsString());
         addressTextView.setText(fullAddress);
@@ -41,12 +45,19 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         String skipTypeAndNumber = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size() + " x " + Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().get(0).getSkipTypeAsString();
         skipTypeAndNumberTextView.setText(skipTypeAndNumber);
 
+        String companyChosen = Control.CONTROL.getCurrentOrder().getCompany().getName();
+        companyChosenTextView.setText(companyChosen);
+
+        String price = "£" + Control.CONTROL.getCurrentOrder().getPrice() + "0";
+        totalPrice.setText(price);
+
         confirmOrder = findViewById(R.id.button_confirm_order_to_banks);
         confirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Order currentOrder = Control.CONTROL.getCurrentOrder();
                 Control.CONTROL.getOrdersFromThisUser().add(currentOrder);
+
                 Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, FrontPageLoggedInActivity.class);
                 startActivity(nextPageIntent);
             }

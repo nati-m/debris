@@ -24,10 +24,6 @@ public class HireHomePageActivity extends AppCompatActivity {
     EditText enterAddressLine1;
     EditText enterAddressLine2;
     EditText enterPostcode;
-    //EditText enterDate; //This will later be changed for a DatePicker, e.g.
-    //https://www.tutorialspoint.com/android/android_datepicker_control.htm
-    // http://abhiandroid.com/ui/datepicker
-    // https://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext
     DatePicker datePicker;
     Button dateDisplayButton;
     int year;
@@ -257,22 +253,20 @@ public class HireHomePageActivity extends AppCompatActivity {
             int numberOfSkipsInt = Integer.parseInt(numberOfSkips);
             ArrayList<Skip> skipArrayList = new ArrayList<>();
             String skipSizeString = skipSizeSpinner.getSelectedItem().toString();
-            int skipSize = 0;
 
-            if (skipSizeString == "Maxi Skip (8yd)"){
-                skipSize = Skip.MAXI_SKIP_8YD;
-            } else if (skipSizeString == "Midi Skip (4yd") {
-                skipSize = Skip.MIDI_SKIP_4YD;
+            Skip skip = Skip.MAXI_SKIP;
+            //must be initialised to work in for loop below, and Skip has no accessible constructor,
+            //so this is used as a default and changed if it isn't a maxi skip
+
+            if (skipSizeString == "Midi Skip (4yd)") {
+                skip = Skip.MIDI_SKIP;
             } else if (skipSizeString == "Mini Skip (2yd)") {
-                skipSize = Skip.MINI_SKIP_2YD;
+                skip = Skip.MINI_SKIP;
             } else if (skipSizeString == "Dumpy Bag"){
-                skipSize = Skip.DUMPY_BAG_SMALLEST;
+                skip = Skip.DUMPY_BAG;
             }
 
-
-
             for(int i = 0; i < numberOfSkipsInt; i++){
-                Skip skip = Skip.getSkipByIntSize(skipSize);
                 skipArrayList.add(skip);
             }
 
