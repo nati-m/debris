@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.firebase.ui.auth.AuthUI;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,6 +70,30 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
                 startActivity(nextPageIntent);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_action_log_out:
+                AuthUI.getInstance().signOut(this);
+                //Signs out of Firebase
+                Control.CONTROL.setCurrentUser(new PublicUser());
+                //Sets current user in CONTROL to a blank user
+                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, MainActivity.class);
+                startActivity(nextPageIntent);
+                //Returns to the top page
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

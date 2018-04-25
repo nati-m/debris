@@ -40,6 +40,8 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
     private ChildEventListener childEventListener;
     private ValueEventListener userValueEventListener;
 
+    private String postcode = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,13 +92,11 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
         final TextView test = findViewById(R.id.test_text_view_firebase_auth_checker);
         test.setText("decideWhatToDoWhenUserSignsIn was called");
 
-        thisUsersDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        usersDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) { //OnDataChange ALSO INCLUDES CHANGING FROM NOT-CHECKED, E.G. IT WILL BE CALLED ONCE INITIALLY
                 if (dataSnapshot.hasChild(uid)){
                     //The user is already in the database
-                    //todo if the database user has FireBaseDatabaseFilledOut, else go straight to home page
-
 
                     DatabaseReference hasThisUserFilledOutPostcode = firebaseDatabase.getReference().child("users").child(uid).child("firebaseDatabaseFilledOut");
                     hasThisUserFilledOutPostcode.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -104,10 +104,22 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             //If the user's all set up, go straight to Front Page
                             if(dataSnapshot.getValue().equals(true)){
+                                test.setText("the info is got");
+
+                                String postcodeFromFirebase = getUserPostcode(user);
+                                PublicUser publicUser = new PublicUser(user.getDisplayName(), postcodeFromFirebase, user.getEmail(), new ArrayList<Order>(), true, uid);
+                                Control.CONTROL.setCurrentUser(publicUser);
+
+
                                 Intent nextPageIntent = new Intent(FirebaseAuthCheckerActivity.this, FrontPageLoggedInActivity.class);
                                 startActivity(nextPageIntent);
                             } else {
                                 //else direct them to the page FirstTimeUserEnterAddressPostcode to finish entering their postcode
+                                test.setText("the user quit before they added the info");
+
+                                PublicUser publicUser = new PublicUser(user.getDisplayName(), "", user.getEmail(), new ArrayList<Order>(), false, uid);
+                                Control.CONTROL.setCurrentUser(publicUser);
+
                                 Intent nextPageIntent = new Intent(FirebaseAuthCheckerActivity.this, FirstTimeUserEnterAddressPostcode.class);
                                 startActivity(nextPageIntent);
                             }
@@ -150,6 +162,40 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
     }
 
 
+    /*This gets the user's postcode by getting the snapshot of the postcode information at the user's uid
+    * in the firebase database. It does so by setting a global variable of this class, "postcode", to the
+    * postcode stored in the database. A global variable must be used due to the nested class ValueEventListener,
+    * which without the global variable would necessitate returning a String from within a nested class or
+    * creating a final String variable in the main method then editing it - both of which are impossible.
+    */
+    private String getUserPostcode(FirebaseUser user){
+        String uid = user.getUid();
+        DatabaseReference thisUsersDatabaseReference = firebaseDatabase.getReference().child("users").child(uid).child("postCode");
+        thisUsersDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+               String postcode = (String) dataSnapshot.getValue();
+               setPostcode(postcode);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                setPostcode("");
+            }
+        });
+
+
+        return postcode;
+    }
+
+    /*
+    To be used in conjunction with the method getUserPostcode
+     */
+    private void setPostcode(String postcode){
+        this.postcode = postcode;
+    }
+
+
 
     @Override
     protected void onResume() {
@@ -167,28 +213,5 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
         //detachDatabaseReadListener();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_action_log_out:
-                AuthUI.getInstance().signOut(this);
-                //Signs out of Firebase
-                Control.CONTROL.setCurrentUser(new PublicUser());
-                //Sets current user in CONTROL to a blank user
-                Intent nextPageIntent = new Intent(FirebaseAuthCheckerActivity.this, MainActivity.class);
-                startActivity(nextPageIntent);
-                //Returns to the top page
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
 }
