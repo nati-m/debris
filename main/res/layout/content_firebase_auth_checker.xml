@@ -6,11 +6,36 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".FirebaseAuthCheckerActivity"
-    tools:showIn="@layout/activity_firebase_auth_checker">
+    tools:showIn="@layout/activity_firebase_auth_checker"
+    android:background="@color/background">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/test_text_view_firebase_auth_checker"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/preparing_user_profile_firebase_auth_checker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:text="Preparing User Profile..."
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="sans-serif-smallcaps"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_spinner_loading"
+            android:layout_margin="16dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/preparing_user_profile_firebase_auth_checker"/>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -79,20 +79,20 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
         }
 
         //If the skip(s) have not yet been collected and the user has not chosen the date of collection
-        if(order.getDateSkipWillBePickedUp() == null){
+        if(!order.getCollectionDateSpecified()){
             message = "ARRIVED.\nCHOOSE SKIP\nPICKUP DATE";
             return message;
         }
 
         //If the skip is being collected today
-        if(c.getTime() == order.getDateSkipWillBePickedUp().getTime()){
+        if(c.getTime() == order.getDateOfSkipCollection().getTime()){
             message = "COLLECTION\nTODAY";
             return message;
         }
 
         //If the skip(s) have not yet been collected and the user has chosen the date of collection
-        if(c.before(order.getDateSkipWillBePickedUp())){
-            message = "COLLECTION ON\n" + simpleDateFormat.format(order.getDateSkipWillBePickedUp().getTime());
+        if(c.before(order.getDateOfSkipCollection())){
+            message = "COLLECTION ON\n" + simpleDateFormat.format(order.getDateOfSkipCollection().getTime());
             return message;
         }
 
@@ -275,7 +275,7 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
         }
 
         //if the skip has been delivered but a pick up date has not been set by the user.
-        if (order.getDateSkipWillBePickedUp() == null) {
+        if (!order.getCollectionDateSpecified()) {
             Calendar TwoWeeksAfterSkipArrival = Calendar.getInstance();
             TwoWeeksAfterSkipArrival.setTime(skipArrival.getTime());
             TwoWeeksAfterSkipArrival.add(Calendar.DAY_OF_MONTH, 14);
@@ -288,7 +288,7 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
         }
 
         //If the pick up date is today
-        if (c.getTime() == order.getDateSkipWillBePickedUp().getTime()) {
+        if (c.getTime() == order.getDateOfSkipCollection().getTime()) {
             message = "Your " + skipOrSkips + " will be picked up today.";
             order.setButtonTypeForTrackOrders(Order.BUTTON_TYPE_NO_BUTTON);
             return message;
@@ -296,8 +296,8 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
 
 
         //If the skip has been delivered, user has set a pick up date which has not yet occurred
-        if (order.getDateSkipWillBePickedUp().after(c)) {
-            long daysBetweenInMilliseconds = order.getDateSkipWillBePickedUp().getTimeInMillis() - c.getTimeInMillis();
+        if (order.getDateOfSkipCollection().after(c)) {
+            long daysBetweenInMilliseconds = order.getDateOfSkipCollection().getTimeInMillis() - c.getTimeInMillis();
             int days = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS);
 
             if (days == 0) {
@@ -318,65 +318,68 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
 
         // If the order has happened, no feedback has been left and the feedback deadline (2 months
         // after skip was picked up) has not been reached yet.
-        if (order.getDateSkipWillBePickedUp().before(c) && feedbackDeadline.after(c) && order.getUserFeedback() == null) {
-            long daysBetweenInMilliseconds = c.getTimeInMillis() - order.getDateSkipWillBePickedUp().getTimeInMillis();
-            int days = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS);
-
-            if (days < 14) {
-                message = "Your " + skipWasOrSkipsWere + " picked up " + days + " days ago.";
-            } else {
-                int weeks = days / 7; //ints will only say 2, 3, 4 weeks etc, never 3.4 etc
-                message = "Your " + skipWasOrSkipsWere + " picked up " + weeks + " weeks ago.";
-            }
-
-
-            daysBetweenInMilliseconds = feedbackDeadline.getTimeInMillis() - c.getTimeInMillis();
-            days = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS);
-
-            if (days == 1) {
-                message += "\nYou have 1 more day to leave feedback for your skip provider.";
-                return message;
-            }
-            if (days < 7) {
-                message += "\nYou have " + days + " more days to leave feedback for your skip provider.";
-                return message;
-            } else {
-                int weeks = days / 7;
-                String weekOrWeeks;
-                if (weeks == 1) {
-                    weekOrWeeks = "week";
-                } else {
-                    weekOrWeeks = "weeks";
-                }
-                message += "\nYou have " + weeks + " more " + weekOrWeeks + " to leave feedback for your skip provider.";
-            }
-            order.setButtonTypeForTrackOrders(Order.BUTTON_TYPE_LEAVE_FEEDBACK_NOW);
-            return message;
-        }
+        //TODO I just disabled this as I took userfeedback out of Orders - new Firebase thingy must be implemented
+//        if (order.getDateSkipWillBePickedUp().before(c) && feedbackDeadline.after(c) && order.getUserFeedback() == null) {
+//            long daysBetweenInMilliseconds = c.getTimeInMillis() - order.getDateSkipWillBePickedUp().getTimeInMillis();
+//            int days = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS);
+//
+//            if (days < 14) {
+//                message = "Your " + skipWasOrSkipsWere + " picked up " + days + " days ago.";
+//            } else {
+//                int weeks = days / 7; //ints will only say 2, 3, 4 weeks etc, never 3.4 etc
+//                message = "Your " + skipWasOrSkipsWere + " picked up " + weeks + " weeks ago.";
+//            }
+//
+//
+//            daysBetweenInMilliseconds = feedbackDeadline.getTimeInMillis() - c.getTimeInMillis();
+//            days = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS);
+//
+//            if (days == 1) {
+//                message += "\nYou have 1 more day to leave feedback for your skip provider.";
+//                return message;
+//            }
+//            if (days < 7) {
+//                message += "\nYou have " + days + " more days to leave feedback for your skip provider.";
+//                return message;
+//            } else {
+//                int weeks = days / 7;
+//                String weekOrWeeks;
+//                if (weeks == 1) {
+//                    weekOrWeeks = "week";
+//                } else {
+//                    weekOrWeeks = "weeks";
+//                }
+//                message += "\nYou have " + weeks + " more " + weekOrWeeks + " to leave feedback for your skip provider.";
+//            }
+//            order.setButtonTypeForTrackOrders(Order.BUTTON_TYPE_LEAVE_FEEDBACK_NOW);
+//            return message;
+//        }
 
 
         //If the feedback deadline has been passed and the user didn't leave feedback.
-        if(feedbackDeadline.before(c) && order.getUserFeedback() == null) {
-            long daysBetweenInMilliseconds = c.getTimeInMillis() - order.getDateSkipWillBePickedUp().getTimeInMillis();
-            int weeks = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS) / 7;
-            message = "Your " + skipWasOrSkipsWere + " picked up " + weeks + " weeks ago. You can no longer leave feedback for this order.";
-            order.setButtonTypeForTrackOrders(Order.BUTTON_TYPE_NO_BUTTON);
-            return message;
-        }
+        //TODO I just disabled this as I took userfeedback out of Orders - new Firebase thingy must be implemented
+//        if(feedbackDeadline.before(c) && order.getUserFeedback() == null) {
+//            long daysBetweenInMilliseconds = c.getTimeInMillis() - order.getDateSkipWillBePickedUp().getTimeInMillis();
+//            int weeks = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS) / 7;
+//            message = "Your " + skipWasOrSkipsWere + " picked up " + weeks + " weeks ago. You can no longer leave feedback for this order.";
+//            order.setButtonTypeForTrackOrders(Order.BUTTON_TYPE_NO_BUTTON);
+//            return message;
+//        }
 
         //If the user has left feedback already.
-        if(order.getUserFeedback() != null) {
-            long daysBetweenInMilliseconds = c.getTimeInMillis() - order.getDateSkipWillBePickedUp().getTimeInMillis();
-            int days = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS);
-            int weeks = days / 7;
-            if (days < 7) {
-                message = "Your" + skipWasOrSkipsWere + " picked up " + days + " days ago. You have already left feedback for this order.";
-            } else {
-                message = "Your " + skipWasOrSkipsWere + " picked up " + weeks + " weeks ago. You have already left feedback for this order.";
-            }
-            order.setButtonTypeForTrackOrders(Order.BUTTON_TYPE_VIEW_FEEDBACK);
-            return message;
-        }
+        //TODO I just disabled this as I took userfeedback out of Orders - new Firebase thingy must be implemented
+//        if(order.getUserFeedback() != null) {
+//            long daysBetweenInMilliseconds = c.getTimeInMillis() - order.getDateSkipWillBePickedUp().getTimeInMillis();
+//            int days = (int) TimeUnit.DAYS.convert(daysBetweenInMilliseconds, TimeUnit.MILLISECONDS);
+//            int weeks = days / 7;
+//            if (days < 7) {
+//                message = "Your" + skipWasOrSkipsWere + " picked up " + days + " days ago. You have already left feedback for this order.";
+//            } else {
+//                message = "Your " + skipWasOrSkipsWere + " picked up " + weeks + " weeks ago. You have already left feedback for this order.";
+//            }
+//            order.setButtonTypeForTrackOrders(Order.BUTTON_TYPE_VIEW_FEEDBACK);
+//            return message;
+//        }
 
         return "";
     }

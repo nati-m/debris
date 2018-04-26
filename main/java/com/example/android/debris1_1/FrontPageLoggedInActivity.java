@@ -29,7 +29,8 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
 
         TextView welcomeUserName = findViewById(R.id.welcome_user_name_front_page_logged_in);
 
-        welcomeUserName.setText("Welcome, " + CONTROL.getCurrentUser().getName());
+        String userFirstName = CONTROL.getCurrentUser().getName().split(" ")[0];
+        welcomeUserName.setText("Welcome, " + userFirstName);
 
         Button toHireSection = findViewById(R.id.hire_button_front_page);
         toHireSection.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +53,7 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
                 skipsOrdered.add(Skip.MIDI_SKIP);
                 //skipsOrdered.add(Skip.MIDI_SKIP);
                 Calendar c = Calendar.getInstance(); c.add(Calendar.MONTH, 1);
-                Order currentOrder = new Order(Control.CONTROL.getCurrentUser(), "9 The Street", "", "NE4 2ER", skipsOrdered, c);
+                Order currentOrder = new Order("9 The Street", "", "NE4 2ER", skipsOrdered, c);
 
                 //sets this to the current order the app is focused on in CONTROL
                 Control.CONTROL.setCurrentOrder(currentOrder);

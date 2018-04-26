@@ -86,10 +86,10 @@ public class Control {
         Calendar skipPickedUp2WeeksAgo = Calendar.getInstance();
         skipPickedUp2WeeksAgo.add(Calendar.WEEK_OF_YEAR, -2);
 
-        Order dummyOrder1 = new Order(getCurrentUser(), "1 Willow Street", "", "NE4 5AB", dummyArrayList1, skipArrival3DaysAgo);
-        Order dummyOrder2 = new Order(getCurrentUser(), "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList2, skipArrivalIn10Days);
-        Order dummyOrder3 = new Order(getCurrentUser(), "1 Willow Street", "", "NE4 5AB", dummyArrayList3, skipArrival6MonthsAgo, skipPickedUp10DaysAfter6MonthsAgo);
-        Order dummyOrder4 = new Order(getCurrentUser(), "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList4, skipArrival1MonthAgo, skipPickedUp2WeeksAgo);
+        Order dummyOrder1 = new Order("1 Willow Street", "", "NE4 5AB", dummyArrayList1, skipArrival3DaysAgo);
+        Order dummyOrder2 = new Order( "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList2, skipArrivalIn10Days);
+        Order dummyOrder3 = new Order("1 Willow Street", "", "NE4 5AB", dummyArrayList3, skipArrival6MonthsAgo, skipPickedUp10DaysAfter6MonthsAgo);
+        Order dummyOrder4 = new Order("5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList4, skipArrival1MonthAgo, skipPickedUp2WeeksAgo);
 
         currentUser.getThisUsersOrders().add(dummyOrder1);
         currentUser.getThisUsersOrders().add(dummyOrder2);

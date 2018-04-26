@@ -148,9 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 //Sets current user in CONTROL to a blank user
                 nextPageButton.setText("Log In Or Sign Up");
                 //Changes the text on the button
-                Intent nextPageIntent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(nextPageIntent);
-                //Returns to the top page
+                finish();
+                startActivity(getIntent());
+                //Refreshes the page
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

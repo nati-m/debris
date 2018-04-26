@@ -1,5 +1,7 @@
 package com.example.android.debris1_1;
 
+import com.google.firebase.database.Exclude;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,21 +20,32 @@ public class Order {
     private String addressLine1;
     private String addressLine2;
     private String postcode;
-    //private Date date;
     private Calendar dateOfSkipArrival;
-    private PublicUser user;
     private double price = -999;
     private Company skipCo;
     private boolean permitRequired;
-    //private Permit permit;
-    private Council localCouncil;
     private ArrayList<Skip> skipsOrdered = new ArrayList<>();
-    private Calendar dateSkipWillBePickedUp = null;
-    private UserFeedback userFeedback;
+    private Calendar dateOfSkipCollection = null;
     private int buttonTypeForTrackOrders = -999;
-    private int parentTypeForExpandableListView;
-    private int childTypeForExpandableListView;
-    private String orderID = "ORD999999999";
+
+
+
+    //For Firebase:
+    private String dateOfSkipArrivalString;
+    private String dateOfSkipCollectionString;
+    private String skipType;
+    private int numberOfSkipsOrdered;
+    private boolean collectionDateSpecified;
+    private String userUID;
+
+
+    static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
+
+    //THINGS FIREBASE WILL DO INSTEAD
+    //private UserFeedback userFeedback;
+    //private String orderID = "ORD999999999";
+    //private Permit permit;
+    //private Council localCouncil;
 
     //These are used in constructing the "track your orders" page, to choose what the button should do.
     public static final int BUTTON_TYPE_EDIT_ORDER_ONLY_BEFORE_SKIP_IS_DELIVERED = 1;
@@ -42,34 +55,37 @@ public class Order {
     public static final int BUTTON_TYPE_VIEW_FEEDBACK = 5;
     public static final int BUTTON_TYPE_NO_BUTTON = 0;
 
-    //Choose Date of Skip Pickup, Edit Date of Skip Pickup, Leave Feedback Now, View Feedback
 
 
-    //private Company haulCo;
-    //private Company tipCo;
-
-    public Order (PublicUser user){
-        this.user = user;
-    }
+    public Order (){ } //So Firebase Database works
 
 
-    public Order (PublicUser user, String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival){
-        this.user = user;
+    public Order (String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival){
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2; //This may be "" but won't be null.
         this.postcode = postcode;
         this.skipsOrdered = skipsOrdered;
+        numberOfSkipsOrdered = skipsOrdered.size();
+        skipType = skipsOrdered.get(0).getSkipTypeAsSimplerString();
         dateOfSkipArrival = calendarWithDateOfSkipArrival;
+        dateOfSkipArrivalString = simpleDateFormat.format(dateOfSkipArrival.getTime());
+        collectionDateSpecified = false;
+        userUID = Control.CONTROL.getCurrentUser().getFirebaseUid();
     }
 
-    public Order (PublicUser user, String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival, Calendar optionalCalenderWithDateSkipPickedUp){
-        this.user = user;
+    public Order (String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival, Calendar optionalCalenderWithDateSkipPickedUp){
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2; //This may be "" but won't be null.
         this.postcode = postcode;
         this.skipsOrdered = skipsOrdered;
+        numberOfSkipsOrdered = skipsOrdered.size();
+        skipType = skipsOrdered.get(0).getSkipTypeAsSimplerString();
         dateOfSkipArrival = calendarWithDateOfSkipArrival;
-        dateSkipWillBePickedUp = optionalCalenderWithDateSkipPickedUp;
+        dateOfSkipArrivalString = simpleDateFormat.format(dateOfSkipArrival.getTime());
+        dateOfSkipCollection = optionalCalenderWithDateSkipPickedUp;
+        dateOfSkipCollectionString = simpleDateFormat.format(dateOfSkipCollection.getTime());
+        collectionDateSpecified = true;
+        userUID = Control.CONTROL.getCurrentUser().getFirebaseUid();
     }
 
 
@@ -88,11 +104,6 @@ public class Order {
 
 
 
-    protected void setDateOfSkipArrival(Calendar newDateOfSkipArrival){
-        dateOfSkipArrival = newDateOfSkipArrival;
-    }
-
-
     public String getAddressLine1(){
         return addressLine1;
     }
@@ -105,47 +116,43 @@ public class Order {
         return postcode;
     }
 
-    public ArrayList<Skip> getSkipsOrderedArrayList(){
+    @Exclude //This stops firebase trying to take an ArrayList of Skips into its database and crashing it
+    protected ArrayList<Skip> getSkipsOrderedArrayList(){
         return skipsOrdered;
     }
 
-    public Calendar getDateOfSkipArrival(){
+    @Exclude //This stops firebase trying to take a Calender into its database and crashing it
+    protected Calendar getDateOfSkipArrival(){
         return dateOfSkipArrival;
     }
 
-    public String getDateOfSkipArrivalAsAString(){
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
-        String toReturn = simpleDateFormat.format(dateOfSkipArrival.getTime());
-
-        return toReturn;
-    }
-
-    public Company getCompany(){
+    @Exclude
+    protected Company getCompany(){
         return skipCo;
     }
 
-    public double getPrice(){
+    protected double getPrice(){
         return price;
     }
 
-    public Calendar getDateSkipWillBePickedUp() {
-        return dateSkipWillBePickedUp;
+    @Exclude
+    protected Calendar getDateOfSkipCollection() {
+        return dateOfSkipCollection;
     }
 
-    public void setDateSkipWillBePickedUp(Calendar dateSkipWillBePickedUp) {
-        this.dateSkipWillBePickedUp = dateSkipWillBePickedUp;
+    protected void setDateOfSkipArrival(Calendar newDateOfSkipArrival){
+        dateOfSkipArrival = newDateOfSkipArrival;
+        dateOfSkipArrivalString = simpleDateFormat.format(dateOfSkipArrival.getTime());
     }
 
-    public UserFeedback getUserFeedback() {
-        return userFeedback;
+    protected void setDateOfSkipCollection(Calendar dateSkipWillBePickedUp) {
+        this.dateOfSkipCollection = dateSkipWillBePickedUp;
+        dateOfSkipCollectionString = simpleDateFormat.format(dateOfSkipCollection.getTime());
+        collectionDateSpecified = true;
     }
 
-    public void setUserFeedback(UserFeedback userFeedback) {
-        this.userFeedback = userFeedback;
-    }
-
-    public int getButtonTypeForTrackOrders() {
+    @Exclude
+    protected int getButtonTypeForTrackOrders() {
         return buttonTypeForTrackOrders;
     }
 
@@ -153,7 +160,8 @@ public class Order {
         this.buttonTypeForTrackOrders = buttonTypeForTrackOrders;
     }
 
-    public static Comparator<Order> dateLatestFirstComparator = new Comparator<Order>() {
+    @Exclude
+    protected static Comparator<Order> dateLatestFirstComparator = new Comparator<Order>() {
         @Override
         public int compare(Order order1, Order order2) {
             //double compareDouble = c1.getRating() - c2.getRating();
@@ -166,7 +174,8 @@ public class Order {
         }
     };
 
-    public static Comparator<Order> dateEarliestFirstComparator = new Comparator<Order>() {
+    @Exclude
+    protected static Comparator<Order> dateEarliestFirstComparator = new Comparator<Order>() {
         @Override
         public int compare(Order order1, Order order2) {
             //double compareDouble = c1.getRating() - c2.getRating();
@@ -179,40 +188,41 @@ public class Order {
         }
     };
 
-    public int getParentTypeForExpandleListView() {
-        return parentTypeForExpandableListView;
-    }
-
-    public void setParentTypeForExpandleListView(int parentTypeForExpandleListView) {
-        this.parentTypeForExpandableListView = parentTypeForExpandleListView;
-    }
-
-    public int getChildTypeForExpandableListView() {
-        return childTypeForExpandableListView;
-    }
-
-    public void setChildTypeForExpandableListView(int childTypeForExpandableListView) {
-        this.childTypeForExpandableListView = childTypeForExpandableListView;
-    }
 
     //As only skips of the same type can be ordered at at least 1 is always ordered, the skip
     //returned will be indicative of all the skips ordered
-    public Skip getSkipType(){
+    @Exclude
+    protected Skip getSkipType(){
         return skipsOrdered.get(0);
     }
 
-    public int getNumberOfSkipsOrdered(){
-        return skipsOrdered.size();
-    }
-
-    public void setSkipsOrdered(ArrayList<Skip> skipsOrdered){
+    protected void setSkipsOrdered(ArrayList<Skip> skipsOrdered){
         this.skipsOrdered.clear();
         this.skipsOrdered.addAll(skipsOrdered);
     }
 
-    public String getOrderID(){
-        return orderID;
+    public String getDateOfSkipArrivalString() {
+        return dateOfSkipArrivalString;
     }
 
+    public String getDateOfSkipCollectionString() {
+        return dateOfSkipCollectionString;
+    }
+
+    public String getSkipTypeString(){
+        return skipType;
+    }
+
+    public int getNumberOfSkipsOrdered(){
+        return numberOfSkipsOrdered;
+    }
+
+    public boolean getCollectionDateSpecified(){
+        return collectionDateSpecified;
+    }
+
+    public String getUserUID(){
+        return userUID;
+    }
 
 }

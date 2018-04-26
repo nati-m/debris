@@ -91,16 +91,16 @@ public class Skip {
 
     public String getSkipTypeAsSimplerString(){
         if (skipType == MAXI_SKIP_8YD){
-            return "Maxi Skip";
+            return "MAXI";
         }
         if (skipType == MIDI_SKIP_4YD){
-            return "Midi Skip";
+            return "MIDI";
         }
         if (skipType == MINI_SKIP_2YD){
-            return "Mini Skip";
+            return "MINI";
         }
         if (skipType == DUMPY_BAG_SMALLEST){
-            return "Skip Bag";
+            return "SKIPBAG";
         }
         return "No real size selected";
     }

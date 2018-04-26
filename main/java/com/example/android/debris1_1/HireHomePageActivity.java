@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -272,10 +275,14 @@ public class HireHomePageActivity extends AppCompatActivity {
 
 
             //create a new Order object with this Address, Postcode, Date, and ArrayList of Skips ordered
-            Order currentOrder = new Order(Control.CONTROL.getCurrentUser(), addressLine1, addressLine2, postcode, skipArrayList, calenderWithDateOfSkipArrival);
+            Order currentOrder = new Order(addressLine1, addressLine2, postcode, skipArrayList, calenderWithDateOfSkipArrival);
 
             //sets this to the current order the app is focused on in CONTROL
             Control.CONTROL.setCurrentOrder(currentOrder);
+
+            //TODO TEST DATABASE FIREBASE
+            DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders");
+            orderDatabaseReference.push().setValue(currentOrder);
 
             //goes to next page
 

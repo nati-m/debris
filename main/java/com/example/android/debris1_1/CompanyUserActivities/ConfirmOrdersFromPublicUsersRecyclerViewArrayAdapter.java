@@ -118,7 +118,7 @@ class OrderFromPublicViewHolder extends RecyclerView.ViewHolder implements View.
 
         final Order currentOrder = orderList.get(position);
 
-        String numberOfAndTypeOfSkip = currentOrder.getNumberOfSkipsOrdered() + " x " + currentOrder.getSkipType().getSkipTypeAsSimplerString();
+        String numberOfAndTypeOfSkip = currentOrder.getNumberOfSkipsOrdered() + " x " + currentOrder.getSkipTypeString();
         if (currentOrder.getNumberOfSkipsOrdered() > 1){
             numberOfAndTypeOfSkip += "s";
         }
@@ -127,20 +127,20 @@ class OrderFromPublicViewHolder extends RecyclerView.ViewHolder implements View.
         String postcode = "To: " + currentOrder.getPostCode();
         holder.toPostcode.setText(postcode);
 
-        String deliveryTimeAndDate = "Delivery: 0-2 " + simpleDateFormat.format(currentOrder.getDateOfSkipArrival().getTime());
+        String deliveryTimeAndDate = "Delivery: 0-2 " + currentOrder.getDateOfSkipArrivalString();
         holder.deliveryTimeAndDate.setText(deliveryTimeAndDate);
 
         String collectionTimeAndDate = "Collection: UNSPECIFIED";
-        if(currentOrder.getDateSkipWillBePickedUp() != null){
-            collectionTimeAndDate = "Collection: 0-2 " + simpleDateFormat.format(currentOrder.getDateSkipWillBePickedUp().getTime());
-        }
+        if(currentOrder.getCollectionDateSpecified()){
+            collectionTimeAndDate = "Collection: 0-2 " + currentOrder.getDateOfSkipCollectionString();
+        } //TODO FIREBASE
         holder.collectionTimeAndDate.setText(collectionTimeAndDate);
 
-        String orderID = currentOrder.getOrderID();
+        String orderID = "99999"; //TODO GET FROM FIREBASE
         holder.orderID.setText(orderID);
 
-        String price = "£" + currentOrder.getPrice() + "0";
-        holder.paymentAmount.setText(price);
+//        String price = "£" + currentOrder.getPrice() + "0"; //TODO FIREBASE
+//        holder.paymentAmount.setText(price);
 
         String offerExpires = workOutWhenOfferExpires(currentOrder);
         holder.expires.setText(offerExpires);

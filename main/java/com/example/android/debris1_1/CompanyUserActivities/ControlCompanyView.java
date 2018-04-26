@@ -63,10 +63,10 @@ public class ControlCompanyView {
         skipArrivalIn10Days.add(Calendar.DAY_OF_YEAR, 10);
 
 
-        Order dummyOrder1 = new Order(dummyUser1, "1 Willow Street", "", "NE4 5AB", dummyArrayList1, skipArrivalIn10Days);
-        Order dummyOrder2 = new Order(dummyUser1, "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList2, skipArrival3DaysFromNow);
-        Order dummyOrder3 = new Order(dummyUser1, "1 Willow Street", "", "NE4 5AB", dummyArrayList3, skipArrivalIn6Months, skipArrivalIn10Days);
-        Order dummyOrder4 = new Order(dummyUser1, "5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList4, skipArrivalTomorrow, skipPickedUp10DaysAfter6Months);
+        Order dummyOrder1 = new Order("1 Willow Street", "", "NE4 5AB", dummyArrayList1, skipArrivalIn10Days);
+        Order dummyOrder2 = new Order("5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList2, skipArrival3DaysFromNow);
+        Order dummyOrder3 = new Order("1 Willow Street", "", "NE4 5AB", dummyArrayList3, skipArrivalIn6Months, skipArrivalIn10Days);
+        Order dummyOrder4 = new Order("5 Windsor Road", "Fenham", "NE4 9EN", dummyArrayList4, skipArrivalTomorrow, skipPickedUp10DaysAfter6Months);
 
         currentOrders.add(dummyOrder1); currentOrders.add(dummyOrder2); currentOrders.add(dummyOrder3); currentOrders.add(dummyOrder4);
 

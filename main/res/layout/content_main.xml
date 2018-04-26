@@ -36,11 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/HeaderText"
-            android:textSize="35sp"
+            android:textSize="49sp"
             android:textColor="@android:color/black"
             android:layout_centerInParent="true"
             android:fontFamily="sans-serif-smallcaps"
-            android:text="DEBRIS"/>
+            android:text="I WANT A SKIP"/>
 
     </RelativeLayout>
 
@@ -83,7 +83,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         android:textAlignment="center"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, mi sed semper fermentum, elit lacus finibus nibh, eu vehicula nibh massa in lacus. Cras quis ex eget neque vestibulum venenatis. Aenean facilisis nulla quis laoreet pellentesque. Sed eget faucibus nunc."/>
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, mi sed semper fermentum, elit lacus finibus nibh, eu vehicula nibh massa in lacus. Cras quis ex eget neque vestibulum venenatis. Aenean facilisis nulla quis laoreet pellentesque."/>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"

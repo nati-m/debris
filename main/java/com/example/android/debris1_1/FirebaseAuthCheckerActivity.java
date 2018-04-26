@@ -59,7 +59,6 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                //user.getUid(); //NULL EXCEPTION CRASHED IT
                 if (user != null) {
                     // User is signed in
 
@@ -142,6 +141,7 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
 
                     Intent nextPageIntent = new Intent(FirebaseAuthCheckerActivity.this, FirstTimeUserEnterAddressPostcode.class);
                     startActivity(nextPageIntent);
+
                 }
             }
 
