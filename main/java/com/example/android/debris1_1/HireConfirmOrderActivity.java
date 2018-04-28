@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -57,6 +60,9 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Order currentOrder = Control.CONTROL.getCurrentOrder();
                 Control.CONTROL.getOrdersFromThisUser().add(currentOrder);
+                //TODO TEST DATABASE FIREBASE
+                DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders");
+                orderDatabaseReference.push().setValue(currentOrder);
 
                 Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, FrontPageLoggedInActivity.class);
                 startActivity(nextPageIntent);

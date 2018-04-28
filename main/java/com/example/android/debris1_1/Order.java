@@ -2,10 +2,12 @@ package com.example.android.debris1_1;
 
 import com.google.firebase.database.Exclude;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  * Created by Paaat VII on 12/03/2018.
@@ -88,7 +90,47 @@ public class Order {
         userUID = Control.CONTROL.getCurrentUser().getFirebaseUid();
     }
 
+    //The constructor for Firebase
+    public Order (String addressLine1, String addressLine2, boolean collectionDateSpecified, String dateOfSkipArrivalString, int numberOfSkipsOrdered, String postcode, double price, String skipTypeString, String userUID) throws ParseException {
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2; //This may be "" but won't be null.
+        this.postcode = postcode;
+        this.collectionDateSpecified = collectionDateSpecified;
+        this.numberOfSkipsOrdered = numberOfSkipsOrdered;
+        this.dateOfSkipArrivalString = dateOfSkipArrivalString;
+        this.price = price;
+        this.skipType = skipTypeString;
+        this.userUID = userUID;
 
+        skipsOrdered = new ArrayList<>();
+
+        Skip skip = Skip.MAXI_SKIP;
+
+        if (skipType == "MIDI"){
+            skip = Skip.MIDI_SKIP;
+        }
+
+        if (skipType == "MINI"){
+            skip = Skip.MINI_SKIP;
+        }
+
+        if (skipType == "SKIPBAG"){
+            skip = Skip.DUMPY_BAG;
+        }
+
+        for (int i = 0; i < numberOfSkipsOrdered; i++){
+            skipsOrdered.add(skip);
+        }
+
+        parseArrivalDate(dateOfSkipArrivalString);
+    }
+
+    private void parseArrivalDate(String date) throws ParseException {
+        Date skipArrival = simpleDateFormat.parse(date);
+        Calendar c = Calendar.getInstance();
+        c.setTime(skipArrival);
+        dateOfSkipArrival = c;
+    }
 
     protected void setChosenSkipCo(Company company){
         skipCo = company;

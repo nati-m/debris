@@ -49,11 +49,11 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
         TextView numberAndTypeOfSkipsOrdered = convertView.findViewById(R.id.number_and_type_of_skips_track_order_expandable_list);
         TextView dateOfDeliveryOrPickUp = convertView.findViewById(R.id.date_of_delivery_or_picked_up_track_order_expandable_list);
 
-        String numberTypeSkipsAndPostcode = currentOrder.getSkipsOrderedArrayList().size() + " x " + currentOrder.getSkipsOrderedArrayList().get(0).getSkipTypeAsString() + "\nto " + currentOrder.getPostCode();
+        String numberTypeSkipsAndPostcode = currentOrder.getNumberOfSkipsOrdered() + " x " + currentOrder.getSkipTypeString() + "\nto " + currentOrder.getPostCode();
         numberAndTypeOfSkipsOrdered.setText(numberTypeSkipsAndPostcode);
 
-        String dateOfDeliveryOrPickUpAndRelevantMessage = sortOutDateOfDeliveryOrPickUpRelevantMessageParentView(currentOrder, dateOfDeliveryOrPickUp);
-        dateOfDeliveryOrPickUp.setText(dateOfDeliveryOrPickUpAndRelevantMessage);
+//        String dateOfDeliveryOrPickUpAndRelevantMessage = sortOutDateOfDeliveryOrPickUpRelevantMessageParentView(currentOrder, dateOfDeliveryOrPickUp);
+//        dateOfDeliveryOrPickUp.setText(dateOfDeliveryOrPickUpAndRelevantMessage);
 
 
 

@@ -280,12 +280,7 @@ public class HireHomePageActivity extends AppCompatActivity {
             //sets this to the current order the app is focused on in CONTROL
             Control.CONTROL.setCurrentOrder(currentOrder);
 
-            //TODO TEST DATABASE FIREBASE
-            DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders");
-            orderDatabaseReference.push().setValue(currentOrder);
-
             //goes to next page
-
             Intent nextPageIntent = new Intent(HireHomePageActivity.this, HireSingleDayViewActivity.class);
             startActivity(nextPageIntent);
 
