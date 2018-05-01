@@ -52,4 +52,10 @@
             />
     </ScrollView>
 
+    <TextView
+        android:id="@+id/orders_test_http_test_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="orders"/>
+
 </LinearLayout>

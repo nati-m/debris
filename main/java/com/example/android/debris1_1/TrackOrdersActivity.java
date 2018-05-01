@@ -57,7 +57,7 @@ public class TrackOrdersActivity extends AppCompatActivity {
         String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
 
         ordersFromThisUser = new ArrayList<>();
-        ordersDatabaseReference.orderByChild("userUID").equalTo("grKVZ54zGpdjhwwVtZBwSHgbFS02").addValueEventListener(
+        ordersDatabaseReference.orderByChild("userUID").equalTo(uid).addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

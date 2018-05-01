@@ -42,6 +42,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     ArrayAdapter<String> sortCompaniesArrayAdapter;
     Skip skipType;
     CheckBox permitCheckBox;
+    boolean permitRequired;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +182,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
             //This code will be run when the button is clicked on.
             public void onClick(View view) {
                 setOrderDateToDateSelectedOnThisPage(dateOfPage);
-                Control.CONTROL.getCurrentOrder().setifPermitRequired(permitCheckBox.isChecked());
+                Control.CONTROL.getCurrentOrder().setPermitRequired(permitCheckBox.isChecked());
                 Control.CONTROL.getCurrentOrder().setChosenSkipCo(Control.CONTROL.getCompanySelectedInRecyclerView());
                 //the price in current Order will still be set from last time user clicked a
                 //company column or the permit required checkbox
@@ -278,9 +279,13 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         //TODO make a separate amount for each council, depending on which postcode the order is going to
         if(permitCheckBox.isChecked()){
             priceDouble += 20;
+            permitRequired = true;
+        } else {
+            permitRequired = false;
         }
 
         Control.CONTROL.getCurrentOrder().setPrice(priceDouble);
+        Control.CONTROL.getCurrentOrder().setPermitRequired(permitRequired);
 
         String priceString = "£" + priceDouble + "0";
         priceSubtotal.setText(priceString);

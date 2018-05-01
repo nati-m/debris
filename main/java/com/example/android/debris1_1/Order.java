@@ -21,7 +21,7 @@ public class Order {
 
     private String addressLine1;
     private String addressLine2;
-    private String postcode;
+    private String postCode;
     private Calendar dateOfSkipArrival;
     private double price = -999;
     private Company skipCo;
@@ -31,14 +31,17 @@ public class Order {
     private int buttonTypeForTrackOrders = -999;
 
 
-
     //For Firebase:
     private String dateOfSkipArrivalString;
     private String dateOfSkipCollectionString;
-    private String skipType;
+    private String skipTypeString;
     private int numberOfSkipsOrdered;
-    private boolean collectionDateSpecified;
+    private boolean collectionDateSpecified = false;
     private String userUID;
+    private String companyUID;
+
+
+
 
 
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
@@ -62,26 +65,26 @@ public class Order {
     public Order (){ } //So Firebase Database works
 
 
-    public Order (String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival){
+    public Order (String addressLine1, String addressLine2, String postCode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival){
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2; //This may be "" but won't be null.
-        this.postcode = postcode;
+        this.postCode = postCode;
         this.skipsOrdered = skipsOrdered;
         numberOfSkipsOrdered = skipsOrdered.size();
-        skipType = skipsOrdered.get(0).getSkipTypeAsSimplerString();
+        skipTypeString = skipsOrdered.get(0).getSkipTypeAsSimplerString();
         dateOfSkipArrival = calendarWithDateOfSkipArrival;
         dateOfSkipArrivalString = simpleDateFormat.format(dateOfSkipArrival.getTime());
         collectionDateSpecified = false;
         userUID = Control.CONTROL.getCurrentUser().getFirebaseUid();
     }
 
-    public Order (String addressLine1, String addressLine2, String postcode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival, Calendar optionalCalenderWithDateSkipPickedUp){
+    public Order (String addressLine1, String addressLine2, String postCode, ArrayList<Skip> skipsOrdered, Calendar calendarWithDateOfSkipArrival, Calendar optionalCalenderWithDateSkipPickedUp){
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2; //This may be "" but won't be null.
-        this.postcode = postcode;
+        this.postCode = postCode;
         this.skipsOrdered = skipsOrdered;
         numberOfSkipsOrdered = skipsOrdered.size();
-        skipType = skipsOrdered.get(0).getSkipTypeAsSimplerString();
+        skipTypeString = skipsOrdered.get(0).getSkipTypeAsSimplerString();
         dateOfSkipArrival = calendarWithDateOfSkipArrival;
         dateOfSkipArrivalString = simpleDateFormat.format(dateOfSkipArrival.getTime());
         dateOfSkipCollection = optionalCalenderWithDateSkipPickedUp;
@@ -91,30 +94,32 @@ public class Order {
     }
 
     //The constructor for Firebase
-    public Order (String addressLine1, String addressLine2, boolean collectionDateSpecified, String dateOfSkipArrivalString, int numberOfSkipsOrdered, String postcode, double price, String skipTypeString, String userUID) throws ParseException {
+    public Order (String addressLine1, String addressLine2, boolean collectionDateSpecified, String dateOfSkipArrivalString, int numberOfSkipsOrdered, String postCode, double price, String skipTypeString, String userUID, String companyUID, boolean permitRequired) throws ParseException {
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2; //This may be "" but won't be null.
-        this.postcode = postcode;
+        this.postCode = postCode;
         this.collectionDateSpecified = collectionDateSpecified;
         this.numberOfSkipsOrdered = numberOfSkipsOrdered;
         this.dateOfSkipArrivalString = dateOfSkipArrivalString;
         this.price = price;
-        this.skipType = skipTypeString;
+        this.skipTypeString = skipTypeString;
         this.userUID = userUID;
-
+        this.companyUID = companyUID;
+        this.permitRequired = permitRequired;
+        //TODO make setters for things that are null - firebase seems to use blank constructors then setters!
         skipsOrdered = new ArrayList<>();
 
         Skip skip = Skip.MAXI_SKIP;
 
-        if (skipType == "MIDI"){
+        if (skipTypeString == "MIDI"){
             skip = Skip.MIDI_SKIP;
         }
 
-        if (skipType == "MINI"){
+        if (skipTypeString == "MINI"){
             skip = Skip.MINI_SKIP;
         }
 
-        if (skipType == "SKIPBAG"){
+        if (skipTypeString == "SKIPBAG"){
             skip = Skip.DUMPY_BAG;
         }
 
@@ -136,15 +141,17 @@ public class Order {
         skipCo = company;
     }
 
-    protected void setifPermitRequired(boolean permitRequired){
+    protected void setPermitRequired(boolean permitRequired){
         this.permitRequired = permitRequired;
+    }
+
+    public boolean getPermitRequired(){
+        return permitRequired;
     }
 
     protected void setPrice(double price){
         this.price = price;
     }
-
-
 
     public String getAddressLine1(){
         return addressLine1;
@@ -155,7 +162,7 @@ public class Order {
     }
 
     public String getPostCode(){
-        return postcode;
+        return postCode;
     }
 
     @Exclude //This stops firebase trying to take an ArrayList of Skips into its database and crashing it
@@ -252,7 +259,7 @@ public class Order {
     }
 
     public String getSkipTypeString(){
-        return skipType;
+        return skipTypeString;
     }
 
     public int getNumberOfSkipsOrdered(){
@@ -266,5 +273,47 @@ public class Order {
     public String getUserUID(){
         return userUID;
     }
+
+    public void setDateOfSkipArrivalString(String dateOfSkipArrivalString) throws ParseException {
+        this.dateOfSkipArrivalString = dateOfSkipArrivalString;
+        parseArrivalDate(dateOfSkipArrivalString);
+    }
+
+    public void setDateOfSkipCollectionString(String dateOfSkipCollectionString){
+        this.dateOfSkipCollectionString = dateOfSkipCollectionString;
+        collectionDateSpecified = true;
+    }
+
+    public void setSkipType(String skipTypeString){
+        this.skipTypeString = skipTypeString;
+
+        Skip skip = Skip.MAXI_SKIP;
+
+        if (skipTypeString == "MIDI"){
+            skip = Skip.MIDI_SKIP;
+        }
+
+        if (skipTypeString == "MINI"){
+            skip = Skip.MINI_SKIP;
+        }
+
+        if (skipTypeString == "SKIPBAG"){
+            skip = Skip.DUMPY_BAG;
+        }
+
+        skipsOrdered = new ArrayList<>();
+        for (int i = 0; i < numberOfSkipsOrdered; i++){
+            skipsOrdered.add(skip);
+        }
+    }
+
+    public String getCompanyUID(){
+        return companyUID;
+    }
+
+    public void setCompanyUID(String companyUID){
+        this.companyUID = companyUID;
+    }
+
 
 }

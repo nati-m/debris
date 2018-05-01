@@ -55,6 +55,9 @@ public class ExpandableListTrackOrdersAdapter extends BaseExpandableListAdapter 
 //        String dateOfDeliveryOrPickUpAndRelevantMessage = sortOutDateOfDeliveryOrPickUpRelevantMessageParentView(currentOrder, dateOfDeliveryOrPickUp);
 //        dateOfDeliveryOrPickUp.setText(dateOfDeliveryOrPickUpAndRelevantMessage);
 
+        //TODO this is a temp test thing
+        String date = "Arrive " + currentOrder.getDateOfSkipArrivalString();
+        dateOfDeliveryOrPickUp.setText(date);
 
 
         return convertView;

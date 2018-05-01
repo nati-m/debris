@@ -61,7 +61,7 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
                 Order currentOrder = Control.CONTROL.getCurrentOrder();
                 Control.CONTROL.getOrdersFromThisUser().add(currentOrder);
                 //TODO TEST DATABASE FIREBASE
-                DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders");
+                DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
                 orderDatabaseReference.push().setValue(currentOrder);
 
                 Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, FrontPageLoggedInActivity.class);
