@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.android.debris1_1.CompanyUserActivities.CompanyHomePageLoggedInActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -59,10 +60,14 @@ public class FirstTimeUserEnterAddressPostcode extends AppCompatActivity {
         //And now to update the Firebase Database with this user's new postcode and firebaseDataFilledOut set to true
         thisUsersDatabaseReference.setValue(Control.CONTROL.getCurrentUser());
 
-        //TODO send them somewhere else if they are a company
-        Intent nextPageIntent = new Intent(FirstTimeUserEnterAddressPostcode.this, FrontPageLoggedInActivity.class);
-        startActivity(nextPageIntent);
-
+        //If the current user is a company user, send them to company home page, if not send them to public user home page
+        if(!Control.CONTROL.getCurrentUser().getIsCompanyUser()) {
+            Intent nextPageIntent = new Intent(FirstTimeUserEnterAddressPostcode.this, FrontPageLoggedInActivity.class);
+            startActivity(nextPageIntent);
+        } else {
+            Intent nextPageIntent = new Intent(FirstTimeUserEnterAddressPostcode.this, CompanyHomePageLoggedInActivity.class);
+            startActivity(nextPageIntent);
+        }
     }
 
 }

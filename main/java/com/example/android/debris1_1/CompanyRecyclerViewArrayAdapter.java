@@ -89,8 +89,8 @@ public class CompanyRecyclerViewArrayAdapter extends RecyclerView.Adapter<Custom
         holder.companyName.setText(companyList.get(position).getName());
 
         Skip skipType = Control.CONTROL.getCurrentOrder().getSkipType();
-        double priceDouble = companyList.get(position).getDefaultPriceDifferentDependingOnSkipType(skipType) * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
-        String priceString = "£" + priceDouble + "0";
+        double priceDouble = 240 * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
+        String priceString = "£" + priceDouble;
         holder.price.setText(priceString);
 
         float rating = (float) companyList.get(position).getRating();

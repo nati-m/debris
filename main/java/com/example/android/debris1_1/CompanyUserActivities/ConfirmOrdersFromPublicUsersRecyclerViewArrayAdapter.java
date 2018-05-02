@@ -133,14 +133,14 @@ class OrderFromPublicViewHolder extends RecyclerView.ViewHolder implements View.
         String collectionTimeAndDate = "Collection: UNSPECIFIED";
         if(currentOrder.getCollectionDateSpecified()){
             collectionTimeAndDate = "Collection: 0-2 " + currentOrder.getDateOfSkipCollectionString();
-        } //TODO FIREBASE
+        }
         holder.collectionTimeAndDate.setText(collectionTimeAndDate);
 
         String orderID = "99999"; //TODO GET FROM FIREBASE
         holder.orderID.setText(orderID);
 
-//        String price = "£" + currentOrder.getPrice() + "0"; //TODO FIREBASE
-//        holder.paymentAmount.setText(price);
+        String price = "£" + currentOrder.getPrice();
+        holder.paymentAmount.setText(price);
 
         String offerExpires = workOutWhenOfferExpires(currentOrder);
         holder.expires.setText(offerExpires);
@@ -155,6 +155,8 @@ class OrderFromPublicViewHolder extends RecyclerView.ViewHolder implements View.
                 holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.greenConfirmLight));
 
                 ControlCompanyView.getINSTANCE().getConfirmedOrdersByThisCompany().add(currentOrder);
+                //Todo Remove from Unconfirmed and send to Confirmed
+
 
                 holder.confirmOrderButton.setOnClickListener(new View.OnClickListener() {
                     @Override

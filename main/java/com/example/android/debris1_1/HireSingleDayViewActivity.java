@@ -132,7 +132,7 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
                 int pos = companyRecyclerView.getChildViewHolder(v).getAdapterPosition();
                 Control.CONTROL.setCompanySelectedInRecyclerView(Control.CONTROL.getSingleDayViewCompanies().get(pos));
 
-                String priceString = "£" + Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceDifferentDependingOnSkipType(skipType) + "0";
+                String priceString = "£240";
                 priceSubtotal.setText(priceString);
 
                 for (int i = 0; i < companyRecyclerViewArrayAdapter.getViewsArrayList().size(); i++){
@@ -145,35 +145,6 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
         });
 
 
-        sortCompaniesBySpinner = (Spinner) findViewById(R.id.sort_companies_by_spinner_single_day_view);
-        spinnerSortCompaniesByCategories = new ArrayList<>();
-        spinnerSortCompaniesByCategories.add("Rating");
-        spinnerSortCompaniesByCategories.add("Cheapest");
-        sortCompaniesArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerSortCompaniesByCategories);
-        sortCompaniesArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortCompaniesBySpinner.setAdapter(sortCompaniesArrayAdapter);
-
-        sortCompaniesBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-
-                if(pos == 0){
-                    ArrayList<Company> ratingOrderArrayList = getRelevantCompaniesArrayList();
-                    Control.CONTROL.setSingleDayViewCompanies(ratingOrderArrayList);
-                    Collections.sort(ratingOrderArrayList, Company.ratingComparator);
-                    reOrderCompanies(ratingOrderArrayList);
-                }
-                if (pos == 1){
-                    ArrayList<Company> priceOrderArrayList = getRelevantCompaniesArrayList();
-                    Control.CONTROL.setSingleDayViewCompanies(priceOrderArrayList);
-                    Collections.sort(priceOrderArrayList, Company.priceComparator);
-                    reOrderCompanies(priceOrderArrayList);
-                    }
-
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
         ImageButton confirmOrder = (ImageButton) findViewById(R.id.button_confirm_hire_day_view);
@@ -197,17 +168,9 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     //TODO http://www.egscomics.com/index.php?id=493
 
     private ArrayList<Company> getRelevantCompaniesArrayList(){
-        ArrayList<Company> toReturn = new ArrayList<>();
-        //Only 4 Skip instances exist so this will be equal to any other skip the same size
-        int numberOfSkipsWanted = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size();
-        ArrayList<Company> allCompanyArrayList = Control.CONTROL.getCurrentCompanies();
 
-        for (int i = 0; i < allCompanyArrayList.size(); i++){
-            if (allCompanyArrayList.get(i).isThisKindOfSkipAvailable(skipType, numberOfSkipsWanted)){
-                toReturn.add(allCompanyArrayList.get(i));
-            }
-        }
-        return toReturn;
+        ArrayList<Company> allCompanyArrayList = Control.CONTROL.getCurrentCompanies();
+        return allCompanyArrayList;
     }
 
     /*
@@ -268,12 +231,8 @@ public class HireSingleDayViewActivity extends AppCompatActivity {
     It then updates the price/subtotal TextView to reflect the user's selection.
      */
     private void updatePriceAndAddToTextViewAndCurrentOrder(){
-        if (Control.CONTROL.getCompanySelectedInRecyclerView() == null){
-            return;
-        }
-        //This stops the app crashing if no company is selected, and leaves the price unchanged
 
-        double priceDouble = Control.CONTROL.getCompanySelectedInRecyclerView().getDefaultPriceDifferentDependingOnSkipType(skipType)
+        double priceDouble = 240
                 * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
 
         //TODO make a separate amount for each council, depending on which postcode the order is going to

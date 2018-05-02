@@ -73,7 +73,7 @@
         android:layout_centerInParent="true"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:text="Log In Or Sign Up"/>
+        android:text="Continue"/>
 
 </RelativeLayout>
 

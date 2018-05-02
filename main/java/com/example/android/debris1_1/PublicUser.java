@@ -14,6 +14,7 @@ public class PublicUser {
     private String firebaseUid;
     private boolean firebaseDatabaseFilledOut;
     private ArrayList<Order> thisUsersOrders;
+    private boolean isCompanyUser;
 
     public PublicUser(){} //A blank constructor is required to let there be a Firebase database of this object
 
@@ -23,6 +24,7 @@ public class PublicUser {
         this.email = email;
         this.thisUsersOrders = thisUsersOrders;
         firebaseDatabaseFilledOut = false;
+        isCompanyUser = false;
     }
 
     public PublicUser(String name, String postCode, String email, ArrayList<Order> thisUsersOrders, boolean firebaseDatabaseFilledOut, String firebaseUid){
@@ -32,6 +34,17 @@ public class PublicUser {
         this.thisUsersOrders = thisUsersOrders;
         this.firebaseDatabaseFilledOut = firebaseDatabaseFilledOut;
         this.firebaseUid = firebaseUid;
+        isCompanyUser = false;
+    }
+
+    public PublicUser(String name, String postCode, String email, ArrayList<Order> thisUsersOrders, boolean firebaseDatabaseFilledOut, String firebaseUid, boolean isCompanyUser){
+        this.name = name;
+        this.postCode = postCode;
+        this.email = email;
+        this.thisUsersOrders = thisUsersOrders;
+        this.firebaseDatabaseFilledOut = firebaseDatabaseFilledOut;
+        this.firebaseUid = firebaseUid;
+        this.isCompanyUser = isCompanyUser;
     }
 
 
@@ -76,4 +89,11 @@ public class PublicUser {
     }
 
 
+    public boolean getIsCompanyUser() {
+        return isCompanyUser;
+    }
+
+    public void setIsCompanyUser(boolean companyUser) {
+        isCompanyUser = companyUser;
+    }
 }

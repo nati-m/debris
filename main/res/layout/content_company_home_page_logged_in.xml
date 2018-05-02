@@ -11,21 +11,22 @@
     android:background="@color/background"
     >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/HeaderText"
-        android:layout_marginTop="16dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
-        android:text="Company Dashboard"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--style="@style/HeaderText"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:textAlignment="center"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:text="Company Dashboard"/>-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
     <Button
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -33,7 +34,7 @@
         android:text="Today's Orders"/>
 
     <Button
-        android:layout_width="160dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -43,6 +44,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/unconfirmed_orders_text_view_company_home_page_logged_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="32dp"

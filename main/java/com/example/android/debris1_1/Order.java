@@ -180,7 +180,7 @@ public class Order {
         return skipCo;
     }
 
-    protected double getPrice(){
+    public double getPrice(){
         return price;
     }
 

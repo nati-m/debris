@@ -21,7 +21,7 @@ import java.util.Calendar;
 
 public class Control {
 
-    protected static Control CONTROL = new Control();
+    public static Control CONTROL = new Control();
 
     //FIREBASE
     public static final int RC_SIGN_IN = 777; //For use in Firebase Database
@@ -100,7 +100,7 @@ public class Control {
     }
 
 
-    protected void setCurrentUser(PublicUser publicUser){
+    public void setCurrentUser(PublicUser publicUser){
         currentUser = publicUser;
     }
 
@@ -125,7 +125,7 @@ public class Control {
         currentUser.setThisUsersOrders(ordersFromThisUser);
     }
 
-    protected PublicUser getCurrentUser(){
+    public PublicUser getCurrentUser(){
         return currentUser;
     }
 
@@ -190,15 +190,15 @@ public class Control {
     protected void initCompanyDummyData(){
         currentCompanies = new ArrayList<>();
 
-        Company company1 = new Company("Jimmy Skips", "NE4 5AA", "jimmyskips@gmail.com", "0191 567392", 120, 50, 20, 0, 0);
-        Company company2 = new Company("Biffa", "NE1 1DF", "biffa@biffa.com", "0800 200 300", 160, 100, 100, 50, 10);
-        Company company3 = new Company("Fenham Skips", "NE4 9EP", "fenhamskips@mail.com", "0191 493475", 140, 20, 0, 0, 0);
-        Company company4 = new Company("Ryton SkipCo", "NE40 3AH", "rightonryton@hotmail.co.uk", "0191 276 358", 170, 50, 50, 50, 50);
-        Company company5 = new Company("Yellow Skips South Shields", "NE33 5RT", "yellowskipssouthshields@mail.com", "0191 988 429", 200, 40, 0, 30, 5);
-        Company company6 = new Company("Expensive Skips", "NE8 3BE", "expensiveskips@gmail.com", "0191 44 55 66", 225, 50, 50, 30, 0);
-        Company company7 = new Company("Taylor SkipCo", "NE27 0FG", "taylorskipgroup@aol.com", "0191 743 599", 150, 25, 10, 5, 5);
-        Company company8 = new Company("Heavy Duty Skips", "NE34 6ET", "heavyskips@gmail.com", "0191 11 00 11", 170, 100, 0, 0, 0);
-        Company company9 = new Company("Yoho Pirate Skips Alnwick", "NE66 2PN", "yohoskips@mail.com", "0191 526 1819", 190, 20, 20, 20, 0);
+        Company company1 = new Company("Jimmy Skips", "NE4 5AA", "jimmyskips@gmail.com", "0191 567392");
+        Company company2 = new Company("Biffa", "NE1 1DF", "biffa@biffa.com", "0800 200 300");
+        Company company3 = new Company("Fenham Skips", "NE4 9EP", "fenhamskips@mail.com", "0191 493475");
+        Company company4 = new Company("Ryton SkipCo", "NE40 3AH", "rightonryton@hotmail.co.uk", "0191 276 358");
+        Company company5 = new Company("Yellow Skips South Shields", "NE33 5RT", "yellowskipssouthshields@mail.com", "0191 988 429");
+        Company company6 = new Company("Expensive Skips", "NE8 3BE", "expensiveskips@gmail.com", "0191 44 55 66");
+        Company company7 = new Company("Taylor SkipCo", "NE27 0FG", "taylorskipgroup@aol.com", "0191 743 599");
+        Company company8 = new Company("Heavy Duty Skips", "NE34 6ET", "heavyskips@gmail.com", "0191 11 00 11");
+        Company company9 = new Company("Yoho Pirate Skips Alnwick", "NE66 2PN", "yohoskips@mail.com", "0191 526 1819");
 
         company1.setRating(2.2); company2.setRating(3.4); company3.setRating(4.4); company4.setRating(3.8); company5.setRating(4.5); company6.setRating(4.2); company7.setRating(1.8); company8.setRating(3.9); company9.setRating(4);
 

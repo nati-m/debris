@@ -39,12 +39,13 @@ public class MainActivity extends AppCompatActivity {
 
         nextPageButton = (Button) findViewById(R.id.front_page_button);
         FirebaseUser checkIfUserIsLoggedIn = FirebaseAuth.getInstance().getCurrentUser();
-        if(checkIfUserIsLoggedIn != null){ // If the user is logged in already
-            String usersName = checkIfUserIsLoggedIn.getDisplayName();
-            String userFirstName = usersName.split(" ")[0];
-            nextPageButton.setText("Continue as " + userFirstName);
+//        if(checkIfUserIsLoggedIn != null){ // If the user is logged in already
+//            String usersName = checkIfUserIsLoggedIn.getDisplayName();
+//            String userFirstName = usersName.split(" ")[0];
+//            nextPageButton.setText("Continue as " + userFirstName
+//            }
             //TODO FIX BUG WHERE THIS CHANGES EVEN WHEN LOGGED OUT IF YOU LOG OUT ON MAIN PAGE
-        }
+
 
         nextPageButton.setOnClickListener(new View.OnClickListener() {
             @Override

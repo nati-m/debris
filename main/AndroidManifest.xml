@@ -26,17 +26,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity
-            android:name=".FrontPageNotSignedIn"
-            android:label="@string/title_activity_front_page_not_signed_in"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".FrontPageLoggedInActivity"
             android:label="@string/title_activity_front_page_logged_in"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -54,7 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TrackOrdersActivity"
-            android:label="@string/title_activity_track_orders"
+            android:label="Track Orders"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EditOrderActivity"
@@ -67,12 +56,12 @@
         <activity android:name=".HTTPTestActivity" />
         <activity
             android:name=".CompanyUserActivities.CompanyHomePageLoggedInActivity"
-            android:label="@string/title_activity_company_home_page_logged_in"
+            android:label="Dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".TestTownActivity" />
         <activity
             android:name=".FirebaseAuthCheckerActivity"
-            android:label="@string/title_activity_firebase_auth_checker"
+            android:label="Loading User Profile..."
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".FirstTimeUserEnterAddressPostcode"

@@ -53,7 +53,7 @@ public class TrackOrdersActivity extends AppCompatActivity {
 
         //getOrdersForThisUserFromFirebase();
 
-        DatabaseReference ordersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders");
+        DatabaseReference ordersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
         String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
 
         ordersFromThisUser = new ArrayList<>();

@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.android.debris1_1.CompanyUserActivities.CompanyHomePageLoggedInActivity;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +42,7 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
     private ValueEventListener userValueEventListener;
 
     private String postcode = "";
+    private boolean isCompanyUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,13 +107,40 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
                             if(dataSnapshot.getValue().equals(true)){
                                 test.setText("the info is got");
 
-                                String postcodeFromFirebase = getUserPostcode(user);
-                                PublicUser publicUser = new PublicUser(user.getDisplayName(), postcodeFromFirebase, user.getEmail(), new ArrayList<Order>(), true, uid);
-                                Control.CONTROL.setCurrentUser(publicUser);
 
 
-                                Intent nextPageIntent = new Intent(FirebaseAuthCheckerActivity.this, FrontPageLoggedInActivity.class);
-                                startActivity(nextPageIntent);
+                                //Gets if the user is a company user as a boolean from the database
+                                //The rest of this method until ELSE happen in here to stop there being two threads of events
+                                //which easily get out of sync and send the user to the wrong place...
+                                //so just a bug fix.
+                                DatabaseReference isCompanyUserFirebase = firebaseDatabase.getReference().child("users").child(uid).child("isCompanyUser");
+                                isCompanyUserFirebase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        if(dataSnapshot.getValue().equals(true)){
+                                            isCompanyUser = true;
+                                        } else {
+                                            isCompanyUser = false;
+                                        }
+                                        String postcodeFromFirebase = getUserPostcode(user);
+                                        PublicUser publicUser = new PublicUser(user.getDisplayName(), postcodeFromFirebase, user.getEmail(), new ArrayList<Order>(), true, uid, isCompanyUser);
+                                        Control.CONTROL.setCurrentUser(publicUser);
+
+                                        //if the user is a public user, send them to public user page, else they're a company user, send them to company user page
+                                        if(!publicUser.getIsCompanyUser()) {
+                                            Intent nextPageIntent = new Intent(FirebaseAuthCheckerActivity.this, FrontPageLoggedInActivity.class);
+                                            startActivity(nextPageIntent);
+                                        } else {
+                                            Intent nextPageIntent = new Intent(FirebaseAuthCheckerActivity.this, CompanyHomePageLoggedInActivity.class);
+                                            startActivity(nextPageIntent);
+                                        }
+                                    }
+                                    @Override public void onCancelled(DatabaseError databaseError) {}
+                                });
+
+
+
+
                             } else {
                                 //else direct them to the page FirstTimeUserEnterAddressPostcode to finish entering their postcode
                                 test.setText("the user quit before they added the info");
