@@ -8,6 +8,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,11 +19,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class HireHomePageActivity extends AppCompatActivity {
 
@@ -273,6 +279,31 @@ public class HireHomePageActivity extends AppCompatActivity {
                 skipArrayList.add(skip);
             }
 
+            //CHANGE THE FORMAT OF POSTCODE TO UPPER CASE AND WITH A SPACE IN THE MIDDLE
+            postcode = postcode.toUpperCase(); //sets the postcode to upper case
+
+            //removes a space from the end of the postcode if there is one
+            if(postcode.charAt(postcode.length() -1) == ' '){
+               postcode = postcode.substring(0, postcode.length() - 1);
+            }
+            if(postcode.charAt(postcode.length() -1) == ' '){
+                postcode = postcode.substring(0, postcode.length() - 1);
+            }
+
+            //adds a space in middle of postcode if there isn't one
+            if(!postcode.contains(" ")){
+                int spaceNeeded = postcode.length() - 3;
+                //As postcodes are not a standard length, but the last part is always three characters,
+                //this finds where the space should be, 3 characters from the end
+
+                ArrayList<String> postcodeParts = new ArrayList<>(); //There will only be two
+                for (int i = 0; i<postcode.length(); i+=spaceNeeded){
+                    postcodeParts.add(postcode.substring(i, Math.min(postcode.length(), i + spaceNeeded)));
+                }
+
+                postcode = postcodeParts.get(0) + " " + postcodeParts.get(1); //This puts the pieces back together again with a space in the middle
+            }
+
 
             //create a new Order object with this Address, Postcode, Date, and ArrayList of Skips ordered
             Order currentOrder = new Order(addressLine1, addressLine2, postcode, skipArrayList, calenderWithDateOfSkipArrival);
@@ -281,7 +312,7 @@ public class HireHomePageActivity extends AppCompatActivity {
             Control.CONTROL.setCurrentOrder(currentOrder);
 
             //goes to next page
-            Intent nextPageIntent = new Intent(HireHomePageActivity.this, HireSingleDayViewActivity.class);
+            Intent nextPageIntent = new Intent(HireHomePageActivity.this, HireSelectSkipContentsActivity.class);
             startActivity(nextPageIntent);
 
         }
@@ -293,7 +324,35 @@ public class HireHomePageActivity extends AppCompatActivity {
     private boolean isPostcodeValid(String postcode){
         //TODO this
 
+        if(postcode == null || postcode.length() < 5 || postcode.length() > 8){
+            return false;
+        }
+
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_action_log_out:
+                AuthUI.getInstance().signOut(this);
+                //Signs out of Firebase
+                Control.CONTROL.setCurrentUser(new PublicUser());
+                //Sets current user in CONTROL to a blank user
+                Intent nextPageIntent = new Intent(HireHomePageActivity.this, MainActivity.class);
+                startActivity(nextPageIntent);
+                //Returns to the top page
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }

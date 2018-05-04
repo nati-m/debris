@@ -162,7 +162,7 @@ public class FirebaseAuthCheckerActivity extends AppCompatActivity {
                 } else {
                     //This is the first time the user has signed in and will be added to the database
                     //before being transported to the page FirstTimeUserEnterAddressPostcode
-                    test.setText("floooooooooooom");
+                    test.setText("first time sign in");
                     PublicUser publicUser = new PublicUser(user.getDisplayName(), "", user.getEmail(), new ArrayList<Order>(), false, uid);
 
                     thisUsersDatabaseReference.setValue(publicUser);

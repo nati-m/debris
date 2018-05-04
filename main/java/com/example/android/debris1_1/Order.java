@@ -39,10 +39,7 @@ public class Order {
     private boolean collectionDateSpecified = false;
     private String userUID;
     private String companyUID;
-
-
-
-
+    private String orderUIDakaFirebaseDatabaseKey;
 
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
@@ -276,7 +273,7 @@ public class Order {
 
     public void setDateOfSkipArrivalString(String dateOfSkipArrivalString) throws ParseException {
         this.dateOfSkipArrivalString = dateOfSkipArrivalString;
-        parseArrivalDate(dateOfSkipArrivalString);
+        //parseArrivalDate(dateOfSkipArrivalString);
     }
 
     public void setDateOfSkipCollectionString(String dateOfSkipCollectionString){
@@ -313,6 +310,15 @@ public class Order {
 
     public void setCompanyUID(String companyUID){
         this.companyUID = companyUID;
+    }
+
+
+    public String getOrderUIDakaFirebaseDatabaseKey() {
+        return orderUIDakaFirebaseDatabaseKey;
+    }
+
+    public void setOrderUIDakaFirebaseDatabaseKey(String orderUIDakaFirebaseDatabaseKey) {
+        this.orderUIDakaFirebaseDatabaseKey = orderUIDakaFirebaseDatabaseKey;
     }
 
 

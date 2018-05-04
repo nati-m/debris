@@ -20,7 +20,9 @@
             android:layout_height="wrap_content"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:text="I want a Skip!"
+            android:text="I Need A Skip!"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/black"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginLeft="32dp"
             />

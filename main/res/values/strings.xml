@@ -30,9 +30,9 @@
     <string name="title_activity_edit_order">EditOrderActivity</string>
     <string name="title_activity_leave_feedback">LeaveFeedbackActivity</string>
     <string name="title_activity_throw_away_company_list_test">ThrowAwayCompanyListTest</string>
-    <string name="title_activity_company_home_page_logged_in">CompanyHomePageLoggedInActivity
+    <string name="title_activity_company_home_page_logged_in">Dashboard
     </string>
     <string name="title_activity_firebase_auth_checker">FirebaseAuthCheckerActivity</string>
-    <string name="title_activity_first_time_user_enter_address_postcode">Welcome to I Want A Skip
+    <string name="title_activity_first_time_user_enter_address_postcode">Welcome to I Need A Skip
     </string>
 </resources>

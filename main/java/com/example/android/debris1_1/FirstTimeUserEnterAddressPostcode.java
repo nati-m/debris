@@ -14,6 +14,8 @@ import com.example.android.debris1_1.CompanyUserActivities.CompanyHomePageLogged
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class FirstTimeUserEnterAddressPostcode extends AppCompatActivity {
 
     Button GO;
@@ -43,12 +45,37 @@ public class FirstTimeUserEnterAddressPostcode extends AppCompatActivity {
         String userEnteredPostcode = enterPostcode.getText().toString();
 
         //TODO Replace with postcode checker from that website
-        if(userEnteredPostcode.length() <= 4 || userEnteredPostcode.length() >= 8){
+        if(userEnteredPostcode.length() < 5 || userEnteredPostcode.length() > 8){
             enterPostcode.setError("Please enter a valid postcode");
             return;
         }
-
         //if the postcode is valid...
+
+        //CHANGE THE FORMAT OF POSTCODE TO UPPER CASE AND WITH A SPACE IN THE MIDDLE
+        userEnteredPostcode = userEnteredPostcode.toUpperCase(); //sets the postcode to upper case
+
+        //removes a space from the end of the postcode if there is one
+        if(userEnteredPostcode.charAt(userEnteredPostcode.length() -1) == ' '){
+            userEnteredPostcode = userEnteredPostcode.substring(0, userEnteredPostcode.length() - 1);
+        }
+        if(userEnteredPostcode.charAt(userEnteredPostcode.length() -1) == ' '){
+            userEnteredPostcode = userEnteredPostcode.substring(0, userEnteredPostcode.length() - 1);
+        }
+
+        //adds a space in middle of postcode if there isn't one
+        if(!userEnteredPostcode.contains(" ")){
+            int spaceNeeded = userEnteredPostcode.length() - 3;
+            //As postcodes are not a standard length, but the last part is always three characters,
+            //this finds where the space should be, 3 characters from the end
+
+            ArrayList<String> postcodeParts = new ArrayList<>(); //There will only be two
+            for (int i = 0; i<userEnteredPostcode.length(); i+=spaceNeeded){
+                postcodeParts.add(userEnteredPostcode.substring(i, Math.min(userEnteredPostcode.length(), i + spaceNeeded)));
+            }
+
+            userEnteredPostcode = postcodeParts.get(0) + " " + postcodeParts.get(1); //This puts the pieces back together again with a space in the middle
+        }
+
         //Updates the user's information both in the currentUser object in CONTROL and in the Firebase Database.
         //Crucially, it sets firebaseDataFilledOut to true, meaning this page will not be visited again.
 

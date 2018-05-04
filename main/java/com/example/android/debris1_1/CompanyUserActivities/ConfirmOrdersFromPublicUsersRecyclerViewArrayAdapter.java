@@ -9,9 +9,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.android.debris1_1.Control;
 import com.example.android.debris1_1.ItemClickListener;
 import com.example.android.debris1_1.Order;
 import com.example.android.debris1_1.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -120,23 +126,28 @@ class OrderFromPublicViewHolder extends RecyclerView.ViewHolder implements View.
 
         String numberOfAndTypeOfSkip = currentOrder.getNumberOfSkipsOrdered() + " x " + currentOrder.getSkipTypeString();
         if (currentOrder.getNumberOfSkipsOrdered() > 1){
-            numberOfAndTypeOfSkip += "s";
+            numberOfAndTypeOfSkip += "S"; //This adds an "s" to the word "skip" if there are more than one
         }
         holder.numberOfAndSizeOfSkips.setText(numberOfAndTypeOfSkip);
 
-        String postcode = "To: " + currentOrder.getPostCode();
+        String areaCodeFromPostcode = currentOrder.getPostCode().split(" ")[0];
+        //This just shows the companies the first part of the postcode, e.g. NE1.
+        //Standards from users entering postcode Strings in HireHomePageActivity ensure they are split by a space at the right place.
+        String postcode = "Area: " + areaCodeFromPostcode;
         holder.toPostcode.setText(postcode);
 
-        String deliveryTimeAndDate = "Delivery: 0-2 " + currentOrder.getDateOfSkipArrivalString();
+        String deliveryTimeAndDate = "Delivery: " + currentOrder.getDateOfSkipArrivalString();
         holder.deliveryTimeAndDate.setText(deliveryTimeAndDate);
+
+        //TODO TIME as well as date
 
         String collectionTimeAndDate = "Collection: UNSPECIFIED";
         if(currentOrder.getCollectionDateSpecified()){
-            collectionTimeAndDate = "Collection: 0-2 " + currentOrder.getDateOfSkipCollectionString();
+            collectionTimeAndDate = "Collection: " + currentOrder.getDateOfSkipCollectionString();
         }
         holder.collectionTimeAndDate.setText(collectionTimeAndDate);
 
-        String orderID = "99999"; //TODO GET FROM FIREBASE
+        String orderID = currentOrder.getOrderUIDakaFirebaseDatabaseKey();
         holder.orderID.setText(orderID);
 
         String price = "£" + currentOrder.getPrice();
@@ -148,14 +159,51 @@ class OrderFromPublicViewHolder extends RecyclerView.ViewHolder implements View.
         holder.confirmOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.declineOrderButton.setVisibility(View.GONE);
-                holder.confirmOrderButton.setText("✓");
-                holder.confirmOrderButton.setTextSize(33);
 
-                holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.greenConfirmLight));
+                //TODO Add an "ARE YOU SURE?"
 
-                ControlCompanyView.getINSTANCE().getConfirmedOrdersByThisCompany().add(currentOrder);
+
+
+
+                DatabaseReference unconfirmedOrders = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
+                unconfirmedOrders.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.hasChild(currentOrder.getOrderUIDakaFirebaseDatabaseKey())){
+                            holder.declineOrderButton.setVisibility(View.GONE);
+                            holder.confirmOrderButton.setText("✓");
+                            holder.confirmOrderButton.setTextSize(33);
+                            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.greenConfirmLight));
+                            ControlCompanyView.getINSTANCE().getConfirmedOrdersByThisCompany().add(currentOrder);
+                            DatabaseReference thisOrderUnconfirmedDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed").child(currentOrder.getOrderUIDakaFirebaseDatabaseKey());
+                            thisOrderUnconfirmedDatabaseReference.removeValue();
+                            DatabaseReference thisOrderConfirmedDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("confirmed").child(Control.CONTROL.getCurrentUser().getFirebaseUid()).child(currentOrder.getOrderUIDakaFirebaseDatabaseKey());
+                            currentOrder.setCompanyUID(Control.CONTROL.getCurrentUser().getFirebaseUid()); //TODO separate firebase user and company UIDs
+                            thisOrderConfirmedDatabaseReference.setValue(currentOrder);
+                        }
+                        else {
+                            //Someone else has beaten them to it with confirming the job
+                            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryDark));
+                            holder.declineOrderButton.setVisibility(View.GONE);
+                            holder.confirmOrderButton.setBackgroundColor(context.getResources().getColor(R.color.colorPrimary));
+                            holder.confirmOrderButton.setText("Too late! Someone else nabbed the job");
+                            holder.confirmOrderButton.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+
+
+
+
                 //Todo Remove from Unconfirmed and send to Confirmed
+
+
+
+
 
 
                 holder.confirmOrderButton.setOnClickListener(new View.OnClickListener() {
