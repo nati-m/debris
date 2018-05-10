@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HireSelectSkipContentsActivity"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/skips_will_contain_select_skip_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Skip Will Contain..."
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-smallcaps"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp">
+        <Switch
+            android:id="@+id/switch_asbestos_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asbestos"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+        <Switch
+            android:id="@+id/switch_paints_chemicals_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paints / Chemicals"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+        <Switch
+            android:id="@+id/switch_fridges_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fridges / Freezers"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+        <Switch
+            android:id="@+id/switch_small_electronics_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Small Electronics"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+        <Switch
+            android:id="@+id/switch_gas_canisters_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:id="@+id/gas_canisters_text_view_skip_contents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gas Canisters / Bottles"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+        <Switch
+            android:id="@+id/switch_soil_stones_bricks_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soil / Stones / Bricks"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+        <Switch
+            android:id="@+id/switch_concrete_tiles_glass_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Concrete / Tiles / Glass"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Switch
+            android:id="@+id/switch_other_skip_contents"
+            android:layout_width="64dp"
+            android:layout_height="32dp"
+            android:layout_marginRight="24dp"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:layout_marginLeft="8dp"
+            android:text="(E.G. Bric-a-Brac, Furniture, Bathroom)"/>
+
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/error_text_view_select_skip_contents"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:text=""/>
+
+    <Button
+        android:id="@+id/continue_button_select_skip_contents"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            style="@style/YellowButton"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="16dp"
+            android:text="Continue"/>
+
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

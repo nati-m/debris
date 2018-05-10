@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/time_text_view_list_item_times"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="11am-1pm"
+        android:layout_centerVertical="true"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="20sp"/>
+
+</RelativeLayout>

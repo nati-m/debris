@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.debris1_1.HireSingleDayViewActivity"
+    tools:showIn="@layout/activity_hire_single_day_view"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:id="@+id/linear_layout_single_day_view">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="8dp"
+            >
+            <ImageButton
+                android:id="@+id/back_one_day_hire_single_day_view"
+                android:src="@drawable/arrow_left_black_32px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:background="@color/background"/>
+
+            <TextView
+                android:id="@+id/date_text_view_string_single_day_view"
+                style="@style/HeaderText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fri 1st Jan 1970"
+                android:layout_centerHorizontal = "true"/>
+
+            <ImageButton
+                android:id="@+id/forward_one_day_hire_single_day_view"
+                android:src="@drawable/arrow_right_black_32px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_alignParentRight="true"
+                android:background="@color/background"/>
+
+
+
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Sort by:"
+            android:layout_toLeftOf="@id/sort_companies_by_spinner_single_day_view"/>
+
+    <Spinner
+        android:id="@+id/sort_companies_by_spinner_single_day_view"
+        android:layout_alignParentRight="true"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_companies_single_day_view"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="48dp">
+
+       <CheckBox
+       android:id="@+id/check_box_permit_needed_single_day_view"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerInParent="true"
+       android:layout_marginRight="32dp"
+       android:layout_marginTop="8dp"
+       android:layout_alignParentBottom="true"
+       android:textSize="12sp"
+       android:checked="true"
+       android:text="Skip(s) will be placed on a public highway"/>
+
+
+   </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginRight="32dp">
+
+            <TextView
+                android:id="@+id/permit_price_text_view_single_day_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingBottom="9dp"
+                android:text="Permit: £20"/>
+
+            <TextView
+                android:id="@+id/subtotal_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="Subtotal: £0.00"
+                android:textStyle="bold"
+                android:paddingBottom="9dp"/>
+
+            <ImageButton
+                android:src="@drawable/shopping_cart_black_32px"
+                style="@style/YellowButton"
+                android:id="@+id/button_confirm_hire_day_view"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:text="HIRE"/>
+
+
+        </RelativeLayout>
+
+</LinearLayout>
