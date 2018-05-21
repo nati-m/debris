@@ -57,7 +57,7 @@ public class GetPostcodeData extends AsyncTask<Void, Void, Void> {
                 line = bufferedReader.readLine();
                 jsonData = jsonData + line;
             }
-            JSONArray records;; //TODO GET RECORDS ARRAY
+            JSONArray records; //TODO GET RECORDS ARRAY
         } catch (MalformedURLException e) {
             e.printStackTrace();
             failed = true;
