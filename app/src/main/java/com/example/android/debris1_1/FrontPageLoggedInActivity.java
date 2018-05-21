@@ -74,14 +74,16 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
             }
         });
 
-//        Button TEMPtoHTTPTest = findViewById(R.id.TEMPBUTTON);
-//        TEMPtoHTTPTest.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, HTTPTestActivity.class);
-//                startActivity(nextPageIntent);
-//            }
-//        });
+
+        //TODO return this to off
+        Button TEMPtoHTTPTest = findViewById(R.id.TEMPBUTTON);
+        TEMPtoHTTPTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, HTTPTestActivity.class);
+                startActivity(nextPageIntent);
+            }
+        });
 
     }
 

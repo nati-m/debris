@@ -1,5 +1,6 @@
 package com.example.android.debris1_1;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +15,82 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+
+class ValidPostcodeTask extends AsyncTask<Void, Void, Void> {
+
+    private Exception exception;
+
+    private boolean validPostcode = false;
+    private String postcode;
+
+    protected void setPostcode(String postcode){
+        this.postcode = postcode;
+    }
+
+    protected Void doInBackground(Void... voids) {
+        try {
+            String urlString = "https://api.postcodes.io/postcodes/" + postcode + "/validate/";
+            URL url = new URL(urlString);
+            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+            String jsonData = "";
+            InputStream inputStream = httpURLConnection.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = "";
+            while (line != null) {
+                line = bufferedReader.readLine();
+                if(line!=null) {
+                    jsonData = jsonData + line;
+                }
+            }
+
+            JSONParser parser = new JSONParser();
+
+
+
+            Object object = new JSONParser().parse(jsonData);
+                JSONObject jsonObject = (JSONObject) object;
+
+                validPostcode = (boolean) jsonObject.get("result");
+
+
+
+        } catch (Exception e) {
+            this.exception = e;
+            validPostcode = false;
+           // HTTPTestActivity.textView.setText("GeneralException");
+            return null;
+        }
+
+        return null;
+    }
+
+
+    protected void onPostExecute(Void aVoid) {
+
+        if(validPostcode) {
+            HTTPTestActivity.textView2.setText("Valid");
+            validPostcode = false;
+        } else {
+            HTTPTestActivity.textView2.setText("Not Valid");
+        }
+
+    }
+}
 
 public class HTTPTestActivity extends AppCompatActivity {
 
@@ -29,6 +103,11 @@ public class HTTPTestActivity extends AppCompatActivity {
     TextView ordersTextView;
     ArrayList<Order> ordersFromThisUser;
 
+    //new
+    Button button2;
+    EditText editText2;
+    static TextView textView2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +117,8 @@ public class HTTPTestActivity extends AppCompatActivity {
         button = findViewById(R.id.button_http_test);
         textView = findViewById(R.id.http_test_text_view);
         ordersTextView = findViewById(R.id.orders_test_http_test_view);
+
+
 
         DatabaseReference ordersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
         String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
@@ -102,6 +183,23 @@ public class HTTPTestActivity extends AppCompatActivity {
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        button2 = findViewById(R.id.isItValidHTTPTestButton);
+        editText2 = findViewById(R.id.isItValidHTTPTestEditText);
+        textView2 = findViewById(R.id.isItValidHTTPTestTextView);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String postcode = editText2.getText().toString();
+                if(postcode==""){return;}
+                boolean valid;
+
+                ValidPostcodeTask validPostcodeTask = new ValidPostcodeTask();
+                validPostcodeTask.setPostcode(postcode);
+                validPostcodeTask.execute();
             }
         });
     }

@@ -58,4 +58,22 @@
         android:layout_height="wrap_content"
         android:text="orders"/>
 
+    <Button
+        android:id="@+id/isItValidHTTPTestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="isPostcodeValid"
+    />
+
+    <TextView
+        android:id="@+id/isItValidHTTPTestTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Not tested yet"/>
+
+    <EditText
+        android:id="@+id/isItValidHTTPTestEditText"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
