@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.debris1_1">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- To allow the app to access the internet -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FrontPageLoggedInActivity"
+            android:label="@string/title_activity_front_page_logged_in"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HireHomePageActivity"
+            android:label="@string/title_activity_hire_home_page"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HireConfirmOrderActivity"
+            android:label="@string/title_activity_hire_confirm_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TrackOrdersActivity"
+            android:label="Track Orders"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EditOrderActivity"
+            android:label="@string/title_activity_edit_order"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LeaveFeedbackActivity"
+            android:label="@string/title_activity_leave_feedback"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".HTTPTestActivity" />
+        <activity
+            android:name=".CompanyUserActivities.CompanyHomePageLoggedInActivity"
+            android:label="Dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TestTownActivity" />
+        <activity
+            android:name=".FirebaseAuthCheckerActivity"
+            android:label="Loading User Profile..."
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FirstTimeUserEnterAddressPostcode"
+            android:label="@string/title_activity_first_time_user_enter_address_postcode"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CompanyUserActivities.AllOrdersCompanyViewActivity"
+            android:label="All Orders" />
+        <activity
+            android:name=".CompanyUserActivities.TodaysOrdersCompanyViewActivity"
+            android:label="Today&apos;s Orders" />
+        <activity
+            android:name=".HireSelectSkipContentsActivity"
+            android:label="Select Skip Contents" />
+        <activity
+            android:name=".HireSkipArrivalTimeChoosingActivity"
+            android:label="@string/title_activity_hire_skip_arrival_time_choosing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HireChooseDateActivity"
+            android:label="Choose Delivery Date / Time" />
+        <activity
+            android:name=".HireIsPermitRequired"
+            android:label="Skip Permits" />
+        <activity android:name=".HireOptionalChooseCollectionDateActivity" />
+        <activity
+            android:name=".HireHazardousActivity"
+            android:label="Hazardous Waste" />
+        <activity
+            android:name=".HireNonHazardousOrInertActivity"
+            android:label="Non-Hazardous Waste" />
+        <activity android:name=".HireReviewOrderActivity"></activity>
+    </application>
+
+</manifest>

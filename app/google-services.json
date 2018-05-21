@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "972810447651",
+    "firebase_url": "https://debris-ba6b5.firebaseio.com",
+    "project_id": "debris-ba6b5",
+    "storage_bucket": "debris-ba6b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:972810447651:android:0a3372328203369a",
+        "android_client_info": {
+          "package_name": "com.example.android.debris1_1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "972810447651-vo0ok2j7dk472d804gg527d7c22imght.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.debris1_1",
+            "certificate_hash": "183b5a3f4fcf1564a008c58ac58af87095fcbd1f"
+          }
+        },
+        {
+          "client_id": "972810447651-6j77ked3dqme4dfvli78l405j1mpo7qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtpktmM6_6Ed7AQSzMbj9jljidpCkT8Pg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "972810447651-6j77ked3dqme4dfvli78l405j1mpo7qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:clickable="true"
+    android:choiceMode="singleChoice"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="8dp">
+
+            <TextView
+                android:id="@+id/number_and_type_of_skips_ordered_confirmed_orders_company_view"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="4 x Maxi Skip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:id="@+id/to_this_address_and_postcode_confirmed_orders_company_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="To: NE12 8RS"/>
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/payment_amount_confirmed_orders_company_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:text="£200.50" />
+
+            <TextView
+                android:id="@+id/to_deliver_skip_date_confirmed_orders_company_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Delivery: 10-12, 18th Sep 18"/>
+
+
+            <TextView
+                android:id="@+id/collection_date_list_confirmed_orders_company_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Collection: 10-12, 18th Sep 18"/>
+
+
+            <TextView
+                android:id="@+id/order_id_confirmed_orders_company_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ORD999999999"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/settings_button_confirmed_orders_company_view"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:background="@color/background"
+                android:text="Settings"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

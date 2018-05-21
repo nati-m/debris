@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#D32F2F</color>
+    <color name="colorAccent">#FFC107</color>
+
+    <color name="textDarkAmber">#FF8F00</color>
+    <color name="softerAmber">#FFD54F</color>
+    <color name="background">#E1F5FE</color>
+
+    <color name="indigo">#3F51B5</color>
+    <color name="indigoLight">#9FA8DA</color>
+
+    <color name="yellowLight">#FFF59D</color>
+    <color name="yellowLighter">#FFF9C4</color>
+
+    <color name="calendarBackground">#FFCDD2</color>
+
+    <color name="greenConfirm">#66BB6A</color>
+    <color name="greenConfirmLight">#A5D6A7</color>
+
+    <color name="blueListBackground">#81D4FA</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="cyan">#00FFFF</color>
+    <color name="greyAndDull">#909090</color>
+</resources>

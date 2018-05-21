@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.android.debris1_1.HireHomePageActivity"
+    tools:showIn="@layout/activity_hire_home_page"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/HeaderText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:text="I Need A Skip!"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textColor="@color/black"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="32dp"
+            />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="380dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <Spinner
+                android:id="@+id/number_of_skips_wanted_spinner_hire_home_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="32dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="16dp"
+                android:textSize="18sp"
+                android:text="Skip(s)" />
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="Size"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/skip_size_spinner_hire_home_page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_weight="1"/>
+
+            <!-- Information. OnClick should display info about skip sizes in popup-->
+            <ImageButton
+                style="@style/YellowButton"
+                android:id="@+id/information_image_button_hire_home_page"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_info_outline_black_24px"
+                />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="64dp"
+            android:textSize="18sp"
+            android:text=""/>
+
+        <LinearLayout
+            android:id="@+id/default_user_address_linear_layout_hire_home_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Delivery Address:"/>
+
+            <TextView
+                android:id="@+id/users_address_text_view_hire_home_page"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:text="3 Woodburn Gardens,
+Northumberland,
+NE16 8FK"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/use_different_address_button_hire_home_page"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                style="@style/YellowButton"
+                android:text="Use Different Address"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/choose_new_address_linear_layout_hire_home_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="Address Line 1:"
+                android:layout_weight="1" />
+
+            <!-- Set hint to the User's Postcode in Java!!!!!!!! -->
+            <EditText
+                android:id="@+id/enter_address_line_1_hire_home_page"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="Address Line 2:"
+                android:layout_weight="1" />
+
+
+            <EditText
+                android:id="@+id/enter_address_line_2_hire_home_page"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:textSize="18sp"
+                android:text="Poscode:"
+                android:layout_weight="1" />
+
+
+            <EditText
+                android:id="@+id/enter_postcode_hire_home_page"
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+
+        <Button
+            style="@style/BigRedButton"
+            android:id="@+id/button_get_a_skip"
+            android:layout_marginTop="8dp"
+            android:text="Get a skip!"/>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
