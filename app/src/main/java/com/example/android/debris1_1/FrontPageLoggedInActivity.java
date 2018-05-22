@@ -114,6 +114,7 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
             case R.id.menu_action_user_settings:
                 Intent settingsIntent = new Intent(FrontPageLoggedInActivity.this, UserSettingsActivity.class);
                 startActivity(settingsIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

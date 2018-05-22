@@ -6,11 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.android.debris1_1.CompanyUserActivities.CompanyHomePageLoggedInActivity;
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -95,6 +97,27 @@ public class FirstTimeUserEnterAddressPostcode extends AppCompatActivity {
         } else {
             Intent nextPageIntent = new Intent(FirstTimeUserEnterAddressPostcode.this, CompanyHomePageLoggedInActivity.class);
             startActivity(nextPageIntent);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_action_log_out:
+                AuthUI.getInstance().signOut(this);
+                //Signs out of Firebase
+                Control.CONTROL.setCurrentUser(new PublicUser());
+                //Sets current user in CONTROL to a blank user
+                Intent nextPageIntent = new Intent(FirstTimeUserEnterAddressPostcode.this, MainActivity.class);
+                startActivity(nextPageIntent);
+                //Returns to the top page
+                return true;
+            case R.id.menu_action_user_settings:
+                Intent settingsIntent = new Intent(FirstTimeUserEnterAddressPostcode.this, UserSettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

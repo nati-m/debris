@@ -166,6 +166,7 @@ public class HireSelectSkipContentsActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -177,6 +178,10 @@ public class HireSelectSkipContentsActivity extends AppCompatActivity {
                 Intent nextPageIntent = new Intent(HireSelectSkipContentsActivity.this, MainActivity.class);
                 startActivity(nextPageIntent);
                 //Returns to the top page
+                return true;
+            case R.id.menu_action_user_settings:
+                Intent settingsIntent = new Intent(HireSelectSkipContentsActivity.this, UserSettingsActivity.class);
+                startActivity(settingsIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

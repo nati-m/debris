@@ -156,6 +156,10 @@ public class HireHazardousActivity extends AppCompatActivity {
                 startActivity(nextPageIntent);
                 //Returns to the top page
                 return true;
+            case R.id.menu_action_user_settings:
+                Intent settingsIntent = new Intent(HireHazardousActivity.this, UserSettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

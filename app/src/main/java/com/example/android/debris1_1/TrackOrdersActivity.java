@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -257,5 +259,29 @@ public class TrackOrdersActivity extends AppCompatActivity {
 //        companyListView.setAdapter(companyArrayAdapter);
 //        companyListView.setOnItemSelectedListener(onItemSelectedListener);
 //    }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_action_log_out:
+                AuthUI.getInstance().signOut(this);
+                //Signs out of Firebase
+                Control.CONTROL.setCurrentUser(new PublicUser());
+                //Sets current user in CONTROL to a blank user
+                Intent nextPageIntent = new Intent(TrackOrdersActivity.this, MainActivity.class);
+                startActivity(nextPageIntent);
+                //Returns to the top page
+                return true;
+            case R.id.menu_action_user_settings:
+                Intent settingsIntent = new Intent(TrackOrdersActivity.this, UserSettingsActivity.class);
+                startActivity(settingsIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }
