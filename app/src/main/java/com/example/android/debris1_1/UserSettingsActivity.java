@@ -2,11 +2,17 @@ package com.example.android.debris1_1;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class UserSettingsActivity extends AppCompatActivity {
 
@@ -72,6 +78,82 @@ public class UserSettingsActivity extends AppCompatActivity {
     }
 
     private void attemptAddressChange(){
-        
+        boolean cancel = false;
+
+        enterAddressLine1.setError(null);
+        enterAddressLine2.setError(null);
+        enterPostcode.setError(null);
+
+        String addressLine1 = enterAddressLine1.getText().toString();
+        String addressLine2 = enterAddressLine2.getText().toString();
+        String postcode = enterPostcode.getText().toString();
+
+        if (TextUtils.isEmpty(addressLine1)) {
+            enterAddressLine1.setError(getString(R.string.error_field_required));
+            cancel = true;
+        }
+
+        //Address Line 2 is not required
+
+        if (TextUtils.isEmpty(postcode)) {
+            enterPostcode.setError(getString(R.string.error_field_required));
+            cancel = true;
+        }
+
+        if (!isPostcodeValid(postcode)) {
+            enterPostcode.setError("This is not a valid postcode.");
+            cancel = true;
+        }
+
+        if(!cancel){
+            Control.CONTROL.getCurrentUser().setAddressLine1(addressLine1);
+            Control.CONTROL.getCurrentUser().setAddressLine2(addressLine2);
+            Control.CONTROL.getCurrentUser().setPostCode(postcode);
+
+            //CHANGE THE FORMAT OF POSTCODE TO UPPER CASE AND WITH A SPACE IN THE MIDDLE
+            postcode = postcode.toUpperCase(); //sets the postcode to upper case
+
+            //removes a space from the end of the postcode if there is one
+            if(postcode.charAt(postcode.length() -1) == ' '){
+                postcode = postcode.substring(0, postcode.length() - 1);
+            }
+            if(postcode.charAt(postcode.length() -1) == ' '){
+                postcode = postcode.substring(0, postcode.length() - 1);
+            }
+
+            //adds a space in middle of postcode if there isn't one
+            if(!postcode.contains(" ")){
+                int spaceNeeded = postcode.length() - 3;
+                //As postcodes are not a standard length, but the last part is always three characters,
+                //this finds where the space should be, 3 characters from the end
+
+                ArrayList<String> postcodeParts = new ArrayList<>(); //There will only be two
+                for (int i = 0; i<postcode.length(); i+=spaceNeeded){
+                    postcodeParts.add(postcode.substring(i, Math.min(postcode.length(), i + spaceNeeded)));
+                }
+
+                postcode = postcodeParts.get(0) + " " + postcodeParts.get(1); //This puts the pieces back together again with a space in the middle
+            }
+
+            String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
+            DatabaseReference thisUsersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+            //And now to update the Firebase Database with this user's new postcode and firebaseDataFilledOut set to true
+            thisUsersDatabaseReference.setValue(Control.CONTROL.getCurrentUser());
+
+            changeDefaultAddressButton.setVisibility(View.VISIBLE);
+            appearingChangeAddressInputLinearLayout.setVisibility(View.GONE);
+
+        }
     }
+
+    private boolean isPostcodeValid(String postcode){
+        //TODO this
+
+        if(postcode == null || postcode.length() < 5 || postcode.length() > 8){
+            return false;
+        }
+
+        return true;
+    }
+
 }

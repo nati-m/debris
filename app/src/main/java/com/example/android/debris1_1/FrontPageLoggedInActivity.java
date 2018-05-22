@@ -111,6 +111,9 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
                 startActivity(nextPageIntent);
                 //Returns to the top page
                 return true;
+            case R.id.menu_action_user_settings:
+                Intent settingsIntent = new Intent(FrontPageLoggedInActivity.this, UserSettingsActivity.class);
+                startActivity(settingsIntent);
             default:
                 return super.onOptionsItemSelected(item);
         }
