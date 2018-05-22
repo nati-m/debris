@@ -205,7 +205,7 @@ NE16 8FK"/>
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
                 android:textSize="18sp"
-                android:text="Poscode:"
+                android:text="Postcode:"
                 android:layout_weight="1" />
 
 

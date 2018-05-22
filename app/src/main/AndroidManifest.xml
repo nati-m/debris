@@ -86,7 +86,10 @@
         <activity
             android:name=".HireNonHazardousOrInertActivity"
             android:label="Non-Hazardous Waste" />
-        <activity android:name=".HireReviewOrderActivity"></activity>
+        <activity android:name=".HireReviewOrderActivity"
+            android:label="Review Order"/>
+        <activity android:name=".UserSettingsActivity"
+            android:label="Account Settings"/>
     </application>
 
 </manifest>
