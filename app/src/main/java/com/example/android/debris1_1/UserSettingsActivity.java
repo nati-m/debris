@@ -40,16 +40,9 @@ public class UserSettingsActivity extends AppCompatActivity {
         cancelAddressChange = findViewById(R.id.cancel_change_address_button_settings);
         confirmAddressChange = findViewById(R.id.confirm_change_address_button_settings);
 
-        String usersAddressAndPostcode;
-        if(Control.CONTROL.getCurrentUser().getAddressLine2().isEmpty()){
-            usersAddressAndPostcode = Control.CONTROL.getCurrentUser().getAddressLine1() +
-                    "\n" + Control.CONTROL.getCurrentUser().getPostCode();
-        } else {
-            usersAddressAndPostcode = Control.CONTROL.getCurrentUser().getAddressLine1() +
-                    "\n" + Control.CONTROL.getCurrentUser().getAddressLine2() +
-                    "\n" + Control.CONTROL.getCurrentUser().getPostCode();
-        }
-        defaultAddressTextView.setText(usersAddressAndPostcode);
+        appearingChangeAddressInputLinearLayout.setVisibility(View.GONE);
+
+        updateDefaultAddressTextView();
 
         changeDefaultAddressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +135,7 @@ public class UserSettingsActivity extends AppCompatActivity {
 
             changeDefaultAddressButton.setVisibility(View.VISIBLE);
             appearingChangeAddressInputLinearLayout.setVisibility(View.GONE);
-
+            updateDefaultAddressTextView();
         }
     }
 
@@ -154,6 +147,19 @@ public class UserSettingsActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    private void updateDefaultAddressTextView(){
+        String usersAddressAndPostcode;
+        if(Control.CONTROL.getCurrentUser().getAddressLine2().isEmpty()){
+            usersAddressAndPostcode = Control.CONTROL.getCurrentUser().getAddressLine1() +
+                    "\n" + Control.CONTROL.getCurrentUser().getPostCode();
+        } else {
+            usersAddressAndPostcode = Control.CONTROL.getCurrentUser().getAddressLine1() +
+                    "\n" + Control.CONTROL.getCurrentUser().getAddressLine2() +
+                    "\n" + Control.CONTROL.getCurrentUser().getPostCode();
+        }
+        defaultAddressTextView.setText(usersAddressAndPostcode);
     }
 
 }
