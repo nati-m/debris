@@ -226,30 +226,7 @@ public class HireHomePageActivity extends AppCompatActivity {
                 skipArrayList.add(skip);
             }
 
-            //CHANGE THE FORMAT OF POSTCODE TO UPPER CASE AND WITH A SPACE IN THE MIDDLE
-            postcode = postcode.toUpperCase(); //sets the postcode to upper case
-
-            //removes a space from the end of the postcode if there is one
-            if(postcode.charAt(postcode.length() -1) == ' '){
-               postcode = postcode.substring(0, postcode.length() - 1);
-            }
-            if(postcode.charAt(postcode.length() -1) == ' '){
-                postcode = postcode.substring(0, postcode.length() - 1);
-            }
-
-            //adds a space in middle of postcode if there isn't one
-            if(!postcode.contains(" ")){
-                int spaceNeeded = postcode.length() - 3;
-                //As postcodes are not a standard length, but the last part is always three characters,
-                //this finds where the space should be, 3 characters from the end
-
-                ArrayList<String> postcodeParts = new ArrayList<>(); //There will only be two
-                for (int i = 0; i<postcode.length(); i+=spaceNeeded){
-                    postcodeParts.add(postcode.substring(i, Math.min(postcode.length(), i + spaceNeeded)));
-                }
-
-                postcode = postcodeParts.get(0) + " " + postcodeParts.get(1); //This puts the pieces back together again with a space in the middle
-            }
+            postcode = Control.CONTROL.formatPostcode(postcode);
 
 
             //create a new Order object with this Address, Postcode, Date, and ArrayList of Skips ordered
