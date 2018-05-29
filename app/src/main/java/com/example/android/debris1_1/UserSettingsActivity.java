@@ -37,6 +37,8 @@ public class UserSettingsActivity extends AppCompatActivity {
     Button cancelAddEmailButton;
     Button confirmAddEmailButton;
 
+    DatabaseReference thisUsersDatabaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,11 @@ public class UserSettingsActivity extends AppCompatActivity {
         usersEmailTextView = findViewById(R.id.users_email_text_view_settings);
         usersAdditionalEmailsTextView = findViewById(R.id.users_additional_emails_text_view_settings);
         addEmailEditText = findViewById(R.id.enter_new_email_edit_text_settings);
-        cancelAddressChange = findViewById(R.id.cancel_add_email_button_settings);
+        cancelAddEmailButton = findViewById(R.id.cancel_add_email_button_settings);
         confirmAddEmailButton = findViewById(R.id.confirm_add_email_button_settings);
+
+        String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
+        thisUsersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
 
         //Update the page to show the user's personal information.
         //These methods will be called again whenever any of the user's information is changed.
@@ -90,6 +95,34 @@ public class UserSettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 attemptAddressChange();
+            }
+        });
+
+        addEmailAddressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appearingAddEmailLinearLayout.setVisibility(View.VISIBLE);
+                appearingAddEmailLinearLayoutButtons.setVisibility(View.VISIBLE);
+                addEmailAddressButton.setVisibility(View.GONE);
+                if(Control.CONTROL.getCurrentUser().getNumberOfAdditionalEmails() > 1){
+                    addEmailEditText.setError("You cannot have more than 2 extra email addresses");
+                }
+            }
+        });
+
+        cancelAddEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                appearingAddEmailLinearLayout.setVisibility(View.GONE);
+                appearingAddEmailLinearLayoutButtons.setVisibility(View.GONE);
+                addEmailAddressButton.setVisibility(View.VISIBLE);
+            }
+        });
+
+        confirmAddEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                attemptAddEmail();
             }
         });
 
@@ -132,15 +165,47 @@ public class UserSettingsActivity extends AppCompatActivity {
             Control.CONTROL.getCurrentUser().setAddressLine2(addressLine2);
             Control.CONTROL.getCurrentUser().setPostCode(postcode);
 
-            String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
-            DatabaseReference thisUsersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
-            //And now to update the Firebase Database with this user's new postcode and firebaseDataFilledOut set to true
+
+            //And now to update the Firebase Database with this user's new address and postcode details
             thisUsersDatabaseReference.setValue(Control.CONTROL.getCurrentUser());
 
             changeDefaultAddressButton.setVisibility(View.VISIBLE);
             appearingChangeAddressInputLinearLayout.setVisibility(View.GONE);
             updateDefaultAddressTextView();
         }
+    }
+
+    private void attemptAddEmail(){
+        addEmailEditText.setError(null);
+        String newEmail = addEmailEditText.getText().toString().toLowerCase();
+
+        //if the email is not valid
+        if(!newEmail.contains("@")){
+            addEmailEditText.setError("This is not a valid email address");
+            return;
+        }
+
+
+        if(Control.CONTROL.getCurrentUser().getNumberOfAdditionalEmails() > 1){
+            addEmailEditText.setError("You cannot have more than 2 extra email addresses");
+            return;
+        }
+
+        //add email address to the user's profile in the appropriate place
+        if(Control.CONTROL.getCurrentUser().getNumberOfAdditionalEmails() == 0){
+            Control.CONTROL.getCurrentUser().setAdditionalEmail1(newEmail);
+        } else {
+            Control.CONTROL.getCurrentUser().setAdditionalEmail2(newEmail);
+        }
+
+        //And now to update the Firebase Database with this user's new additional emails
+        thisUsersDatabaseReference.setValue(Control.CONTROL.getCurrentUser());
+
+        appearingAddEmailLinearLayout.setVisibility(View.GONE);
+        appearingAddEmailLinearLayoutButtons.setVisibility(View.GONE);
+        addEmailAddressButton.setVisibility(View.VISIBLE);
+
+        updateUsersEmailAndAdditionalEmailsTextViews();
     }
 
     private boolean isPostcodeValid(String postcode) {

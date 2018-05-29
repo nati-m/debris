@@ -26,6 +26,7 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
     TextView pointsTextView;
     Button toHireSection;
     Button toOrderSection;
+    Button toSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,15 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
 
                 Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, TrackOrdersActivity.class);
                 startActivity(nextPageIntent);
+            }
+        });
+
+        toSettings = findViewById(R.id.settings_button_front_page_logged_in);
+        toSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingsIntent = new Intent(FrontPageLoggedInActivity.this, UserSettingsActivity.class);
+                startActivity(settingsIntent);
             }
         });
 

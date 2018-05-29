@@ -94,6 +94,7 @@
         android:text="Track"/>
 
         <Button
+            android:id="@+id/settings_button_front_page_logged_in"
             style="@style/YellowButton"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -103,6 +104,7 @@
             android:text="Settings"/>
 
         <Button
+            android:id="@+id/points_button_front_page_logged_in"
             style="@style/YellowButton"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
