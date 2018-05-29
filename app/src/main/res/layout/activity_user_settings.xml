@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserSettingsActivity"
     android:background="@color/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".UserSettingsActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,144 +16,251 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-w
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp">
+            w
 
-        <TextView
-            android:layout_width="95dp"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="Default Address:"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp">
 
-        <TextView
-            android:id="@+id/users_address_text_view_settings"
-            android:layout_width="230dp"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18dp"
-            android:text="3 Woodburn Gardens,
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Default Address:"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/users_address_text_view_settings"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:text="3 Woodburn Gardens,
 Northumberland,
-NE16 8FK"/>
+NE16 8FK"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
 
-    </LinearLayout>
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/edit_default_address_button_settings"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        style="@style/YellowButton"
-        android:text="Change Address"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"/>
-
-
-<LinearLayout
-android:id="@+id/choose_new_address_linear_layout_settings"
-android:layout_width="match_parent"
-android:layout_height="wrap_content"
-android:orientation="vertical"
->
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
-        android:text="Address Line 1:"
-        android:layout_weight="1" />
-
-    <!-- Set hint to the User's Postcode in Java!!!!!!!! -->
-    <EditText
-        android:id="@+id/enter_address_line_1_settings"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:layout_weight="1"/>
-
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
-        android:text="Address Line 2:"
-        android:layout_weight="1" />
+            <Button
+                android:id="@+id/edit_default_address_button_settings"
+                style="@style/YellowButton"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="16dp"
+                android:text="Change Address" />
 
 
-    <EditText
-        android:id="@+id/enter_address_line_2_settings"
-        android:layout_width="128dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:layout_weight="1"/>
+            <LinearLayout
+                android:id="@+id/choose_new_address_linear_layout_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-</LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_weight="1"
+                        android:text="Address Line 1:"
+                        android:textSize="18sp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:textSize="18sp"
-        android:text="Postcode:"
-        android:layout_weight="1" />
+                    <!-- Set hint to the User's Postcode in Java!!!!!!!! -->
+                    <EditText
+                        android:id="@+id/enter_address_line_1_settings"
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="32dp"
+                        android:layout_weight="1" />
 
+                </LinearLayout>
 
-    <EditText
-        android:id="@+id/enter_postcode_settings"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="4dp">
-
-        <Button
-            android:id="@+id/cancel_change_address_button_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="16dp"
-            style="@style/YellowButton"
-            android:text="Cancel"/>
-
-        <Button
-            android:id="@+id/confirm_change_address_button_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:layout_marginLeft="16dp"
-            style="@style/YellowButton"
-            android:text="Confirm New Address"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_weight="1"
+                        android:text="Address Line 2:"
+                        android:textSize="18sp" />
 
 
-    </LinearLayout>
+                    <EditText
+                        android:id="@+id/enter_address_line_2_settings"
+                        android:layout_width="128dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="32dp"
+                        android:layout_weight="1" />
 
-    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
+                        android:layout_weight="1"
+                        android:text="Postcode:"
+                        android:textSize="18sp" />
+
+
+                    <EditText
+                        android:id="@+id/enter_postcode_settings"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="32dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="4dp">
+
+                    <Button
+                        android:id="@+id/cancel_change_address_button_settings"
+                        style="@style/YellowButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:layout_weight="1"
+                        android:text="Cancel" />
+
+                    <Button
+                        android:id="@+id/confirm_change_address_button_settings"
+                        style="@style/YellowButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_weight="4"
+                        android:text="Confirm New Address" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Main Email:"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/users_email_text_view_settings"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:text="user@example.com"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Additional Emails:"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/users_additional_emails_text_view_settings"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:text="none"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/enter_new_email_linear_layout_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_weight="1"
+                    android:text="Enter New Email:"
+                    android:textSize="18sp" />
+
+
+                <EditText
+                    android:id="@+id/enter_new_email_edit_text_settings"
+                    android:layout_width="64dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="32dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/enter_new_email_buttons_linear_layout_settings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="4dp">
+
+                <Button
+                    android:id="@+id/cancel_add_email_button_settings"
+                    style="@style/YellowButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/confirm_add_email_button_settings"
+                    style="@style/YellowButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="4"
+                    android:text="Add Email Address" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/add_email_button_settings"
+                style="@style/YellowButton"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="16dp"
+                android:text="Add Email Address" />
 
         </LinearLayout>
 

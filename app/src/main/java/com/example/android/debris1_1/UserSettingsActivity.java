@@ -28,6 +28,15 @@ public class UserSettingsActivity extends AppCompatActivity {
     Button cancelAddressChange;
     Button confirmAddressChange;
 
+    Button addEmailAddressButton;
+    LinearLayout appearingAddEmailLinearLayout;
+    LinearLayout appearingAddEmailLinearLayoutButtons;
+    TextView usersEmailTextView;
+    TextView usersAdditionalEmailsTextView;
+    EditText addEmailEditText;
+    Button cancelAddEmailButton;
+    Button confirmAddEmailButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +48,27 @@ public class UserSettingsActivity extends AppCompatActivity {
         appearingChangeAddressInputLinearLayout = findViewById(R.id.choose_new_address_linear_layout_settings);
         enterAddressLine1 = findViewById(R.id.enter_address_line_1_settings);
         enterAddressLine2 = findViewById(R.id.enter_address_line_2_settings);
-        enterPostcode =  findViewById(R.id.enter_postcode_settings);
+        enterPostcode = findViewById(R.id.enter_postcode_settings);
         cancelAddressChange = findViewById(R.id.cancel_change_address_button_settings);
         confirmAddressChange = findViewById(R.id.confirm_change_address_button_settings);
+        addEmailAddressButton = findViewById(R.id.add_email_button_settings);
+        appearingAddEmailLinearLayout = findViewById(R.id.enter_new_email_linear_layout_settings);
+        appearingAddEmailLinearLayoutButtons = findViewById(R.id.enter_new_email_buttons_linear_layout_settings);
+        usersEmailTextView = findViewById(R.id.users_email_text_view_settings);
+        usersAdditionalEmailsTextView = findViewById(R.id.users_additional_emails_text_view_settings);
+        addEmailEditText = findViewById(R.id.enter_new_email_edit_text_settings);
+        cancelAddressChange = findViewById(R.id.cancel_add_email_button_settings);
+        confirmAddEmailButton = findViewById(R.id.confirm_add_email_button_settings);
 
-        appearingChangeAddressInputLinearLayout.setVisibility(View.GONE);
-
+        //Update the page to show the user's personal information.
+        //These methods will be called again whenever any of the user's information is changed.
         updateDefaultAddressTextView();
+        updateUsersEmailAndAdditionalEmailsTextViews();
+
+        //Make the views only accessed by pressing a button disappear from view until their respective buttons are pressed
+        appearingChangeAddressInputLinearLayout.setVisibility(View.GONE);
+        appearingAddEmailLinearLayout.setVisibility(View.GONE);
+        appearingAddEmailLinearLayoutButtons.setVisibility(View.GONE);
 
         changeDefaultAddressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +96,7 @@ public class UserSettingsActivity extends AppCompatActivity {
 
     }
 
-    private void attemptAddressChange(){
+    private void attemptAddressChange() {
         boolean cancel = false;
 
         enterAddressLine1.setError(null);
@@ -101,7 +124,7 @@ public class UserSettingsActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        if(!cancel){
+        if (!cancel) {
 
             postcode = Control.CONTROL.formatPostcode(postcode);
 
@@ -120,19 +143,19 @@ public class UserSettingsActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isPostcodeValid(String postcode){
+    private boolean isPostcodeValid(String postcode) {
         //TODO this
 
-        if(postcode == null || postcode.length() < 5 || postcode.length() > 8){
+        if (postcode == null || postcode.length() < 5 || postcode.length() > 8) {
             return false;
         }
 
         return true;
     }
 
-    private void updateDefaultAddressTextView(){
+    private void updateDefaultAddressTextView() {
         String usersAddressAndPostcode;
-        if(Control.CONTROL.getCurrentUser().getAddressLine2().isEmpty()){
+        if (Control.CONTROL.getCurrentUser().getAddressLine2().isEmpty()) {
             usersAddressAndPostcode = Control.CONTROL.getCurrentUser().getAddressLine1() +
                     "\n" + Control.CONTROL.getCurrentUser().getPostCode();
         } else {
@@ -141,6 +164,24 @@ public class UserSettingsActivity extends AppCompatActivity {
                     "\n" + Control.CONTROL.getCurrentUser().getPostCode();
         }
         defaultAddressTextView.setText(usersAddressAndPostcode);
+    }
+
+    private void updateUsersEmailAndAdditionalEmailsTextViews(){
+        usersEmailTextView.setText(Control.CONTROL.getCurrentUser().getEmail());
+
+        if(Control.CONTROL.getCurrentUser().getNumberOfAdditionalEmails() == 0){
+            usersAdditionalEmailsTextView.setText("None");
+            return;
+        }
+        else if (Control.CONTROL.getCurrentUser().getNumberOfAdditionalEmails() == 1){
+            usersAdditionalEmailsTextView.setText(Control.CONTROL.getCurrentUser().getAdditionalEmail1());
+            return;
+        }
+        else if (Control.CONTROL.getCurrentUser().getNumberOfAdditionalEmails() > 1){
+            usersAdditionalEmailsTextView.setText(Control.CONTROL.getCurrentUser().getAdditionalEmail1()
+                + "\n" + Control.CONTROL.getCurrentUser().getAdditionalEmail2());
+            return;
+        }
     }
 
     @Override
