@@ -49,6 +49,7 @@ class ValidPostcodeTask extends AsyncTask<Void, Void, Void> {
 
             String jsonData = "";
             InputStream inputStream = httpURLConnection.getInputStream();
+            //TODO See if there's another way to do this, I think it might be the issue
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
             String line = "";
             while (line != null) {

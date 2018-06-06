@@ -152,7 +152,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="24dp">
+                android:paddingBottom="8dp">
 
                 <TextView
                     android:layout_width="120dp"
@@ -171,28 +171,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp">
 
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black"
-                    android:text="TOTAL:"
-                    android:textSize="18sp"/>
-
-                <TextView
-                    android:id="@+id/total_price_confirm_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="COMPANY ONE"
-                    android:textSize="18sp"/>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -201,9 +180,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textColor="@color/greenConfirm"
-                android:text="You'll get "/>
+                android:text="Skip points awarded: "/>
 
                 <TextView
                     android:id="@+id/skip_points_amount_confirm_order"
@@ -213,19 +192,42 @@
                     android:textColor="@color/colorAccent"
                     android:text="1300"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/greenConfirm"
-                    android:text=" Skip Points for this purchase "/>
 
             </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="TOTAL:"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/total_price_confirm_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="COMPANY ONE"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/button_confirm_order_to_banks"
+            android:text="*This figure is based on a pick-up date of 5 days or less. Details of charges for longer skip hire can be found on the next page."/>
 
         <Button
             style="@style/BigRedButton"

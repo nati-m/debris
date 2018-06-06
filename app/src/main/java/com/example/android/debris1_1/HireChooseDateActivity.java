@@ -23,6 +23,7 @@ import com.firebase.ui.auth.AuthUI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class HireChooseDateActivity extends AppCompatActivity {
@@ -80,38 +81,10 @@ public class HireChooseDateActivity extends AppCompatActivity {
         calenderWithDateOfSkipArrival.setTimeInMillis(calendar.getTimeInMillis());
 
         recyclerView = findViewById(R.id.recycler_view_choose_time_skip_arrival);
-
-
-        selectedTime = "";
-        times = new ArrayList<>();
-        times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
-        //TODO if not saturday
-        times.add("1pm-3pm"); times.add("2pm-4pm"); times.add("3pm-5pm");
-
-        chooseTimeArrayAdapter = new ChooseTimeArrayAdapter(times, this);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(chooseTimeArrayAdapter);
 
-        chooseTimeArrayAdapter.setClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int pos = recyclerView.getChildViewHolder(v).getAdapterPosition();
-
-                selectedTime = times.get(pos);
-
-                for (int i = 0; i < chooseTimeArrayAdapter.getViewsArrayList().size(); i++){
-                    if (i == pos){
-                        chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
-                    }
-                    else chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
-                }
-
-                updateSkipArrivingTextView();
-            }
-        });
-
+        resetChooseTimeRecyclerView();
         updateSkipArrivingTextView();
 
         continueButton.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +95,15 @@ public class HireChooseDateActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private boolean isItSaturday(Calendar calendar){
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        //Saturday has the static value of 7, so dayOfWeek will equal Calendar.SATURDAY if Calender.DAY_OF_WEEK returned 7
+        if (dayOfWeek == Calendar.SATURDAY){
+            return true;
+        }
+        return false;
     }
 
     private void updateSkipArrivingTextView(){
@@ -175,6 +157,8 @@ public class HireChooseDateActivity extends AppCompatActivity {
             datePickerDialog.getDatePicker().setMaxDate(c2.getTimeInMillis());
 
 
+
+
             //This is here in case a Calendar rather than a Spinner view is wanted in future.
             //Simply uncomment to do so.
             //datePickerDialog.getDatePicker().setCalendarViewShown(true);
@@ -198,8 +182,8 @@ public class HireChooseDateActivity extends AppCompatActivity {
                 public void onDateSet(DatePicker datePicker,
                                       int year, int month, int day) {
                     setDateDisplayedOnButton(year, month, day);
-                    resetChooseTimeRecyclerView();
                     calenderWithDateOfSkipArrival.set(year, month, day);
+                    resetChooseTimeRecyclerView();
                     updateSkipArrivingTextView();
                 }
             };
@@ -217,6 +201,37 @@ public class HireChooseDateActivity extends AppCompatActivity {
     }
 
     private void resetChooseTimeRecyclerView(){
+        times = new ArrayList<>();
+        times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
+        //if it is not Saturday, three more times are added
+        if(!isItSaturday(calenderWithDateOfSkipArrival)) {
+            times.add("1pm-3pm");
+            times.add("2pm-4pm");
+            times.add("3pm-5pm");
+        }
+
+        chooseTimeArrayAdapter = new ChooseTimeArrayAdapter(times, this);
+
+        recyclerView.setAdapter(chooseTimeArrayAdapter);
+
+        chooseTimeArrayAdapter.setClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = recyclerView.getChildViewHolder(v).getAdapterPosition();
+
+                selectedTime = times.get(pos);
+
+                for (int i = 0; i < chooseTimeArrayAdapter.getViewsArrayList().size(); i++){
+                    if (i == pos){
+                        chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
+                    }
+                    else chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
+                }
+
+                updateSkipArrivingTextView();
+            }
+        });
+
         selectedTime = "";
 
         for (int i = 0; i < chooseTimeArrayAdapter.getViewsArrayList().size(); i++){

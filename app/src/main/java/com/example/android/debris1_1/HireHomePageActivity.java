@@ -113,9 +113,9 @@ public class HireHomePageActivity extends AppCompatActivity {
         numberOfSkipsWantedSpinnerCategories.add(new Integer(4));
         numberOfSkipsWantedSpinnerCategories.add(new Integer(5));
         skipSizeSpinnerCategories = new ArrayList<>();
-        skipSizeSpinnerCategories.add("Maxi Skip (8yd)");
-        skipSizeSpinnerCategories.add("Midi Skip (4yd)");
-        skipSizeSpinnerCategories.add("Mini Skip (2yd)");
+        skipSizeSpinnerCategories.add("Maxi Skip (8yd³)");
+        skipSizeSpinnerCategories.add("Midi Skip (4yd³)");
+        skipSizeSpinnerCategories.add("Mini Skip (2yd³)");
         skipSizeSpinnerCategories.add("Skip Bag");
 
         // Creating adapters for spinner
@@ -214,9 +214,9 @@ public class HireHomePageActivity extends AppCompatActivity {
             //must be initialised to work in for loop below, and Skip has no accessible constructor,
             //so this is used as a default and changed if it isn't a maxi skip
 
-            if (skipSizeString == "Midi Skip (4yd)") {
+            if (skipSizeString == "Midi Skip (4yd³)") {
                 skip = Skip.MIDI_SKIP;
-            } else if (skipSizeString == "Mini Skip (2yd)") {
+            } else if (skipSizeString == "Mini Skip (2yd³)") {
                 skip = Skip.MINI_SKIP;
             } else if (skipSizeString == "Skip Bag"){
                 skip = Skip.DUMPY_BAG;

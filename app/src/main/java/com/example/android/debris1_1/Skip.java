@@ -69,13 +69,13 @@ public class Skip {
 
     public void setSkipTypeStringFromIntType(){
         if (skipType == MAXI_SKIP_8YD){
-            skipTypeString = "Maxi Skip (8yd)";
+            skipTypeString = "Maxi Skip (8yd³)";
         }
         else if (skipType == MIDI_SKIP_4YD){
-            skipTypeString = "Midi Skip (4yd)";
+            skipTypeString = "Midi Skip (4yd³)";
         }
         else if (skipType == MINI_SKIP_2YD){
-            skipTypeString = "Mini Skip (2yd)";
+            skipTypeString = "Mini Skip (2yd³)";
         }
         else if (skipType == DUMPY_BAG_SMALLEST){
             skipTypeString = "Dumpy Bag";

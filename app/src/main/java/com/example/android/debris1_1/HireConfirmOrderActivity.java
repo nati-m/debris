@@ -99,7 +99,7 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
 
         double totalPriceDouble = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
 
-        String price = "£" + totalPriceDouble + "0";
+        String price = "£" + totalPriceDouble + "0*";
         totalPrice.setText(price);
 
         skipPoints = (int) totalPriceDouble;
