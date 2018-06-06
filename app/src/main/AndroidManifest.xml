@@ -79,18 +79,22 @@
         <activity
             android:name=".HireIsPermitRequired"
             android:label="Skip Permits" />
-        <activity android:name=".HireOptionalChooseCollectionDateActivity"
-            android:label="Choose Collection Date / Time"/>
+        <activity
+            android:name=".HireOptionalChooseCollectionDateActivity"
+            android:label="Choose Collection Date / Time" />
         <activity
             android:name=".HireHazardousActivity"
             android:label="Hazardous Waste" />
         <activity
             android:name=".HireNonHazardousOrInertActivity"
             android:label="Non-Hazardous Waste" />
-        <activity android:name=".HireOLDReviewOrderActivity"
-            android:label="Review Order"/>
-        <activity android:name=".UserSettingsActivity"
-            android:label="Account Settings"/>
+        <activity
+            android:name=".HireOLDReviewOrderActivity"
+            android:label="Review Order" />
+        <activity
+            android:name=".UserSettingsActivity"
+            android:label="Account Settings" />
+        <activity android:name=".HireConfirmOrderActivity"></activity>
     </application>
 
 </manifest>

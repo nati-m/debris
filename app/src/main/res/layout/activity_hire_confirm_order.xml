@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HireConfirmOrderActivity"
+    android:background="@color/background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:layout_marginLeft="16dp">
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="TOTAL:"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/total_price_confirm_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="TOTAL PRICE"
+        android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/black"
+        android:text="*Please note, this price is for a skip that is picked up within 5 days. Additional charges apply for skips hired for longer periods.
+We will make every attempt to remind you to select a collection date. However, we will collect 28 days after the delivery date if we do no hear from you."/>
+
+
+</LinearLayout>

@@ -29,7 +29,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/hire_confirm_skip_type_and_number"
+            android:id="@+id/hire_review_skip_type_and_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -51,7 +51,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/skip_arriving_confirm_order"
+            android:id="@+id/skip_arriving_review_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -73,7 +73,7 @@
                     android:textSize="18sp"/>
 
                 <TextView
-                    android:id="@+id/skip_collection_confirm_order"
+                    android:id="@+id/skip_collection_review_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -95,7 +95,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/hire_confirm_address"
+            android:id="@+id/hire_review_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -118,7 +118,7 @@
             android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/subtotal_minus_VAT_confirm_order"
+            android:id="@+id/subtotal_minus_VAT_review_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -140,7 +140,7 @@
                     android:textSize="18sp"/>
 
                 <TextView
-                    android:id="@+id/VAT_confirm_order"
+                    android:id="@+id/VAT_review_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -162,7 +162,7 @@
                     android:textSize="18sp"/>
 
                 <TextView
-                    android:id="@+id/permit_price_confirm_order"
+                    android:id="@+id/permit_price_review_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
@@ -185,7 +185,7 @@
                 android:text="Skip points awarded: "/>
 
                 <TextView
-                    android:id="@+id/skip_points_amount_confirm_order"
+                    android:id="@+id/skip_points_amount_review_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
@@ -208,7 +208,7 @@
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/total_price_confirm_order"
+            android:id="@+id/total_price_review_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
@@ -226,12 +226,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/button_confirm_order_to_banks"
+            android:layout_above="@id/button_continue_review_order"
             android:text="*This figure is based on a pick-up date of 5 days or less. Details of charges for longer skip hire can be found on the next page."/>
 
         <Button
             style="@style/BigRedButton"
-            android:id="@+id/button_confirm_order_to_banks"
+            android:id="@+id/button_continue_review_order"
             android:text="Continue"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"

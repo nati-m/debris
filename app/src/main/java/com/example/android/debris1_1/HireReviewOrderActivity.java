@@ -46,15 +46,15 @@ public class HireReviewOrderActivity extends AppCompatActivity {
 
         simpleDateFormat = new SimpleDateFormat("EE dd MMM yyyy", Locale.UK);
 
-        addressTextView = findViewById(R.id.hire_confirm_address);
-        skipArrivalDateAndTime = findViewById(R.id.skip_arriving_confirm_order);
-        skipCollectionDateAndTime = findViewById(R.id.skip_collection_confirm_order);
-        skipTypeAndNumberTextView = findViewById(R.id.hire_confirm_skip_type_and_number);
-        totalPrice = findViewById(R.id.total_price_confirm_order);
-        subtotalBeforeVAT = findViewById(R.id.subtotal_minus_VAT_confirm_order);
-        VAT = findViewById(R.id.VAT_confirm_order);
-        permitPrice = findViewById(R.id.permit_price_confirm_order);
-        skipPointsNumber = findViewById(R.id.skip_points_amount_confirm_order);
+        addressTextView = findViewById(R.id.hire_review_address);
+        skipArrivalDateAndTime = findViewById(R.id.skip_arriving_review_order);
+        skipCollectionDateAndTime = findViewById(R.id.skip_collection_review_order);
+        skipTypeAndNumberTextView = findViewById(R.id.hire_review_skip_type_and_number);
+        totalPrice = findViewById(R.id.total_price_review_order);
+        subtotalBeforeVAT = findViewById(R.id.subtotal_minus_VAT_review_order);
+        VAT = findViewById(R.id.VAT_review_order);
+        permitPrice = findViewById(R.id.permit_price_review_order);
+        skipPointsNumber = findViewById(R.id.skip_points_amount_review_order);
 
         String fullAddress = (Control.CONTROL.getCurrentOrderAddressAsString());
         addressTextView.setText(fullAddress);
@@ -103,7 +103,7 @@ public class HireReviewOrderActivity extends AppCompatActivity {
         Control.CONTROL.getCurrentOrder().setSkipPointsForThisOrder(skipPoints);
 
 
-        confirmOrderButton = findViewById(R.id.button_confirm_order_to_banks);
+        confirmOrderButton = findViewById(R.id.button_continue_review_order);
         confirmOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
