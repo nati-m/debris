@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_hire_confirm_order" />
+    <include layout="@layout/content_hire_review_order" />
 
 </android.support.design.widget.CoordinatorLayout>

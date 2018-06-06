@@ -32,7 +32,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HireReviewOrderActivity"
-            android:label="@string/title_activity_hire_confirm_order"
+            android:label="Review Your Order"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TrackOrdersActivity"

@@ -232,7 +232,7 @@
         <Button
             style="@style/BigRedButton"
             android:id="@+id/button_confirm_order_to_banks"
-            android:text="Confirm Skip Hire"
+            android:text="Continue"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginRight="0dp"

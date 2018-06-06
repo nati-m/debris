@@ -195,10 +195,20 @@ public class Order {
         dateOfSkipArrivalString = simpleDateFormat.format(dateOfSkipArrival.getTime());
     }
 
+    //This includes options for if the calendar is null so that a null object can reset not only
+    //the dateOfSkipCollection calendar but the dateOfSkipCollectionString, and set the boolean
+    //collectionDateSpecified to false, as a null object is not a specified date
     protected void setDateOfSkipCollection(Calendar dateSkipWillBePickedUp) {
         this.dateOfSkipCollection = dateSkipWillBePickedUp;
-        dateOfSkipCollectionString = simpleDateFormat.format(dateOfSkipCollection.getTime());
-        collectionDateSpecified = true;
+        if(dateSkipWillBePickedUp != null){
+            dateOfSkipCollectionString = simpleDateFormat.format(dateOfSkipCollection.getTime());
+            collectionDateSpecified = true;
+        } else {
+            dateOfSkipCollectionString = null;
+            collectionDateSpecified = false;
+        }
+
+
     }
 
     @Exclude
@@ -269,6 +279,10 @@ public class Order {
 
     public boolean getCollectionDateSpecified(){
         return collectionDateSpecified;
+    }
+
+    public void setCollectionDateSpecified(boolean collectionDateSpecified){
+        this.collectionDateSpecified = collectionDateSpecified;
     }
 
     public String getUserUID(){

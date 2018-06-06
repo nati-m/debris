@@ -259,6 +259,12 @@ public class HireChooseDateActivity extends AppCompatActivity {
             Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireOptionalChooseCollectionDateActivity.class);
             startActivity(nextPageIntent);
         } else {
+            //This sets the value of Skip collection date and time to null.
+            //This resets the values if the user chose to select their collection date/time and then changed
+            //their mind by pressing the back button.
+            Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(null);
+            Control.CONTROL.getCurrentOrder().setTimeOfCollection(null);
+
             Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireReviewOrderActivity.class);
             startActivity(nextPageIntent);
         }
