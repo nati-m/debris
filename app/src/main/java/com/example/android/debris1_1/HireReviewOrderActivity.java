@@ -100,6 +100,7 @@ public class HireReviewOrderActivity extends AppCompatActivity {
 
         skipPoints = (int) totalPriceDouble;
         skipPointsNumber.setText("" + skipPoints);
+        Control.CONTROL.getCurrentOrder().setSkipPointsForThisOrder(skipPoints);
 
 
         confirmOrderButton = findViewById(R.id.button_confirm_order_to_banks);
@@ -107,10 +108,15 @@ public class HireReviewOrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Order currentOrder = Control.CONTROL.getCurrentOrder();
-                //Control.CONTROL.getOrdersFromThisUser().add(currentOrder);
-                //TODO TEST DATABASE FIREBASE
+
                 DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
                 orderDatabaseReference.push().setValue(currentOrder);
+
+                //Updates the user's skip points on Firebase and locally
+                int currentSkipPoints = Control.CONTROL.getCurrentUser().getPoints();
+                Control.CONTROL.getCurrentUser().setPoints(currentSkipPoints + skipPoints);
+                DatabaseReference skipPointsDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(Control.CONTROL.getCurrentUser().getFirebaseUid()).child("points");
+                skipPointsDatabaseReference.setValue(Control.CONTROL.getCurrentUser().getPoints());
 
                 Intent nextPageIntent = new Intent(HireReviewOrderActivity.this, FrontPageLoggedInActivity.class);
                 startActivity(nextPageIntent);

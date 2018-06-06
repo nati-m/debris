@@ -44,6 +44,7 @@ public class Order {
     private String timeOfArrival;
     private String timeOfCollection;
     private String wasteType;
+    private int skipPointsForThisOrder;
 
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
@@ -373,6 +374,15 @@ public class Order {
 
     public void setWasteType(String wasteType) {
         this.wasteType = wasteType;
+    }
+
+
+    public int getSkipPointsForThisOrder() {
+        return skipPointsForThisOrder;
+    }
+
+    public void setSkipPointsForThisOrder(int skipPointsForThisOrder) {
+        this.skipPointsForThisOrder = skipPointsForThisOrder;
     }
 
 
