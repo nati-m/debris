@@ -31,7 +31,7 @@
             android:label="@string/title_activity_hire_home_page"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".HireConfirmOrderActivity"
+            android:name=".HireReviewOrderActivity"
             android:label="@string/title_activity_hire_confirm_order"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -79,14 +79,15 @@
         <activity
             android:name=".HireIsPermitRequired"
             android:label="Skip Permits" />
-        <activity android:name=".HireOptionalChooseCollectionDateActivity" />
+        <activity android:name=".HireOptionalChooseCollectionDateActivity"
+            android:label="Choose Collection Date / Time"/>
         <activity
             android:name=".HireHazardousActivity"
             android:label="Hazardous Waste" />
         <activity
             android:name=".HireNonHazardousOrInertActivity"
             android:label="Non-Hazardous Waste" />
-        <activity android:name=".HireReviewOrderActivity"
+        <activity android:name=".HireOLDReviewOrderActivity"
             android:label="Review Order"/>
         <activity android:name=".UserSettingsActivity"
             android:label="Account Settings"/>

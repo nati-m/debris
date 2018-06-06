@@ -3,8 +3,6 @@ package com.example.android.debris1_1;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,7 +63,7 @@ public class HireSkipArrivalTimeChoosingActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextPageIntent = new Intent(HireSkipArrivalTimeChoosingActivity.this, HireConfirmOrderActivity.class);
+                Intent nextPageIntent = new Intent(HireSkipArrivalTimeChoosingActivity.this, HireReviewOrderActivity.class);
                 startActivity(nextPageIntent);
             }
         });

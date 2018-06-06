@@ -23,7 +23,6 @@ import com.firebase.ui.auth.AuthUI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class HireChooseDateActivity extends AppCompatActivity {
@@ -260,7 +259,7 @@ public class HireChooseDateActivity extends AppCompatActivity {
             Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireOptionalChooseCollectionDateActivity.class);
             startActivity(nextPageIntent);
         } else {
-            Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireConfirmOrderActivity.class);
+            Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireReviewOrderActivity.class);
             startActivity(nextPageIntent);
         }
 

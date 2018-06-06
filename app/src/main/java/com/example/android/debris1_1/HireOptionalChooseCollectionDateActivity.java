@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -126,6 +125,15 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
 
     }
 
+    private boolean isItSaturday(Calendar calendar){
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        //Saturday has the static value of 7, so dayOfWeek will equal Calendar.SATURDAY if Calender.DAY_OF_WEEK returned 7
+        if (dayOfWeek == Calendar.SATURDAY){
+            return true;
+        }
+        return false;
+    }
+
     private void updateSkipCollectionTextView(){
         String message = "Collection " + dayOfWeekIncludingSimpleDateFormat.format(calendarWithDateOfSkipCollection.getTime()) + ",";
 
@@ -196,8 +204,8 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
                 public void onDateSet(DatePicker datePicker,
                                       int year, int month, int day) {
                     setDateDisplayedOnButton(year, month, day);
-                    resetChooseTimeRecyclerView();
                     calendarWithDateOfSkipCollection.set(year, month, day);
+                    resetChooseTimeRecyclerView();
                     updateSkipCollectionTextView();
                 }
             };
@@ -215,11 +223,43 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
     }
 
     private void resetChooseTimeRecyclerView(){
+        times = new ArrayList<>();
+        times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
+        //if it is not Saturday, three more times are added
+        if(!isItSaturday(calendarWithDateOfSkipCollection)) {
+            times.add("1pm-3pm");
+            times.add("2pm-4pm");
+            times.add("3pm-5pm");
+        }
+
+        chooseTimeArrayAdapter = new ChooseTimeArrayAdapter(times, this);
+
+        recyclerView.setAdapter(chooseTimeArrayAdapter);
+
+        chooseTimeArrayAdapter.setClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = recyclerView.getChildViewHolder(v).getAdapterPosition();
+
+                selectedTime = times.get(pos);
+
+                for (int i = 0; i < chooseTimeArrayAdapter.getViewsArrayList().size(); i++){
+                    if (i == pos){
+                        chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
+                    }
+                    else chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
+                }
+
+                updateSkipCollectionTextView();
+            }
+        });
+
         selectedTime = "";
 
         for (int i = 0; i < chooseTimeArrayAdapter.getViewsArrayList().size(); i++){
             chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
         }
+
 
     }
 
@@ -240,7 +280,7 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         Control.CONTROL.getCurrentOrder().setTimeOfCollection(selectedTime);
 
 
-        Intent nextPageIntent = new Intent(HireOptionalChooseCollectionDateActivity.this, HireConfirmOrderActivity.class);
+        Intent nextPageIntent = new Intent(HireOptionalChooseCollectionDateActivity.this, HireReviewOrderActivity.class);
         startActivity(nextPageIntent);
 
 

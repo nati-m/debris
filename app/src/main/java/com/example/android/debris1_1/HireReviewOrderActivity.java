@@ -1,58 +1,121 @@
 package com.example.android.debris1_1;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class HireReviewOrderActivity extends AppCompatActivity {
 
-    boolean showIsPermitDefinitelyNotRequired;
-    boolean showIsDriveWideEnoughForNonPermit;
+    TextView addressTextView;
+    TextView skipArrivalDateAndTime;
+    TextView skipTypeAndNumberTextView;
+    Button confirmOrderButton;
 
-    boolean showIsDefinitelyNotHazardous;
-    boolean showIsDefinitelyInert;
+    TextView subtotalBeforeVAT;
+    TextView VAT;
+    TextView permitPrice;
+    TextView totalPrice;
+    TextView skipCollectionDateAndTime;
+    TextView skipPointsNumber;
 
-    boolean showEditTextDriverInstructions;
-    boolean showSpaceOnHighwayMessage;
+    SimpleDateFormat simpleDateFormat;
 
-    int maxPoints;
+    int skipPoints;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hire_review_order);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        maxPoints = 0;
+        simpleDateFormat = new SimpleDateFormat("EE dd MMM yyyy", Locale.UK);
 
-        if(!Control.CONTROL.getCurrentOrder().getPermitRequired()){
-            showIsPermitDefinitelyNotRequired = true;
-            showIsDriveWideEnoughForNonPermit = false;
-            maxPoints++;
+        addressTextView = findViewById(R.id.hire_confirm_address);
+        skipArrivalDateAndTime = findViewById(R.id.skip_arriving_confirm_order);
+        skipCollectionDateAndTime = findViewById(R.id.skip_collection_confirm_order);
+        skipTypeAndNumberTextView = findViewById(R.id.hire_confirm_skip_type_and_number);
+        totalPrice = findViewById(R.id.total_price_confirm_order);
+        subtotalBeforeVAT = findViewById(R.id.subtotal_minus_VAT_confirm_order);
+        VAT = findViewById(R.id.VAT_confirm_order);
+        permitPrice = findViewById(R.id.permit_price_confirm_order);
+        skipPointsNumber = findViewById(R.id.skip_points_amount_confirm_order);
+
+        String fullAddress = (Control.CONTROL.getCurrentOrderAddressAsString());
+        addressTextView.setText(fullAddress);
+
+        String arrival = simpleDateFormat.format(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime()) + ", " + Control.CONTROL.getCurrentOrder().getTimeOfArrival();
+        skipArrivalDateAndTime.setText(arrival);
+
+        if(Control.CONTROL.getCurrentOrder().getCollectionDateSpecified()){
+            String collection = simpleDateFormat.format(Control.CONTROL.getCurrentOrder().getDateOfSkipCollection().getTime()) + ", " + Control.CONTROL.getCurrentOrder().getTimeOfCollection();
+            skipCollectionDateAndTime.setText(collection);
         }
         else {
-            showIsPermitDefinitelyNotRequired = false;
-            showIsDriveWideEnoughForNonPermit = true;
-            maxPoints++;
+            skipCollectionDateAndTime.setText("NOT SPECIFIED");
         }
 
-        if(!Control.CONTROL.getCurrentOrder().getWasteType().equals("Hazardous")){
-            showIsDefinitelyNotHazardous = true;
-            maxPoints++;
+        String skipTypeAndNumber = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size() + " x " + Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().get(0).getSkipTypeAsString();
+        skipTypeAndNumberTextView.setText(skipTypeAndNumber);
+
+
+        double priceMinusVAT = Control.CONTROL.getCurrentOrder().getPrice() * Control.VAT_REMOVAL_PERCENTAGE / 100;
+        priceMinusVAT = Math.round(priceMinusVAT * 1.00d); //This round the price to 2 decimal places
+        String priceMinusVATString = "£" + priceMinusVAT;
+        subtotalBeforeVAT.setText(priceMinusVATString);
+
+        double VATdouble = Control.CONTROL.getCurrentOrder().getPrice() - priceMinusVAT;
+        VATdouble = Math.round(VATdouble * 1.00d);
+        String VATString = "£" + VATdouble;
+        VAT.setText(VATString);
+
+        String permitPriceString;
+        if(Control.CONTROL.getCurrentOrder().getPermitRequired()){
+            permitPriceString = "£" + Control.CONTROL.getCurrentOrder().getPermitPrice() + "0";
         } else {
-            showIsDefinitelyNotHazardous = false;
+            permitPriceString = "N/A";
         }
 
-        if(Control.CONTROL.getCurrentOrder().getWasteType().equals("Inert")){
-            showIsDefinitelyInert = true;
-            maxPoints++;
-        } else {
-            showIsDefinitelyInert = false;
-        }
+        permitPrice.setText(permitPriceString);
+
+        double totalPriceDouble = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
+
+        String price = "£" + totalPriceDouble + "0*";
+        totalPrice.setText(price);
+
+        skipPoints = (int) totalPriceDouble;
+        skipPointsNumber.setText("" + skipPoints);
 
 
+        confirmOrderButton = findViewById(R.id.button_confirm_order_to_banks);
+        confirmOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Order currentOrder = Control.CONTROL.getCurrentOrder();
+                //Control.CONTROL.getOrdersFromThisUser().add(currentOrder);
+                //TODO TEST DATABASE FIREBASE
+                DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
+                orderDatabaseReference.push().setValue(currentOrder);
+
+                Intent nextPageIntent = new Intent(HireReviewOrderActivity.this, FrontPageLoggedInActivity.class);
+                startActivity(nextPageIntent);
+            }
+        });
 
 
 
@@ -61,6 +124,15 @@ public class HireReviewOrderActivity extends AppCompatActivity {
 
 
 
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -82,4 +154,5 @@ public class HireReviewOrderActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
