@@ -35,11 +35,78 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:textColor="@color/black"
         android:text="*Please note, this price is for a skip that is picked up within 5 days. Additional charges apply for skips hired for longer periods.
 We will make every attempt to remind you to select a collection date. However, we will collect 28 days after the delivery date if we do no hear from you."/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/colorAccent"
+        android:text="Read the terms and conditions here"/>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp">
+
+        <CheckBox
+            android:id="@+id/terms_and_conditions_check_box_confirm_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="I have read and accept the Terms and Conditions"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/black"
+        android:text="We will take a third of the payment when you order, and the outstanding payment upon skip delivery."/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_choose_pick_up_date_before_ordering_confirm_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_above="@id/button_to_payment_page_confirm_order"
+            android:text="Choose Pick Up Date Before Ordering"/>
+
+        <Button
+            android:id="@+id/button_to_payment_page_confirm_order"
+            style="@style/BigRedButton"
+            android:text="Go To Payment Page Now"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+
+            />
+
+    </RelativeLayout>
+
+
 
 
 </LinearLayout>
