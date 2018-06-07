@@ -94,7 +94,9 @@
         <activity
             android:name=".UserSettingsActivity"
             android:label="Account Settings" />
-        <activity android:name=".HireConfirmOrderActivity"></activity>
+        <activity android:name=".HireConfirmOrderActivity" />
+        <activity android:name=".HirePaymentActivity" />
+        <activity android:name=".HireCongratulationsActivity"></activity>
     </application>
 
 </manifest>
