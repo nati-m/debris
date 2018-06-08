@@ -44,7 +44,7 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         chooseCollectionDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, HirePaymentActivity.class);
+                Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, HireOptionalChooseCollectionDateActivity.class);
                 startActivity(nextPageIntent);
             }
         });

@@ -40,6 +40,9 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
     SimpleDateFormat dayOfWeekIncludingSimpleDateFormat;
     Button continueButton;
     TextView arrivalDateMessage;
+    TextView totalPriceTextView;
+    TextView numberOfDaysHired;
+    TextView priceForNumberOfDaysHired;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +98,9 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
             }
         });
 
-
+        numberOfDaysHired = findViewById(R.id.number_of_days_hired_for_optional_choose_collection_date);
+        priceForNumberOfDaysHired = findViewById(R.id.subtotal_hire_length_charge_optional_choose_collection_date);
+        totalPriceTextView = findViewById(R.id.total_price_optional_choose_collection_date);
     }
 
     private boolean isItSaturday(Calendar calendar){
@@ -180,6 +185,7 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
                     calendarWithDateOfSkipCollection.set(year, month, day);
                     resetChooseTimeRecyclerView();
                     updateSkipCollectionTextView();
+                    updatePrices();
                 }
             };
 
@@ -257,6 +263,17 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         startActivity(nextPageIntent);
 
 
+    }
+
+    private void updatePrices(){
+        double priceAddedForNumberOfDays = 0;
+
+        int daysApart = calendarWithDateOfSkipCollection.compareTo(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival());
+        //Todo if daysApart = blah. test if this works. it's milliseconds atm need days
+
+        double total = Control.CONTROL.getCurrentOrder().getPrice() + priceAddedForNumberOfDays;
+
+        //Todo update textviews
     }
 
     @Override
