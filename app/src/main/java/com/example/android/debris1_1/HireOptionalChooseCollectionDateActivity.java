@@ -82,37 +82,10 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         setDateDisplayedOnButton(year, month, day);
 
         recyclerView = findViewById(R.id.recycler_view_choose_time_skip_arrival);
-
-        selectedTime = "";
-        times = new ArrayList<>();
-        times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
-        //TODO if not saturday
-        times.add("1pm-3pm"); times.add("2pm-4pm"); times.add("3pm-5pm");
-
-        chooseTimeArrayAdapter = new ChooseTimeArrayAdapter(times, this);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(chooseTimeArrayAdapter);
 
-        chooseTimeArrayAdapter.setClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int pos = recyclerView.getChildViewHolder(v).getAdapterPosition();
-
-                selectedTime = times.get(pos);
-
-                for (int i = 0; i < chooseTimeArrayAdapter.getViewsArrayList().size(); i++){
-                    if (i == pos){
-                        chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(Color.CYAN);
-                    }
-                    else chooseTimeArrayAdapter.getViewsArrayList().get(i).setBackgroundColor(getResources().getColor(R.color.background));
-                }
-
-                updateSkipCollectionTextView();
-            }
-        });
-
+        resetChooseTimeRecyclerView();
         updateSkipCollectionTextView();
 
         continueButton.setOnClickListener(new View.OnClickListener() {
