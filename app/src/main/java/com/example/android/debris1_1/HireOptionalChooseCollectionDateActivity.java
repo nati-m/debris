@@ -280,7 +280,7 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         Control.CONTROL.getCurrentOrder().setTimeOfCollection(selectedTime);
 
 
-        Intent nextPageIntent = new Intent(HireOptionalChooseCollectionDateActivity.this, HireReviewOrderActivity.class);
+        Intent nextPageIntent = new Intent(HireOptionalChooseCollectionDateActivity.this, HirePaymentActivity.class);
         startActivity(nextPageIntent);
 
 

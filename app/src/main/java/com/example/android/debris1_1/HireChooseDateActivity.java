@@ -33,13 +33,11 @@ public class HireChooseDateActivity extends AppCompatActivity {
     int year;
     int month;
     int day;
-    CheckBox chooseCollectionDate;
     RecyclerView recyclerView;
     ChooseTimeArrayAdapter chooseTimeArrayAdapter;
     ArrayList<String> times;
     String selectedTime;
     TextView skipArrivingTextView;
-    String skipArrivingWarning;
     SimpleDateFormat dayOfWeekIncludingSimpleDateFormat;
     Button continueButton;
 
@@ -50,7 +48,6 @@ public class HireChooseDateActivity extends AppCompatActivity {
 
         dateDisplayButton = findViewById(R.id.date_display_button_arrival_hire_choose_date);
         calenderWithDateOfSkipArrival = Calendar.getInstance();
-        chooseCollectionDate = findViewById(R.id.check_box_choose_pick_up_date);
         skipArrivingTextView = findViewById(R.id.skip_arriving_text_view_choose_date);
         dayOfWeekIncludingSimpleDateFormat = new SimpleDateFormat("EE dd MMM yyyy", Locale.UK);
         continueButton = findViewById(R.id.continue_button_select_date_time);
@@ -252,22 +249,11 @@ public class HireChooseDateActivity extends AppCompatActivity {
 
         //A date and time has been chosen...
 
-            Control.CONTROL.getCurrentOrder().setDateOfSkipArrival(calenderWithDateOfSkipArrival);
-            Control.CONTROL.getCurrentOrder().setTimeOfArrival(selectedTime);
+        Control.CONTROL.getCurrentOrder().setDateOfSkipArrival(calenderWithDateOfSkipArrival);
+        Control.CONTROL.getCurrentOrder().setTimeOfArrival(selectedTime);
 
-        if(chooseCollectionDate.isChecked()){
-            Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireOptionalChooseCollectionDateActivity.class);
-            startActivity(nextPageIntent);
-        } else {
-            //This sets the value of Skip collection date and time to null.
-            //This resets the values if the user chose to select their collection date/time and then changed
-            //their mind by pressing the back button.
-            Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(null);
-            Control.CONTROL.getCurrentOrder().setTimeOfCollection(null);
-
-            Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireReviewOrderActivity.class);
-            startActivity(nextPageIntent);
-        }
+        Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireReviewOrderActivity.class);
+        startActivity(nextPageIntent);
 
     }
 

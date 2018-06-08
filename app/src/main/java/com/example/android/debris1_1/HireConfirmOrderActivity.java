@@ -1,5 +1,6 @@
 package com.example.android.debris1_1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,12 +27,27 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         String priceString = "£" + Control.CONTROL.getCurrentOrder().getPrice() + "0*";
         price.setText(priceString);
 
-        //If the user has already chosen their collection date, the button to do so is removed
-        //and some text on the page is changed.
-        if(Control.CONTROL.getCurrentOrder().getCollectionDateSpecified()){
-            chooseCollectionDateButton.setVisibility(View.GONE);
-            goToPaymentButton.setText("");
-        }
+        goToPaymentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //This sets the value of Skip collection date and time to null.
+                //This resets the values if the user chose to select their collection date/time and then changed
+                //their mind by pressing the back button.
+                Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(null);
+                Control.CONTROL.getCurrentOrder().setTimeOfCollection(null);
+
+                Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, HirePaymentActivity.class);
+                startActivity(nextPageIntent);
+            }
+        });
+
+        chooseCollectionDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, HirePaymentActivity.class);
+                startActivity(nextPageIntent);
+            }
+        });
 
 
     }
