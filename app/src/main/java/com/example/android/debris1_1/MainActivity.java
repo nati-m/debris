@@ -56,14 +56,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button toTestTown = findViewById(R.id.go_to_test_town);
-        toTestTown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent nextPageIntent = new Intent(MainActivity.this, TestTownActivity.class);
-                startActivity(nextPageIntent);
-            }
-        });
+
 
 
 

@@ -10,6 +10,8 @@
     android:background="@color/background"
     android:orientation="vertical">
 
+
+
     <TextView
         android:id="@+id/testTestTestTestTest"
         android:layout_width="match_parent"
@@ -31,16 +33,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/big_title_main_page"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/HeaderText"
-            android:textSize="49sp"
-            android:textColor="@android:color/black"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
             android:layout_centerInParent="true"
-            android:fontFamily="sans-serif-smallcaps"
-            android:text="I NEED A SKIP"/>
+            android:src="@drawable/logo"
+            />
+
+        <!--<TextView-->
+            <!--android:id="@+id/big_title_main_page"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--style="@style/HeaderText"-->
+            <!--android:textSize="49sp"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:fontFamily="sans-serif-smallcaps"-->
+            <!--android:text="I NEED A SKIP"/>-->
 
     </RelativeLayout>
 
@@ -84,23 +93,7 @@
         android:layout_marginLeft="50dp"
         android:textAlignment="center"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porttitor, mi sed semper fermentum, elit lacus finibus nibh, eu vehicula nibh massa in lacus. Cras quis ex eget neque vestibulum venenatis. Aenean facilisis nulla quis laoreet pellentesque."/>
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginBottom="32dp">
 
-    <Button
-        android:id="@+id/go_to_test_town"
-        android:background="@color/softerAmber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="64dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/colorPrimary"
-        android:text="Go To Test Town"/>
-
-</RelativeLayout>
 
 
 

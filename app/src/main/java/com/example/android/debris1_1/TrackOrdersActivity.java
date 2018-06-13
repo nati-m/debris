@@ -1,13 +1,18 @@
 package com.example.android.debris1_1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -33,13 +38,15 @@ import static android.view.View.GONE;
 public class TrackOrdersActivity extends AppCompatActivity {
 
     TextView youHaveNoOrders;
-    ExpandableListView expandableListView;
     ArrayList<Order> ordersFromThisUser;
-    ExpandableListTrackOrdersAdapter expandableListAdapter;
     HashMap<String, ArrayList<Order>> stringArrayListHashMap;
     TextView sortOrdersByTextView;
     Spinner sortOrdersBy;
     ArrayList<String> spinnerSortByOptions = new ArrayList<>();
+
+    RecyclerView recyclerView;
+    TrackOrdersRecyclerViewAdapter trackOrdersRecyclerViewAdapter;
+    Context contextForArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +55,8 @@ public class TrackOrdersActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        youHaveNoOrders = (TextView) findViewById(R.id.you_have_no_orders_track_orders);
-        expandableListView = findViewById(R.id.orders_expandable_list_view_track_orders);
+        recyclerView = findViewById(R.id.recycler_view_track_orders);
+        youHaveNoOrders = findViewById(R.id.you_have_no_orders_track_orders);
         sortOrdersByTextView = findViewById(R.id.sort_by_date_of_skip_arrival_track_orders);
         sortOrdersBy = findViewById(R.id.spinner_sort_orders_by_track_orders);
 
@@ -98,90 +105,14 @@ public class TrackOrdersActivity extends AppCompatActivity {
 
             youHaveNoOrders.setVisibility(GONE);
 //            Collections.sort(ordersFromThisUser, Order.dateLatestFirstComparator);
-            expandableListAdapter = new ExpandableListTrackOrdersAdapter(this, ordersFromThisUser, stringArrayListHashMap);
 
-            expandableListView.setAdapter(expandableListAdapter);
-
-
-            expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-                @Override
-                public void onGroupExpand(int groupPosition) {
-
-                    Button button = findViewById(R.id.button_track_orders_expandable_list_view_child);
-                    Order order = ordersFromThisUser.get(groupPosition);
-                    View.OnClickListener toReturn = new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //a blank one to fill with an option below
-                        }
-                    };
-
-                    if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_EDIT_ORDER_ONLY_BEFORE_SKIP_IS_DELIVERED) {
-                        button.setText("Edit\nOrder");
-                        toReturn = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
-                                startActivity(nextPageIntent);
-                            }
-                        };
-                    }
+            contextForArrayAdapter = this;
 
 
-                    if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_CHOOSE_DATE_OF_SKIP_PICKUP) {
-                        button.setText("Choose\nDate");
-                        toReturn = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
-                                startActivity(nextPageIntent);
-
-                                //TODO
-                            }
-                        };
-                    }
-
-                    if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_EDIT_DATE) {
-                        button.setText("Edit\nDate");
-                        toReturn = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
-                                startActivity(nextPageIntent);
-
-                                //TODO
-                            }
-                        };
-                    }
-
-                    if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_LEAVE_FEEDBACK_NOW) {
-                        button.setText("Leave\nFeedback");
-                        toReturn = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent nextPageIntent = new Intent(TrackOrdersActivity.this, LeaveFeedbackActivity.class);
-                                startActivity(nextPageIntent);
-                            }
-                        };
-                    }
-
-                    if (order.getButtonTypeForTrackOrders() == Order.BUTTON_TYPE_VIEW_FEEDBACK) {
-                        button.setText("View\nFeedback");
-                        toReturn = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent nextPageIntent = new Intent(TrackOrdersActivity.this, EditOrderActivity.class);
-                                startActivity(nextPageIntent);
-
-                                //TODO
-                            }
-                        };
-                    }
-                    if(button != null) {
-                        button.setOnClickListener(toReturn);
-                    }
-                }
-            });
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setHasFixedSize(true);
+            trackOrdersRecyclerViewAdapter = new TrackOrdersRecyclerViewAdapter(ordersFromThisUser, contextForArrayAdapter);
+            recyclerView.setAdapter(trackOrdersRecyclerViewAdapter);
 
 
 
@@ -225,17 +156,15 @@ public class TrackOrdersActivity extends AppCompatActivity {
 //
 //    }
 
-    private void bla(){
 
-    }
 
     private void sortOrdersLatestFirst(){
         ArrayList<Order> latestFirstArrayList = new ArrayList<>();
         latestFirstArrayList.addAll(ordersFromThisUser);
         //Collections.sort(latestFirstArrayList, Order.dateLatestFirstComparator);
 
-        expandableListAdapter = new ExpandableListTrackOrdersAdapter(this, latestFirstArrayList, stringArrayListHashMap);
-        expandableListView.setAdapter(expandableListAdapter);
+//        expandableListAdapter = new ExpandableListTrackOrdersAdapter(this, latestFirstArrayList, stringArrayListHashMap);
+//        expandableListView.setAdapter(expandableListAdapter);
     }
 
     private void sortOrdersEarliestFirst(){
@@ -243,8 +172,8 @@ public class TrackOrdersActivity extends AppCompatActivity {
         earliestFirstArrayList.addAll(ordersFromThisUser);
         //Collections.sort(earliestFirstArrayList, Order.dateEarliestFirstComparator);
 
-        expandableListAdapter = new ExpandableListTrackOrdersAdapter(this, earliestFirstArrayList, stringArrayListHashMap);
-        expandableListView.setAdapter(expandableListAdapter);
+//        expandableListAdapter = new ExpandableListTrackOrdersAdapter(this, earliestFirstArrayList, stringArrayListHashMap);
+//        expandableListView.setAdapter(expandableListAdapter);
     }
 
 

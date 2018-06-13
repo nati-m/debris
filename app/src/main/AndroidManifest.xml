@@ -94,12 +94,17 @@
         <activity
             android:name=".UserSettingsActivity"
             android:label="Account Settings" />
-        <activity android:name=".HireConfirmOrderActivity"
-            android:label="Confirm Order"/>
-        <activity android:name=".HirePaymentActivity"
-            android:label="Payment"/>
-        <activity android:name=".HireCongratulationsActivity"
-            android:label="Congratulations!!!"></activity>
+        <activity
+            android:name=".HireConfirmOrderActivity"
+            android:label="Confirm Order" />
+        <activity
+            android:name=".HirePaymentActivity"
+            android:label="Payment" />
+        <activity
+            android:name=".HireCongratulationsActivity"
+            android:label="Congratulations!!!" />
+        <activity android:name=".ChooseCollectionDateAfterTrackOrdersActivity" />
+        <activity android:name=".CancelOrderActivity"></activity>
     </application>
 
 </manifest>

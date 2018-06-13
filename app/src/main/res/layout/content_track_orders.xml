@@ -49,8 +49,8 @@
 
 
 
-    <ExpandableListView
-        android:id="@+id/orders_expandable_list_view_track_orders"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_track_orders"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_width="match_parent"

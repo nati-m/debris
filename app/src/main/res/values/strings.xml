@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Debris 1.1</string>
+    <string name="app_name">I Need A Skip</string>
     <string name="action_settings">Settings</string>
-    <string name="app_version_number">Debris 1.1, April 2018</string>
-    <string name="title_activity_login">Sign in to your Debris Account</string>
+    <string name="app_version_number">Debris 1.2, June 2018</string>
+    <string name="title_activity_login">Sign in to I Need A Skip</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
