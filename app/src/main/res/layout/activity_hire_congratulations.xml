@@ -16,13 +16,45 @@
         android:textColor="@color/black"
         android:layout_margin="16dp"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/balloons"/>
 
-    <Button
-    android:id="@+id/button_to_main_menu_congratulations"
-    style="@style/YellowButton"
-    android:layout_margin="16dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="To Main Menu"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textStyle="bold"
+        android:text="Thank you! For choosing"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:src="@drawable/logo"/>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/button_to_main_menu_congratulations"
+            android:background="@color/softerAmber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="32dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/colorPrimary"
+            android:text="To Main Menu"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

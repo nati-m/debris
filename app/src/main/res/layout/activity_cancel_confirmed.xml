@@ -16,13 +16,40 @@
         android:textColor="@color/black"
         android:layout_margin="16dp"/>
 
-
-    <Button
-        android:id="@+id/button_to_main_menu_cancel_confirmed"
-        style="@style/YellowButton"
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To Main Menu"/>
+        android:textSize="16sp"
+        android:text="This action cannot be reversed."
+        android:textColor="@color/black"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="A refund of any money taken, minus our cancellation fee, will be returned to your account within 5 working days."
+        android:textColor="@color/black"
+        android:layout_margin="16dp"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/button_to_main_menu_cancel_confirmed"
+            android:background="@color/softerAmber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="32dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/colorPrimary"
+            android:text="To Main Menu"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

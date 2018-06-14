@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -147,6 +150,25 @@ public class TrackOrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrderVi
             @Override
             public void onClick(View v) {
                 Control.CONTROL.setCurrentOrder(currentOrder);
+                String dateOfArrivalString = currentOrder.getDateOfSkipArrivalString();
+
+                //The skip arrival date in the currentOrder object is then set from the String version.
+                //This is necessary because Firebase cannot store Calendar objects, and the Calendar
+                //object for skip Arrival Time is required on the next page.
+                Date date;
+                Calendar c = Calendar.getInstance();
+                try {
+                    date = Order.simpleDateFormat.parse(dateOfArrivalString);
+                    c.setTime(date);
+                    //Because the same static parser is used both to create the String versions of dates and parse them,
+                    //this should always work.
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Control.CONTROL.getCurrentOrder().setDateOfSkipArrival(c);
+
+
+
                 Intent nextPageIntent = new Intent(context, ChooseCollectionDateAfterTrackOrdersActivity.class);
                 context.startActivity(nextPageIntent);
                 //TODO check this works

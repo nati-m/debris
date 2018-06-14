@@ -8,12 +8,48 @@
     android:orientation="vertical"
     android:background="@color/background">
 
-    <Button
-        android:id="@+id/button_confirm_order_payment"
-        style="@style/YellowButton"
-        android:layout_margin="16dp"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CONFIRM ORDER"/>
+        android:layout_margin="32dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="A bank page provided by a third party, such as PayPal, will be placed here in a future version."/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="The user will confirm their purchase here and the first installment of their payment will be taken immediately."/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:text="The user can later cancel the order from the Track Orders section for a fee if desired."/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/button_confirm_order_payment"
+            android:background="@color/softerAmber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="32dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/black"
+            android:text="Confirm Order"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
