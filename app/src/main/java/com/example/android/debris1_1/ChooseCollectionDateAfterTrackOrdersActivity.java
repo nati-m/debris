@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActivity {
 
@@ -46,6 +47,9 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
     TextView numberOfDaysHired;
     TextView priceForNumberOfDaysHired;
     Calendar limitForCollection28DaysAfterArrival;
+
+    double newTotalPrice;
+    double priceAddedForNumberOfDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +96,12 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
         limitForCollection28DaysAfterArrival.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
         limitForCollection28DaysAfterArrival.add(Calendar.DATE, 28);
 
-        if(calendarWithDateOfSkipCollection.before(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime())){
+        Order currentOrder = Control.CONTROL.getCurrentOrder();
+        Calendar testy = currentOrder.getDateOfSkipArrival();
+
+        //I convert the Calendar objects to Date objects with .getTime() to use comparing methods before and after.
+        //Without converting these compare methods can be buggy
+        if(calendarWithDateOfSkipCollection.getTime().before(testy.getTime())){
             calendarWithDateOfSkipCollection.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
             calendarWithDateOfSkipCollection.add(Calendar.DATE, 2);
         }
@@ -104,7 +113,7 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
         //This checks that the suggested date is not more than 28 days away from the skip arrival date,
         //and sets it to 28 days from then if the limit is reached.
         //This stops users from being able to order collection after the time limit.
-        if (calendarWithDateOfSkipCollection.after(limitForCollection28DaysAfterArrival)){
+        if (calendarWithDateOfSkipCollection.getTime().after(limitForCollection28DaysAfterArrival.getTime())){
             calendarWithDateOfSkipCollection.setTime(limitForCollection28DaysAfterArrival.getTime());
         }
 
@@ -129,6 +138,9 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
         priceForNumberOfDaysHired = findViewById(R.id.subtotal_hire_length_charge_choose_collection_after_track);
         totalPriceTextView = findViewById(R.id.total_price_choose_collection_after_track);
 
+        resetChooseTimeRecyclerView();
+        updateSkipCollectionTextView();
+        updatePrices();
     }
 
 
@@ -179,7 +191,13 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
 
             Calendar c = Calendar.getInstance();
             c.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
+
+
             c.add(Calendar.DATE, 1); //This sets the minimum date to 1 day after skip arrival
+
+            if(c.before(Calendar.getInstance())){
+                c.add(Calendar.DATE, 1); //This sets the minimum date to 1 day after skip arrival
+            }
 
 
             datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis()); //Setting the minimum, c, defined above
@@ -287,8 +305,12 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
         Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(calendarWithDateOfSkipCollection);
         Control.CONTROL.getCurrentOrder().setTimeOfCollection(selectedTime);
 
+        Control.CONTROL.getCurrentOrder().setPrice(newTotalPrice);
+        Control.CONTROL.getCurrentOrder().setSurchargeForLongHire(priceAddedForNumberOfDays);
+
         DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed").child(Control.CONTROL.getCurrentOrder().getOrderUIDakaFirebaseDatabaseKey());
         orderDatabaseReference.setValue(Control.CONTROL.getCurrentOrder());
+
 
 
         Intent nextPageIntent = new Intent(ChooseCollectionDateAfterTrackOrdersActivity.this, FrontPageLoggedInActivity.class);
@@ -298,14 +320,42 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
     }
 
     private void updatePrices(){
-        double priceAddedForNumberOfDays = 0;
+        priceAddedForNumberOfDays = 0;
 
-        int daysApart = calendarWithDateOfSkipCollection.compareTo(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival());
-        //Todo if daysApart = blah. test if this works. it's milliseconds atm need days
+        long daysApart = calendarWithDateOfSkipCollection.getTimeInMillis() - Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTimeInMillis();
+        //This returns the milliseconds apart, below converts it to days
+        daysApart = TimeUnit.DAYS.convert(daysApart, TimeUnit.MILLISECONDS);
 
-        double total = Control.CONTROL.getCurrentOrder().getPrice() + priceAddedForNumberOfDays;
+        double currentTotalPrice = Control.CONTROL.getCurrentOrder().getPrice();
 
-        //Todo update textviews
+        if(daysApart > 21){
+            //Then there is a 20% surcharge
+            priceAddedForNumberOfDays = currentTotalPrice;
+            priceAddedForNumberOfDays = priceAddedForNumberOfDays / 5;
+        } else if (daysApart > 14){
+            //Then there is a 10% surcharge
+            priceAddedForNumberOfDays = currentTotalPrice;
+            priceAddedForNumberOfDays = priceAddedForNumberOfDays / 10;
+        } else if (daysApart > 7){
+            priceAddedForNumberOfDays = 7;
+        }
+
+        //This is then multiplied by the number of skips
+        priceAddedForNumberOfDays = priceAddedForNumberOfDays * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
+
+        double total = currentTotalPrice + priceAddedForNumberOfDays;
+
+        String numberOfDays = "Charge for " + daysApart + " days hired:";
+        numberOfDaysHired.setText(numberOfDays);
+
+        String priceForNumberDaysHired = "£" + priceAddedForNumberOfDays + "0";
+        priceForNumberOfDaysHired.setText(priceForNumberDaysHired);
+
+        String totalString = "£" + total + "0";
+        totalPriceTextView.setText(totalString);
+
+        newTotalPrice = total;
+
     }
 
     @Override

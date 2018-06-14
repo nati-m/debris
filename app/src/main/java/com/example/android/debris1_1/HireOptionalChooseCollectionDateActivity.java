@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity {
 
@@ -43,6 +44,9 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
     TextView totalPriceTextView;
     TextView numberOfDaysHired;
     TextView priceForNumberOfDaysHired;
+
+    double newTotalPrice;
+    double priceAddedForNumberOfDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +92,6 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        resetChooseTimeRecyclerView();
-        updateSkipCollectionTextView();
-
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +102,12 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         numberOfDaysHired = findViewById(R.id.number_of_days_hired_for_optional_choose_collection_date);
         priceForNumberOfDaysHired = findViewById(R.id.subtotal_hire_length_charge_optional_choose_collection_date);
         totalPriceTextView = findViewById(R.id.total_price_optional_choose_collection_date);
+
+        resetChooseTimeRecyclerView();
+        updateSkipCollectionTextView();
+        updatePrices();
     }
+
 
     private boolean isItSaturday(Calendar calendar){
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -258,6 +264,11 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(calendarWithDateOfSkipCollection);
         Control.CONTROL.getCurrentOrder().setTimeOfCollection(selectedTime);
 
+        //The permit price is subtracted to keep the process in sync with users who chose not to select their collection date now
+        newTotalPrice = newTotalPrice - Control.CONTROL.getCurrentOrder().getPermitPrice();
+        Control.CONTROL.getCurrentOrder().setPrice(newTotalPrice);
+        Control.CONTROL.getCurrentOrder().setSurchargeForLongHire(priceAddedForNumberOfDays);
+
 
         Intent nextPageIntent = new Intent(HireOptionalChooseCollectionDateActivity.this, HirePaymentActivity.class);
         startActivity(nextPageIntent);
@@ -266,14 +277,42 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
     }
 
     private void updatePrices(){
-        double priceAddedForNumberOfDays = 0;
+        priceAddedForNumberOfDays = 0;
 
-        int daysApart = calendarWithDateOfSkipCollection.compareTo(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival());
-        //Todo if daysApart = blah. test if this works. it's milliseconds atm need days
+        long daysApart = calendarWithDateOfSkipCollection.getTimeInMillis() - Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTimeInMillis();
+        //This returns the milliseconds apart, below converts it to days
+        daysApart = TimeUnit.DAYS.convert(daysApart, TimeUnit.MILLISECONDS);
 
-        double total = Control.CONTROL.getCurrentOrder().getPrice() + priceAddedForNumberOfDays;
+        double pricePlusPermit = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
 
-        //Todo update textviews
+        if(daysApart > 21){
+            //Then there is a 20% surcharge
+            priceAddedForNumberOfDays = pricePlusPermit;
+            priceAddedForNumberOfDays = priceAddedForNumberOfDays / 5;
+        } else if (daysApart > 14){
+            //Then there is a 10% surcharge
+            priceAddedForNumberOfDays = pricePlusPermit;
+            priceAddedForNumberOfDays = priceAddedForNumberOfDays / 10;
+        } else if (daysApart > 7){
+            priceAddedForNumberOfDays = 7;
+        }
+
+        //This is then multiplied by the number of skips
+        priceAddedForNumberOfDays = priceAddedForNumberOfDays * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
+
+        double total = pricePlusPermit + priceAddedForNumberOfDays;
+
+        String numberOfDays = "Charge for " + daysApart + " days hired:";
+        numberOfDaysHired.setText(numberOfDays);
+
+        String priceForNumberDaysHired = "£" + priceAddedForNumberOfDays + "0";
+        priceForNumberOfDaysHired.setText(priceForNumberDaysHired);
+
+        String totalString = "£" + total + "0";
+        totalPriceTextView.setText(totalString);
+
+        newTotalPrice = total;
+
     }
 
     @Override

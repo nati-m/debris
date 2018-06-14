@@ -24,7 +24,8 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         chooseCollectionDateButton = findViewById(R.id.button_choose_pick_up_date_before_ordering_confirm_order);
         goToPaymentButton = findViewById(R.id.button_to_payment_page_confirm_order);
 
-        String priceString = "£" + Control.CONTROL.getCurrentOrder().getPrice() + "0*";
+        double pricePlusPermit = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
+        String priceString = "£" + pricePlusPermit + "0*";
         price.setText(priceString);
 
         goToPaymentButton.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +36,7 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
                 //their mind by pressing the back button.
                 Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(null);
                 Control.CONTROL.getCurrentOrder().setTimeOfCollection(null);
+                Control.CONTROL.getCurrentOrder().setSurchargeForLongHire(0);
 
                 Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, HirePaymentActivity.class);
                 startActivity(nextPageIntent);

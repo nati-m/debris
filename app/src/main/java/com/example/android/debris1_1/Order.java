@@ -45,6 +45,7 @@ public class Order {
     private String timeOfCollection;
     private String wasteType;
     private int skipPointsForThisOrder;
+    private double surchargeForLongHire;
 
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
@@ -383,6 +384,14 @@ public class Order {
 
     public void setSkipPointsForThisOrder(int skipPointsForThisOrder) {
         this.skipPointsForThisOrder = skipPointsForThisOrder;
+    }
+
+    public double getSurchargeForLongHire() {
+        return surchargeForLongHire;
+    }
+
+    public void setSurchargeForLongHire(double surchargeForLongHire) {
+        this.surchargeForLongHire = surchargeForLongHire;
     }
 
 

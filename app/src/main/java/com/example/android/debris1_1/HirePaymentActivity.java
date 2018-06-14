@@ -23,6 +23,11 @@ public class HirePaymentActivity extends AppCompatActivity {
         confirmOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //The full price is set to the price plus the permit.
+                //They were kept separate earlier before this "point of no return" in case the user went back and changed their mind.
+                double pricePlusPermit = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
+                Control.CONTROL.getCurrentOrder().setPrice(pricePlusPermit);
+
                 Order currentOrder = Control.CONTROL.getCurrentOrder();
 
                 DatabaseReference orderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
