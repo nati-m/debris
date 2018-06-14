@@ -313,7 +313,7 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
 
 
 
-        Intent nextPageIntent = new Intent(ChooseCollectionDateAfterTrackOrdersActivity.this, FrontPageLoggedInActivity.class);
+        Intent nextPageIntent = new Intent(ChooseCollectionDateAfterTrackOrdersActivity.this, CollectionDateChosenConfirmAfterTrackOrdersActivity.class);
         startActivity(nextPageIntent);
 
 
