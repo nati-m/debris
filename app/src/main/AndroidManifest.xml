@@ -103,10 +103,14 @@
         <activity
             android:name=".HireCongratulationsActivity"
             android:label="Congratulations!!!" />
-        <activity android:name=".ChooseCollectionDateAfterTrackOrdersActivity" />
-        <activity android:name=".CancelOrderActivity" />
-        <activity android:name=".CancelConfirmedActivity" />
-        <activity android:name=".CollectionDateChosenConfirmAfterTrackOrdersActivity"></activity>
+        <activity android:name=".ChooseCollectionDateAfterTrackOrdersActivity"
+            android:label="Choose Collection Date / Time"/>
+        <activity android:name=".CancelOrderActivity"
+            android:label="Cancel Your Order?"/>
+        <activity android:name=".CancelConfirmedActivity"
+            android:label="Order Cancelled"/>
+        <activity android:name=".CollectionDateChosenConfirmAfterTrackOrdersActivity"
+            android:label="Collection Date Confirmed"/>
     </application>
 
 </manifest>
