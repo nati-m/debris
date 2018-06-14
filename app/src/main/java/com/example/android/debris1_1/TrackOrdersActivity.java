@@ -62,6 +62,7 @@ public class TrackOrdersActivity extends AppCompatActivity {
 
         //getOrdersForThisUserFromFirebase();
 
+        //TODO change Firebase to not have confirmed/unconfirmed orders or work out another way to sort the issue
         DatabaseReference ordersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed");
         String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
 
@@ -73,6 +74,7 @@ public class TrackOrdersActivity extends AppCompatActivity {
                         for (DataSnapshot child : dataSnapshot.getChildren()){
 
                             Order order = child.getValue(Order.class);
+                            order.setOrderUIDakaFirebaseDatabaseKey(child.getKey());
                             ordersFromThisUser.add(order);
                         }
                         //When the data is finished loading, THEN render the page

@@ -104,7 +104,8 @@
             android:name=".HireCongratulationsActivity"
             android:label="Congratulations!!!" />
         <activity android:name=".ChooseCollectionDateAfterTrackOrdersActivity" />
-        <activity android:name=".CancelOrderActivity"></activity>
+        <activity android:name=".CancelOrderActivity" />
+        <activity android:name=".CancelConfirmedActivity"></activity>
     </application>
 
 </manifest>

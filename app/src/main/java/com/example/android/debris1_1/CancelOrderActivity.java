@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -49,7 +52,7 @@ public class CancelOrderActivity extends AppCompatActivity {
 
         double totalPriceDouble = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
 
-        String priceString = "£" + totalPriceDouble + "0*";
+        String priceString = "£" + totalPriceDouble + "0";
         price.setText(priceString);
 
         doNotCancel.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +69,19 @@ public class CancelOrderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 confirmOrderCancellation.setText("Cancelling...");
                 doNotCancel.setVisibility(View.GONE);
-                //TODO Firebase
+
+                Order currentOrder = Control.CONTROL.getCurrentOrder();
+
+                //Delete this order from the main orders section in firebase
+                DatabaseReference thisOrderDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("unconfirmed").child(currentOrder.getOrderUIDakaFirebaseDatabaseKey());
+                thisOrderDatabaseReference.removeValue();
+
+                //Add to the cancelled orders section in Firebase
+                DatabaseReference thisOrderCancelledDatabaseReference = FirebaseDatabase.getInstance().getReference().child("orders").child("cancelled").child(Control.CONTROL.getCurrentUser().getFirebaseUid()).child(currentOrder.getOrderUIDakaFirebaseDatabaseKey());
+                thisOrderCancelledDatabaseReference.setValue(currentOrder);
+
+                Intent nextPageIntent = new Intent(CancelOrderActivity.this, CancelConfirmedActivity.class);
+                startActivity(nextPageIntent);
             }
         });
     }

@@ -101,7 +101,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="COMPANY ONE"
+            android:text="Price"
             android:textSize="18sp"/>
 
     </LinearLayout>
@@ -110,31 +110,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Please note that cancellation of an order will result in a refund of 2/3 of the price paid.
-
-Skip points awarded for this order will be removed.
-
-Confirm order cancellation?"
+        android:text="Please note that cancellation of an order will result in a refund of 2/3 of the price paid. Skip points awarded for this order will be removed."
         android:textSize="18sp"/>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm order cancellation?"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
 
     </LinearLayout>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/button_do_not_cancel_cancel_order"
+            android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/greenConfirm"
             android:text="Do not Cancel"/>
 
         <Button
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginLeft="32dp"
             android:id="@+id/button_confirm_cancel_cancel_order"
-            android:layout_marginLeft="8dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:text="Confirm Order Cancellation"/>

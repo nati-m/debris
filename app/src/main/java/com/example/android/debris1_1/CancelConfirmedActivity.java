@@ -6,24 +6,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class HireCongratulationsActivity extends AppCompatActivity {
+public class CancelConfirmedActivity extends AppCompatActivity {
 
     Button toMainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hire_congratulations);
+        setContentView(R.layout.activity_cancel_confirmed);
 
-        toMainMenu = findViewById(R.id.button_to_main_menu_congratulations);
+        toMainMenu = findViewById(R.id.button_to_main_menu_cancel_confirmed);
         toMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextPageIntent = new Intent(HireCongratulationsActivity.this, FrontPageLoggedInActivity.class);
+                Intent nextPageIntent = new Intent(CancelConfirmedActivity.this, FrontPageLoggedInActivity.class);
                 startActivity(nextPageIntent);
             }
         });
     }
+
 
     @Override
     public void onBackPressed() {

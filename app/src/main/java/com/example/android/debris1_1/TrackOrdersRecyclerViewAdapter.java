@@ -129,13 +129,11 @@ public class TrackOrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrderVi
 
         //TODO TIME as well as date
 
-        String collectionTimeAndDate;
+        String collectionTimeAndDate = "Collection: UNSPECIFIED";
         if (currentOrder.getCollectionDateSpecified()) {
             collectionTimeAndDate = "Collection: " + currentOrder.getDateOfSkipCollectionString();
-        } else {
             //remove choose collection date button if it's already chosen
             holder.chooseCollectionDateButton.setVisibility(View.GONE);
-            collectionTimeAndDate = "Collection: UNSPECIFIED";
         }
         holder.collectionTimeAndDate.setText(collectionTimeAndDate);
 
