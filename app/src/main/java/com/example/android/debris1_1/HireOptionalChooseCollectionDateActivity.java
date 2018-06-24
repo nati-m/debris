@@ -82,7 +82,7 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         //Displays this date on the dateDisplayButton.
         calendarWithDateOfSkipCollection = Calendar.getInstance();
         calendarWithDateOfSkipCollection.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
-        calendarWithDateOfSkipCollection.add(Calendar.DATE, 2);
+        calendarWithDateOfSkipCollection.add(Calendar.DATE, 5);
         year = calendarWithDateOfSkipCollection.get(Calendar.YEAR);
         month = calendarWithDateOfSkipCollection.get(Calendar.MONTH);
         day = calendarWithDateOfSkipCollection.get(Calendar.DAY_OF_MONTH);
@@ -204,7 +204,7 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
 
         //The CONTROL feature is a centralised function returning a String that returns dates in the
         //format dd MMM YYYY, e.g. 08 NOV 2018. This makes the date format consistent across the app.
-        dateDisplayButton.setText(Control.CONTROL.getDateAsAStringInFormat08NOV2018(year, month, day));
+        dateDisplayButton.setText(Control.CONTROL.getDateAsAStringInFormat08NOV2018(year, month, day) + "?");
     }
 
     private void resetChooseTimeRecyclerView(){

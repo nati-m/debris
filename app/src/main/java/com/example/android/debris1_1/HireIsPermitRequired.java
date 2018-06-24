@@ -26,6 +26,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
     double permitPrice;
     boolean permitRequired;
     TextView messageAboutPermit;
+    TextView gateWidthMessage;
 
     String messagePermitIsRequired;
     String messagePermitIsNotRequired;
@@ -43,6 +44,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
         permitPrice = 20.00 * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
         messageAboutPermit = findViewById(R.id.permit_message_is_permit_required);
         acceptAndContinue = findViewById(R.id.accept_and_continue_button_hire_permit_required);
+        gateWidthMessage = findViewById(R.id.gate_width_message_is_permit_required);
         String numberOfSkips;
 
         if(Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() == 1){
@@ -86,10 +88,13 @@ public class HireIsPermitRequired extends AppCompatActivity {
                     permitRequiredLinearLayout.setBackgroundColor(getResources().getColor(R.color.cyan));
                     permitRequiredCheckBox.setChecked(true);
                     permitRequired = true;
+                    gateWidthMessage.setVisibility(View.GONE);
+                    permitForXSkips.setVisibility(View.VISIBLE);
+                    price.setVisibility(View.VISIBLE);
                     messageAboutPermit.setText(messagePermitIsRequired);
                     messageAboutPermit.setTextColor(getResources().getColor(R.color.colorPrimary));
                     permitPrice = 20.00 * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
-                    price.setText("£" + permitPrice + "0");
+                    //price.setText("£" + permitPrice + "0"); //This doesn't change now as price TextView is just View.GONE when other button pressed
                 }
             });
 
@@ -100,8 +105,11 @@ public class HireIsPermitRequired extends AppCompatActivity {
                     permitRequiredCheckBox.setChecked(false);
                     permitNotRequiredLinearLayout.setBackgroundColor(getResources().getColor(R.color.cyan));
                     permitNotRequiredCheckBox.setChecked(true);
-                    price.setText("£0");
                     permitRequired = false;
+                    gateWidthMessage.setVisibility(View.VISIBLE);
+                    permitForXSkips.setVisibility(View.GONE);
+                    price.setVisibility(View.GONE);
+                    //price.setText("£0"); //this TextView is now set to View.GONE
                     messageAboutPermit.setText(messagePermitIsNotRequired);
                     messageAboutPermit.setTextColor(getResources().getColor(R.color.greenConfirm));
                     permitPrice = 0;
@@ -113,6 +121,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
             permitNotRequiredLinearLayout.setVisibility(View.GONE);
             price.setText("£0");
             permitRequired = false;
+            permitPrice = 0;
             messageAboutPermit.setTextColor(getResources().getColor(R.color.greenConfirm));
             messageAboutPermit.setText("Luckily, permits are not required for Skip Bags (phew).\n\nPress button below to continue your order.");
         }

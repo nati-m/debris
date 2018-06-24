@@ -32,12 +32,33 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Promo Code:"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:textSize="12sp"
         android:textColor="@color/black"
         android:text="*Please note, this price is for a skip that is picked up within 5 days. Additional charges apply for skips hired for longer periods.
 You may choose your collection date now, or easily do so later, after ordering.
@@ -79,7 +100,8 @@ We will make every attempt to remind you to select a collection date. However, w
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:textColor="@color/black"
-        android:text="We will take a third of the payment when you order, and the outstanding payment upon skip delivery."/>
+        android:textSize="12sp"
+        android:text="We will take one third (33%) of the payment upon order, and the balance payment upon skip collection. We reserve the right to take the extra balance due if any incorrect information has been supplied."/>
 
     <RelativeLayout
         android:layout_width="match_parent"

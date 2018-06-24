@@ -89,6 +89,18 @@
         android:textAlignment="center"
         android:text="As your skip will be placed on a public highway, it is a legal requirement to purchase a permit."/>
 
+    <TextView
+        android:id="@+id/gate_width_message_is_permit_required"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/colorPrimary"
+        android:text="(A gate width of at least 3 METRES is required. If not, our trucks cannot enter your property, and you MUST purchase a permit.)"
+        />
+
 
 
     <RelativeLayout

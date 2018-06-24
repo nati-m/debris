@@ -78,7 +78,7 @@ public class Skip {
             skipTypeString = "Mini Skip (2yd³)";
         }
         else if (skipType == DUMPY_BAG_SMALLEST){
-            skipTypeString = "Dumpy Bag";
+            skipTypeString = "Skip Bag";
         }
         else {
             skipTypeString = "No real size selected";

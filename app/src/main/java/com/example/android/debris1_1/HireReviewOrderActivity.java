@@ -29,7 +29,7 @@ public class HireReviewOrderActivity extends AppCompatActivity {
     TextView VAT;
     TextView permitPrice;
     TextView totalPrice;
-    TextView skipCollectionDateAndTime;
+    //TextView skipCollectionDateAndTime;
     TextView skipPointsNumber;
 
     SimpleDateFormat simpleDateFormat;
@@ -48,7 +48,7 @@ public class HireReviewOrderActivity extends AppCompatActivity {
 
         addressTextView = findViewById(R.id.hire_review_address);
         skipArrivalDateAndTime = findViewById(R.id.skip_arriving_review_order);
-        skipCollectionDateAndTime = findViewById(R.id.skip_collection_review_order);
+        //skipCollectionDateAndTime = findViewById(R.id.skip_collection_review_order);
         skipTypeAndNumberTextView = findViewById(R.id.hire_review_skip_type_and_number);
         totalPrice = findViewById(R.id.total_price_review_order);
         subtotalBeforeVAT = findViewById(R.id.subtotal_minus_VAT_review_order);
@@ -62,13 +62,14 @@ public class HireReviewOrderActivity extends AppCompatActivity {
         String arrival = simpleDateFormat.format(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime()) + ", " + Control.CONTROL.getCurrentOrder().getTimeOfArrival();
         skipArrivalDateAndTime.setText(arrival);
 
-        if(Control.CONTROL.getCurrentOrder().getCollectionDateSpecified()){
-            String collection = simpleDateFormat.format(Control.CONTROL.getCurrentOrder().getDateOfSkipCollection().getTime()) + ", " + Control.CONTROL.getCurrentOrder().getTimeOfCollection();
-            skipCollectionDateAndTime.setText(collection);
-        }
-        else {
-            skipCollectionDateAndTime.setText("NOT SPECIFIED");
-        }
+        //THE USER NO LONGER CAN CHOOSE COLLECTION DATE BEFORE THIS POINT. THIS REMAINS COMMENTED IN CASE IT IS NEEDED AT A LATER DATE
+//        if(Control.CONTROL.getCurrentOrder().getCollectionDateSpecified()){
+//            String collection = simpleDateFormat.format(Control.CONTROL.getCurrentOrder().getDateOfSkipCollection().getTime()) + ", " + Control.CONTROL.getCurrentOrder().getTimeOfCollection();
+//            skipCollectionDateAndTime.setText(collection);
+//        }
+//        else {
+//            skipCollectionDateAndTime.setText("NOT SPECIFIED");
+//        }
 
         String skipTypeAndNumber = Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().size() + " x " + Control.CONTROL.getCurrentOrder().getSkipsOrderedArrayList().get(0).getSkipTypeAsString();
         skipTypeAndNumberTextView.setText(skipTypeAndNumber);
