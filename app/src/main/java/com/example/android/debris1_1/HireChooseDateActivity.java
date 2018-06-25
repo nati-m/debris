@@ -252,7 +252,7 @@ public class HireChooseDateActivity extends AppCompatActivity {
         Control.CONTROL.getCurrentOrder().setDateOfSkipArrival(calenderWithDateOfSkipArrival);
         Control.CONTROL.getCurrentOrder().setTimeOfArrival(selectedTime);
 
-        Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireReviewOrderActivity.class);
+        Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireDriverMessageActivity.class);
         startActivity(nextPageIntent);
 
     }

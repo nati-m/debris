@@ -46,6 +46,9 @@ public class Order {
     private String wasteType;
     private int skipPointsForThisOrder;
     private double surchargeForLongHire;
+    private String messageForDriver;
+    private double cancellationFee;
+
 
     static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
@@ -394,5 +397,20 @@ public class Order {
         this.surchargeForLongHire = surchargeForLongHire;
     }
 
+    public String getMessageForDriver() {
+        return messageForDriver;
+    }
+
+    public void setMessageForDriver(String messageForDriver) {
+        this.messageForDriver = messageForDriver;
+    }
+
+    public double getCancellationFee() {
+        return cancellationFee;
+    }
+
+    public void setCancellationFee(double cancellationFee) {
+        this.cancellationFee = cancellationFee;
+    }
 
 }

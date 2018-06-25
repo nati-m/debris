@@ -115,7 +115,10 @@
         <activity
             android:name=".CollectionDateChosenConfirmAfterTrackOrdersActivity"
             android:label="Collection Date Confirmed" />
-        <activity android:name=".HireDriverMessageActivity"></activity>
+        <activity
+            android:name=".HireDriverMessageActivity"
+            android:label="Add A Message?"
+            />
     </application>
 
 </manifest>

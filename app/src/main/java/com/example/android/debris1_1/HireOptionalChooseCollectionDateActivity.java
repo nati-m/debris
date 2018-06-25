@@ -305,10 +305,10 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         String numberOfDays = "Charge for " + daysApart + " days hired:";
         numberOfDaysHired.setText(numberOfDays);
 
-        String priceForNumberDaysHired = "£" + priceAddedForNumberOfDays + "0";
+        String priceForNumberDaysHired = Control.CONTROL.moneyFormat(priceAddedForNumberOfDays);
         priceForNumberOfDaysHired.setText(priceForNumberDaysHired);
 
-        String totalString = "£" + total + "0";
+        String totalString = Control.CONTROL.moneyFormat(total);
         totalPriceTextView.setText(totalString);
 
         newTotalPrice = total;

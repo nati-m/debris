@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="111 OOO STREET \nHeaton \nNewcastle-upon-Tyne\nTyne and Wear\n NE1 1AA"
+            android:text="111 OOO STREET \nTyne and Wear\n NE1 1AA"
             android:textSize="18sp"/>
 
     </LinearLayout>
@@ -106,12 +106,34 @@
 
     </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Cancellation Fee:"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/cancel_order_cancellation_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="Cancellation Fee"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Please note that cancellation of an order will result in a refund of 2/3 of the price paid. Skip points awarded for this order will be removed."
-        android:textSize="18sp"/>
+        android:text="Please note that cancellation of an order will result in a refund of all funds paid, minus a cancellation fee of 1/9 (11.1%) the full price of the order. Skip points awarded for this order will be removed."
+        android:textSize="12sp"/>
 
         <TextView
             android:layout_marginTop="16dp"

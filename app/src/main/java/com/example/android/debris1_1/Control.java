@@ -152,6 +152,13 @@ public class Control {
         return postcode;
     }
 
+    /*
+    This formats a double into a usual money format, e.g. 23.108 returns £23.11, or 9 returns £9.00
+     */
+    public String moneyFormat(double amount){
+        return "£" + String.format(Locale.UK, "%.2f", amount );
+    }
+
 
 
 }

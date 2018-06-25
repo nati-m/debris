@@ -101,7 +101,8 @@ public class HireHazardousActivity extends AppCompatActivity {
                 {
                     continueButton.setBackgroundColor(getResources().getColor(R.color.softerAmber));
                     checkboxGasCanisters.setChecked(true);
-                    subtotalTextView.setText("£" + subtotal + "0");
+                    String subtotalString = Control.CONTROL.moneyFormat(subtotal);
+                    subtotalTextView.setText(subtotalString);
                     subtotalTextView.setTextColor(getResources().getColor(R.color.black));
                     wasteType.setText("Hazardous");
                     wasteType.setTextColor(getResources().getColor(R.color.black));
@@ -133,8 +134,6 @@ public class HireHazardousActivity extends AppCompatActivity {
 
 
     }
-
-
 
 
     @Override

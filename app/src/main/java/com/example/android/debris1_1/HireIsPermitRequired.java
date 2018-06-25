@@ -76,7 +76,8 @@ public class HireIsPermitRequired extends AppCompatActivity {
         permitNotRequiredLinearLayout = findViewById(R.id.linear_layout_permit_not_required_is_permit_required);
 
         permitPrice = 20.00 * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
-        price.setText("£" + permitPrice + "0");
+        String permitPriceString = Control.CONTROL.moneyFormat(permitPrice);
+        price.setText(permitPriceString);
 
         if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
 

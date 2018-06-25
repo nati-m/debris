@@ -158,7 +158,8 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
 
         whatWasOrdered.setText(numberOfSkips + skipType);
         wasteType.setText(wasteTypeString);
-        subtotalTextView.setText("£" + subtotal + "0");
+        String subtotalString = Control.CONTROL.moneyFormat(subtotal);
+        subtotalTextView.setText(subtotalString);
     }
 
     @Override

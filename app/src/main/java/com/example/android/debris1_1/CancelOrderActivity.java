@@ -19,6 +19,7 @@ public class CancelOrderActivity extends AppCompatActivity {
     TextView arrivalDate;
     TextView address;
     TextView price;
+    TextView cancellationFee;
 
     Button doNotCancel;
     Button confirmOrderCancellation;
@@ -36,6 +37,7 @@ public class CancelOrderActivity extends AppCompatActivity {
         arrivalDate = findViewById(R.id.cancel_order_date_skip_arriving);
         address = findViewById(R.id.cancel_order_address);
         price = findViewById(R.id.cancel_order_price);
+        cancellationFee = findViewById(R.id.cancel_order_cancellation_fee);
 
         doNotCancel = findViewById(R.id.button_do_not_cancel_cancel_order);
         confirmOrderCancellation = findViewById(R.id.button_confirm_cancel_cancel_order);
@@ -52,8 +54,17 @@ public class CancelOrderActivity extends AppCompatActivity {
 
         double totalPriceDouble = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
 
-        String priceString = "£" + totalPriceDouble + "0";
+        String priceString = Control.CONTROL.moneyFormat(totalPriceDouble);
         price.setText(priceString);
+
+        double cancelFee = totalPriceDouble / 9;
+        cancelFee = Math.round(cancelFee * 1.00d); //This rounds the price to 2 decimal places
+        Control.CONTROL.getCurrentOrder().setCancellationFee(cancelFee);
+
+        String cancellationFeeString = Control.CONTROL.moneyFormat(cancelFee);
+        cancellationFee.setText(cancellationFeeString);
+
+
 
         doNotCancel.setOnClickListener(new View.OnClickListener() {
             @Override

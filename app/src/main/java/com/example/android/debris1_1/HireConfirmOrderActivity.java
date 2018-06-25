@@ -25,7 +25,7 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
         goToPaymentButton = findViewById(R.id.button_to_payment_page_confirm_order);
 
         double pricePlusPermit = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
-        String priceString = "£" + pricePlusPermit + "0*";
+        String priceString = Control.CONTROL.moneyFormat(pricePlusPermit) + "*";
         price.setText(priceString);
 
         goToPaymentButton.setOnClickListener(new View.OnClickListener() {

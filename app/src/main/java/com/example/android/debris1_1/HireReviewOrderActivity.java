@@ -76,18 +76,18 @@ public class HireReviewOrderActivity extends AppCompatActivity {
 
 
         double priceMinusVAT = Control.CONTROL.getCurrentOrder().getPrice() * Control.VAT_REMOVAL_PERCENTAGE / 100;
-        priceMinusVAT = Math.round(priceMinusVAT * 1.00d); //This round the price to 2 decimal places
-        String priceMinusVATString = "£" + priceMinusVAT;
+        priceMinusVAT = Math.round(priceMinusVAT * 1.00d); //This rounds the price to 2 decimal places
+        String priceMinusVATString = Control.CONTROL.moneyFormat(priceMinusVAT);
         subtotalBeforeVAT.setText(priceMinusVATString);
 
         double VATdouble = Control.CONTROL.getCurrentOrder().getPrice() - priceMinusVAT;
         VATdouble = Math.round(VATdouble * 1.00d);
-        String VATString = "£" + VATdouble;
+        String VATString = Control.CONTROL.moneyFormat(VATdouble);
         VAT.setText(VATString);
 
         String permitPriceString;
         if(Control.CONTROL.getCurrentOrder().getPermitRequired()){
-            permitPriceString = "£" + Control.CONTROL.getCurrentOrder().getPermitPrice() + "0";
+            permitPriceString = Control.CONTROL.moneyFormat(Control.CONTROL.getCurrentOrder().getPermitPrice());
         } else {
             permitPriceString = "N/A";
         }
@@ -96,7 +96,7 @@ public class HireReviewOrderActivity extends AppCompatActivity {
 
         double totalPriceDouble = Control.CONTROL.getCurrentOrder().getPrice() + Control.CONTROL.getCurrentOrder().getPermitPrice();
 
-        String price = "£" + totalPriceDouble + "0*";
+        String price = Control.CONTROL.moneyFormat(totalPriceDouble) + "*";
         totalPrice.setText(price);
 
         skipPoints = (int) totalPriceDouble;
