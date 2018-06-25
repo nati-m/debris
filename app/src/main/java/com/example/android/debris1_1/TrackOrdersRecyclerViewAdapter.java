@@ -26,6 +26,7 @@ class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickLis
 
     public Button chooseCollectionDateButton;
     public Button cancelOrderButton;
+    public Button editOrderButton;
 
     ItemClickListener itemClickListener;
 
@@ -43,7 +44,7 @@ class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickLis
         paymentAmount = itemView.findViewById(R.id.payment_amount_track_orders_list);
         chooseCollectionDateButton = itemView.findViewById(R.id.choose_collection_date_button_track_orders_list);
         cancelOrderButton = itemView.findViewById(R.id.cancel_order_button_track_orders_list);
-
+        editOrderButton = itemView.findViewById(R.id.edit_order_button_track_orders_list);
         itemView.setOnClickListener(this);
     }
 
@@ -171,7 +172,6 @@ public class TrackOrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrderVi
 
                 Intent nextPageIntent = new Intent(context, ChooseCollectionDateAfterTrackOrdersActivity.class);
                 context.startActivity(nextPageIntent);
-                //TODO check this works
             }
         });
 
@@ -182,7 +182,14 @@ public class TrackOrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrderVi
 
                 Intent nextPageIntent = new Intent(context, CancelOrderActivity.class);
                 context.startActivity(nextPageIntent);
-                //TODO check this works
+            }
+        });
+
+        holder.editOrderButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextPageIntent = new Intent(context, ContactUsActivity.class);
+                context.startActivity(nextPageIntent);
             }
         });
 

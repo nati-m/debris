@@ -118,7 +118,9 @@
         <activity
             android:name=".HireDriverMessageActivity"
             android:label="Add A Message?" />
-        <activity android:name=".ContactUsActivity"></activity>
+        <activity
+            android:name=".ContactUsActivity"
+            android:label="Contact Us"/>
     </application>
 
 </manifest>

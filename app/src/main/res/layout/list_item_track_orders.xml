@@ -76,7 +76,18 @@
                 android:id="@+id/order_id_track_orders_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ORD999999999"/>
+                android:text="ORD999999999999"/>
+
+            <Button
+                android:id="@+id/edit_order_button_track_orders_list"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorAccent"
+                android:text="Edit Order"/>
 
 
         </LinearLayout>
