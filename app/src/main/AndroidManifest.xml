@@ -117,8 +117,8 @@
             android:label="Collection Date Confirmed" />
         <activity
             android:name=".HireDriverMessageActivity"
-            android:label="Add A Message?"
-            />
+            android:label="Add A Message?" />
+        <activity android:name=".ContactUsActivity"></activity>
     </application>
 
 </manifest>

@@ -12,11 +12,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -45,6 +47,7 @@ public class HireHomePageActivity extends AppCompatActivity {
     Button chooseDifferentAddress;
     boolean useDefaultAddress;
     TextView usersAddress;
+    ImageView skipImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class HireHomePageActivity extends AppCompatActivity {
         chooseDifferentAddress = findViewById(R.id.use_different_address_button_hire_home_page);
         useDefaultAddress = true;
         usersAddress = findViewById(R.id.users_address_text_view_hire_home_page);
+        skipImageView = findViewById(R.id.skip_picture_hire_home_page);
 
         //This view disappears unless the user presses a button to select a different address
         selectAddressLinearLayout.setVisibility(View.GONE);
@@ -129,6 +133,18 @@ public class HireHomePageActivity extends AppCompatActivity {
         // attaching data adapter to spinner
         numberOfSkipsWantedSpinner.setAdapter(dateAdapterForNumberOfSkipsWantedSpinner);
         skipSizeSpinner.setAdapter(dataAdapterForSkipSizeSpinner);
+
+        skipSizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateSkipImage();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                //do nothing
+            }
+        });
 
         //Setting a toast for the info button
         ImageButton infoImageButton = (ImageButton) findViewById(R.id.information_image_button_hire_home_page);
@@ -241,6 +257,25 @@ public class HireHomePageActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    /*
+    This checks which option is selected in the Skip Size drop down menu and changes the image of a skip accordingly.
+    It is called when the user selects something from the drop down menu.
+    The images used are from beefysskips.com/skip-sizes/ and should NOT be used in the final version.
+     */
+    public void updateSkipImage(){
+        String skipSizeString = skipSizeSpinner.getSelectedItem().toString();
+        if (skipSizeString == "Maxi Skip (8yd³)") {
+            skipImageView.setImageResource(R.drawable.maxi);
+        } else if (skipSizeString == "Midi Skip (4yd³)") {
+            skipImageView.setImageResource(R.drawable.midi);
+        } else if (skipSizeString == "Mini Skip (2yd³)") {
+            skipImageView.setImageResource(R.drawable.mini);
+        } else if (skipSizeString == "Skip Bag"){
+            skipImageView.setImageResource(R.drawable.skipbag);
+
+        }
     }
 
 

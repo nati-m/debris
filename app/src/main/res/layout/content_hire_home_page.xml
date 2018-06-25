@@ -97,19 +97,27 @@
 
         </LinearLayout>
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="64dp"
-            android:textSize="18sp"
-            android:text=""/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/skip_picture_hire_home_page"
+                android:layout_width="220dp"
+                android:layout_height="120dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/maxi"/>
+
+        </RelativeLayout>
+
+
 
         <LinearLayout
             android:id="@+id/default_user_address_linear_layout_hire_home_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="8dp"
             android:orientation="vertical">
 
             <LinearLayout

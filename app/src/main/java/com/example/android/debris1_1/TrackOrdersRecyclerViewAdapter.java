@@ -143,7 +143,7 @@ public class TrackOrdersRecyclerViewAdapter extends RecyclerView.Adapter<OrderVi
         String orderID = currentOrder.getOrderUIDakaFirebaseDatabaseKey();
         holder.orderID.setText(orderID);
 
-        String price = "£" + currentOrder.getPrice() + "0";
+        String price = Control.CONTROL.moneyFormat(currentOrder.getPrice());
         holder.paymentAmount.setText(price);
 
         holder.chooseCollectionDateButton.setOnClickListener(new View.OnClickListener() {
