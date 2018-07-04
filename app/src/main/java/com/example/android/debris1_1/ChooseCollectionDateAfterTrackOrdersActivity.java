@@ -250,6 +250,10 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
 
     private void resetChooseTimeRecyclerView(){
         times = new ArrayList<>();
+        times.add("Don't mind"); times.add("Morning");
+        if(!isItSaturday(calendarWithDateOfSkipCollection)){
+            times.add("Afternoon");
+        }
         times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
         //if it is not Saturday, three more times are added
         if(!isItSaturday(calendarWithDateOfSkipCollection)) {

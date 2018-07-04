@@ -32,6 +32,15 @@
         android:textColor="@color/black"
         android:layout_margin="16dp"/>
 
+    <TextView
+        android:id="@+id/email_confirmation_text_view_cancel_confirmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Email confirmation has been sent."
+        android:textColor="@color/black"
+        android:layout_margin="16dp"/>
+
 
 
     <RelativeLayout

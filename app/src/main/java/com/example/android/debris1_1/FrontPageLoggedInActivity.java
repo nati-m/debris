@@ -27,6 +27,7 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
     Button toHireSection;
     Button toOrderSection;
     Button toSettings;
+    Button toPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,16 +85,25 @@ public class FrontPageLoggedInActivity extends AppCompatActivity {
             }
         });
 
-
-        //TODO return this to off
-        Button TEMPtoHTTPTest = findViewById(R.id.TEMPBUTTON);
-        TEMPtoHTTPTest.setOnClickListener(new View.OnClickListener() {
+        toPoints = findViewById(R.id.points_button_front_page_logged_in);
+        toPoints.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, HTTPTestActivity.class);
+                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, PointsActivity.class);
                 startActivity(nextPageIntent);
             }
         });
+
+
+//
+//        Button TEMPtoHTTPTest = findViewById(R.id.TEMPBUTTON);
+//        TEMPtoHTTPTest.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent nextPageIntent = new Intent(FrontPageLoggedInActivity.this, HTTPTestActivity.class);
+//                startActivity(nextPageIntent);
+//            }
+//        });
 
     }
 

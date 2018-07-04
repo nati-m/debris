@@ -211,7 +211,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 android:layout_above="@id/button_continue_review_order"
                 android:text="*This figure is based on 1) a pick-up date of 5 days or less. Further charges may be levied for longer hire duration. 2) the contents as described by you. Should the contents differ from your declaration, we reserve the right to make additional charges in accordance with our terms and conditions.
 "/>

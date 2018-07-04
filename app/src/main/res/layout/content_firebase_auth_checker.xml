@@ -12,7 +12,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/test_text_view_firebase_auth_checker"/>
+        android:id="@+id/test_text_view_firebase_auth_checker"
+        android:visibility="invisible"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -61,8 +61,8 @@
         android:textSize="12sp"
         android:textColor="@color/black"
         android:text="*Please note, this price is for a skip that is picked up within 5 days. Additional charges apply for skips hired for longer periods.
-You may choose your collection date now, or easily do so later, after ordering.
-We will make every attempt to remind you to select a collection date. However, we will collect 28 days after the delivery date if we do no hear from you."/>
+You may choose your collection date now, or easily do so later, after ordering. You may keep your skip(s) for up to 28 days.
+We will make every attempt to remind you to select a collection date. However, we will collect 14 days after the delivery date if we do no hear from you."/>
 
     <Button
         android:layout_width="match_parent"

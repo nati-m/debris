@@ -36,6 +36,7 @@ public class UserSettingsActivity extends AppCompatActivity {
     EditText addEmailEditText;
     Button cancelAddEmailButton;
     Button confirmAddEmailButton;
+    Button toHome;
 
     DatabaseReference thisUsersDatabaseReference;
 
@@ -61,6 +62,15 @@ public class UserSettingsActivity extends AppCompatActivity {
         addEmailEditText = findViewById(R.id.enter_new_email_edit_text_settings);
         cancelAddEmailButton = findViewById(R.id.cancel_add_email_button_settings);
         confirmAddEmailButton = findViewById(R.id.confirm_add_email_button_settings);
+//        toHome = findViewById(R.id.back_to_front_page_settings);
+//
+//        toHome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent nextPageIntent = new Intent(UserSettingsActivity.this, FrontPageLoggedInActivity.class);
+//                startActivity(nextPageIntent);
+//            }
+//        });
 
         String uid = Control.CONTROL.getCurrentUser().getFirebaseUid();
         thisUsersDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(uid);

@@ -16,7 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
-        android:text="Track Your Orders"/>
+        android:text="Track Your Orders"
+        android:visibility="invisible"/>
 
 
     <TextView
@@ -37,13 +38,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:layout_toLeftOf="@id/spinner_sort_orders_by_track_orders"
-            android:text="Sort by Date of Skip Arrival:"/>
+            android:text="Sort by Date of Skip Arrival:"
+            android:visibility="gone"/>
 
         <Spinner
             android:id="@+id/spinner_sort_orders_by_track_orders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

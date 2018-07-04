@@ -120,7 +120,8 @@
             android:label="Add A Message?" />
         <activity
             android:name=".ContactUsActivity"
-            android:label="Contact Us"/>
+            android:label="Contact Us" />
+        <activity android:name=".PointsActivity"></activity>
     </application>
 
 </manifest>

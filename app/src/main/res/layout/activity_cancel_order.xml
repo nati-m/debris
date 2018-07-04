@@ -132,7 +132,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="Please note that cancellation of an order will result in a refund of all funds paid, minus a cancellation fee of 1/9 (11.1%) the full price of the order. Skip points awarded for this order will be removed."
+        android:text="Please note that cancellation of an order will result in a refund of all funds paid, minus a cancellation fee of 1/9 of the full price of the order. Skip points awarded for this order will be removed."
         android:textSize="12sp"/>
 
         <TextView
