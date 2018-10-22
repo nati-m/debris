@@ -5,149 +5,161 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
-    <TextView
+    <ScrollView
+        android:id="@+id/scrollView_hire_is_permit_required"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:text="Legally, any skip placed on a public highway/pavement requires a permit from the local council."/>
-
-
-    <LinearLayout
-        android:id="@+id/linear_layout_permit_required_is_permit_required"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cyan"
-        >
-
-        <CheckBox
-            android:id="@+id/check_box_permit_required_is_permit_required"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:clickable="false"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="8dp"
-            android:text="Skip will be placed on public highway or pavement"/>
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear_layout_permit_not_required_is_permit_required"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <CheckBox
-            android:id="@+id/check_box_permit_not_required_is_permit_required"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:clickable="false"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="8dp"
-            android:text="Skip will be placed on private land, e.g. your driveway or garden"/>
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/permit_message_is_permit_required"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:textSize="21sp"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"
-        android:textAlignment="center"
-        android:text="As your skip will be placed on a public highway, it is a legal requirement to purchase a permit."/>
-
-    <TextView
-        android:id="@+id/gate_width_message_is_permit_required"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/colorPrimary"
-        android:text="(A gate width of at least 3 METRES is required. If not, our trucks cannot enter your property, and you MUST purchase a permit.)"
-        />
-
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="16dp">
+        android:layout_height="410dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/accept_and_continue_button_hire_permit_required"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="32dp">
-            <TextView
-                android:id="@+id/permit_for_x_skips_is_permit_required"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:text="Permit for 1 Skip: "/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/permit_price_is_permit_required"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginTop="8dp"
-                android:textSize="18sp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="Legally, any skip placed on a public highway/pavement requires a permit from the local council."
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:text="£20.00"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/linear_layout_permit_required_is_permit_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/cyan">
+
+                <CheckBox
+                    android:id="@+id/check_box_permit_required_is_permit_required"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:clickable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Skip will be placed on public highway or pavement"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_permit_not_required_is_permit_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="8dp">
+
+                <CheckBox
+                    android:id="@+id/check_box_permit_not_required_is_permit_required"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:clickable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Skip will be placed on private land, e.g. your driveway or garden"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/permit_message_is_permit_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="As your skip will be placed on a public highway, it is a legal requirement to purchase a permit."
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/gate_width_message_is_permit_required"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="32dp"
+                android:text="(A gate width of at least 3 METRES is required. If not, our trucks cannot enter your property, and you MUST purchase a permit.)"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/accept_and_continue_button_hire_permit_required"
-            android:background="@color/softerAmber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="64dp"
-            android:layout_centerInParent="true"
-            android:layout_alignParentBottom="true"
-            android:textColor="@color/colorPrimary"
-            android:text="Accept and Continue"/>
+    </ScrollView>
 
-    </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/accept_and_continue_button_hire_permit_required"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/permit_for_x_skips_is_permit_required"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Permit for 1 Skip: "
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/permit_price_is_permit_required"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="£20.00"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+
+
+                <Button
+                    android:id="@+id/accept_and_continue_button_hire_permit_required"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="64dp"
+                    android:background="@color/softerAmber"
+                    android:text="Accept and Continue"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
 
 
 

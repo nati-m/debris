@@ -4,133 +4,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HireSelectSkipContentsActivity"
     android:background="@color/background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".HireSelectSkipContentsActivity">
 
-    <TextView
-        android:id="@+id/skips_will_contain_select_skip_contents"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="I confirm that, unless the switch below is marked as such, my skip will contain none of the following:"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="32dp"
-        android:textSize="18sp"/>
+        android:layout_height="410dp">
 
-    <TextView
-       android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:text="Asbestos, Gas Cannisters, Paints/Chemicals, Fridges or Freezers*"
-        android:textStyle="bold"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:textSize="21sp"/>
-
-    <LinearLayout
-        android:id="@+id/linear_layout_one_or_more_items_present_skip_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cyan"
-        >
-
-        <CheckBox
-            android:id="@+id/check_box_one_or_more_items_present_skip_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:clickable="false"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="8dp"
-            android:text="One or more of these items present"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/skips_will_contain_select_skip_contents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginRight="16dp"
+                android:text="I confirm that, unless the switch below is marked as such, my skip will contain none of the following:"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-    <LinearLayout
-        android:id="@+id/linear_layout_none_of_these_items_present_skip_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Asbestos, Gas Cannisters, Paints/Chemicals, Fridges or Freezers*"
+                android:textColor="@color/colorPrimary"
+                android:textSize="21sp"
+                android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/check_box_none_of_these_items_present_skip_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:clickable="false"/>
+            <LinearLayout
+                android:id="@+id/linear_layout_one_or_more_items_present_skip_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/cyan">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="8dp"
-            android:text="None of these items present"/>
+                <CheckBox
+                    android:id="@+id/check_box_one_or_more_items_present_skip_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:clickable="false" />
 
-    </LinearLayout>
-
-
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:text="(*Don’t panic if it does, we just need this information to keep your order compliant and to get you the right skip provider.)"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="One or more of these items present"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_none_of_these_items_present_skip_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="8dp">
+
+                <CheckBox
+                    android:id="@+id/check_box_none_of_these_items_present_skip_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:clickable="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="None of these items present"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="(*Don’t panic if it does, we just need this information to keep your order compliant and to get you the right skip provider.)"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+
+        </LinearLayout>
+    </ScrollView>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/error_text_view_select_skip_contents"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginLeft="16dp"
-        android:fontFamily="sans-serif-smallcaps"
-        android:text=""/>
+        <TextView
+            android:id="@+id/error_text_view_select_skip_contents"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text=""
+            android:textColor="@color/colorPrimary" />
 
-    <Button
-        android:id="@+id/continue_button_select_skip_contents"
-        android:background="@color/softerAmber"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="64dp"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginBottom="16dp"
-        android:text="Continue"/>
-
+        <Button
+            android:id="@+id/continue_button_select_skip_contents"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="64dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/softerAmber"
+            android:text="Continue"
+            android:textColor="@color/colorPrimary" />
 
 
     </RelativeLayout>
-
 
 
 </LinearLayout>

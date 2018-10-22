@@ -8,6 +8,16 @@
     android:orientation="vertical"
     android:background="@color/background">
 
+    <ScrollView
+        android:id="@+id/scrollView_hire_hazardous"
+        android:layout_width="match_parent"
+        android:layout_height="410dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
     <TextView
         android:id="@+id/message_hazardous"
         android:layout_width="match_parent"
@@ -158,6 +168,9 @@
             android:textColor="@color/colorPrimary"
             android:text="N/A"/>
     </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"

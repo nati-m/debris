@@ -3,8 +3,11 @@
     package="com.example.android.debris1_1">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <!-- To allow the app to access the internet -->
+
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +18,8 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,103 +29,134 @@
         <activity
             android:name=".FrontPageLoggedInActivity"
             android:label="@string/title_activity_front_page_logged_in"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireHomePageActivity"
             android:label="@string/title_activity_hire_home_page"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireReviewOrderActivity"
             android:label="Review Your Order"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TrackOrdersActivity"
             android:label="Track Orders"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".EditOrderActivity"
             android:label="@string/title_activity_edit_order"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LeaveFeedbackActivity"
             android:label="@string/title_activity_leave_feedback"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".HTTPTestActivity" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HTTPTestActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CompanyUserActivities.CompanyHomePageLoggedInActivity"
             android:label="Dashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity android:name=".TestTownActivity" />
         <activity
             android:name=".FirebaseAuthCheckerActivity"
             android:label="Loading User Profile..."
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".FirstTimeUserEnterAddressPostcode"
             android:label="@string/title_activity_first_time_user_enter_address_postcode"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CompanyUserActivities.AllOrdersCompanyViewActivity"
-            android:label="All Orders" />
+            android:label="All Orders"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CompanyUserActivities.TodaysOrdersCompanyViewActivity"
-            android:label="Today&apos;s Orders" />
+            android:label="Today&apos;s Orders"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireSelectSkipContentsActivity"
-            android:label="Select Skip Contents" />
+            android:label="Select Skip Contents"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireSkipArrivalTimeChoosingActivity"
             android:label="@string/title_activity_hire_skip_arrival_time_choosing"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireChooseDateActivity"
-            android:label="Choose Delivery Date / Time" />
+            android:label="Choose Delivery Date / Time"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireIsPermitRequired"
-            android:label="Skip Permits" />
+            android:label="Skip Permits"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireOptionalChooseCollectionDateActivity"
-            android:label="Choose Collection Date / Time" />
+            android:label="Choose Collection Date / Time"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireHazardousActivity"
-            android:label="Hazardous Waste" />
+            android:label="Hazardous Waste"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireNonHazardousOrInertActivity"
-            android:label="Non-Hazardous Waste" />
+            android:label="Non-Hazardous Waste"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireOLDReviewOrderActivity"
-            android:label="Review Order" />
+            android:label="Review Order"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UserSettingsActivity"
-            android:label="Account Settings" />
+            android:label="Account Settings"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireConfirmOrderActivity"
-            android:label="Confirm Order" />
+            android:label="Confirm Order"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HirePaymentActivity"
-            android:label="Payment" />
+            android:label="Payment"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireCongratulationsActivity"
-            android:label="Congratulations!!!" />
+            android:label="Congratulations!!!"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ChooseCollectionDateAfterTrackOrdersActivity"
-            android:label="Choose Collection Date / Time" />
+            android:label="Choose Collection Date / Time"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CancelOrderActivity"
-            android:label="Cancel Your Order?" />
+            android:label="Cancel Your Order?"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CancelConfirmedActivity"
-            android:label="Order Cancelled" />
+            android:label="Order Cancelled"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".CollectionDateChosenConfirmAfterTrackOrdersActivity"
-            android:label="Collection Date Confirmed" />
+            android:label="Collection Date Confirmed"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HireDriverMessageActivity"
-            android:label="Add A Message?" />
+            android:label="Add A Message?"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ContactUsActivity"
-            android:label="Contact Us" />
-        <activity android:name=".PointsActivity"></activity>
+            android:label="Contact Us"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".PointsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

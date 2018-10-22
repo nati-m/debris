@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -33,6 +34,8 @@ public class HireIsPermitRequired extends AppCompatActivity {
 
     Button acceptAndContinue;
 
+    ScrollView scrollView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +49,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
         acceptAndContinue = findViewById(R.id.accept_and_continue_button_hire_permit_required);
         gateWidthMessage = findViewById(R.id.gate_width_message_is_permit_required);
         String numberOfSkips;
+        scrollView = findViewById(R.id.scrollView_hire_is_permit_required);
 
         if(Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() == 1){
             numberOfSkips = "Permit for 1 Skip: ";
@@ -95,6 +99,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
                     messageAboutPermit.setText(messagePermitIsRequired);
                     messageAboutPermit.setTextColor(getResources().getColor(R.color.colorPrimary));
                     permitPrice = 20.00 * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
+                    focusScrollViewToBottom();
                     //price.setText("£" + permitPrice + "0"); //This doesn't change now as price TextView is just View.GONE when other button pressed
                 }
             });
@@ -114,6 +119,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
                     messageAboutPermit.setText(messagePermitIsNotRequired);
                     messageAboutPermit.setTextColor(getResources().getColor(R.color.greenConfirm));
                     permitPrice = 0;
+                    focusScrollViewToBottom();
                 }
             });
 
@@ -139,6 +145,22 @@ public class HireIsPermitRequired extends AppCompatActivity {
             }
         });
     }
+
+    /*
+    This means that, when text is added or taken away from the page, it will be in focus at the bottom of the ScrollView
+    which comprises all of the page except the button at the bottom.
+     */
+    private void focusScrollViewToBottom(){
+
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
+    
 
 
 

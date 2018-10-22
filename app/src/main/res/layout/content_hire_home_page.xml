@@ -73,7 +73,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginLeft="32dp"
                 android:textSize="18sp"
-                android:text="Size"
+                android:text="What Size?"
                 android:layout_weight="1" />
 
             <Spinner

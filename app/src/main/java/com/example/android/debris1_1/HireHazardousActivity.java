@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -30,6 +31,8 @@ public class HireHazardousActivity extends AppCompatActivity {
     TextView messageHazardous;
     TextView messageConfirmNoGasCanisters;
 
+    ScrollView scrollView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,7 @@ public class HireHazardousActivity extends AppCompatActivity {
         subtotalTextView = findViewById(R.id.subtotal_text_view_hazardous);
         messageHazardous = findViewById(R.id.message_hazardous);
         messageConfirmNoGasCanisters = findViewById(R.id.confirm_no_gas_canisters_text_view_hazardous);
+        scrollView = findViewById(R.id.scrollView_hire_hazardous);
 
         String message; String confirmNoGas;
         if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
@@ -95,6 +99,7 @@ public class HireHazardousActivity extends AppCompatActivity {
                     wasteType.setText("Illegal");
                     wasteType.setTextColor(getResources().getColor(R.color.colorPrimary));
                     gasCanistersLinearLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    focusScrollViewToBottom();
                     isIllegal = true;
                 }
                 else
@@ -107,6 +112,7 @@ public class HireHazardousActivity extends AppCompatActivity {
                     wasteType.setText("Hazardous");
                     wasteType.setTextColor(getResources().getColor(R.color.black));
                     gasCanistersLinearLayout.setBackgroundColor(getResources().getColor(R.color.cyan));
+                    focusScrollViewToBottom();
                     isIllegal = false;
                 }
             }
@@ -133,6 +139,21 @@ public class HireHazardousActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    /*
+    This means that, when text is added or taken away from the page, it will be in focus at the bottom of the ScrollView
+    which comprises all of the page except the button at the bottom.
+     */
+    private void focusScrollViewToBottom(){
+
+        scrollView.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
     }
 
 
