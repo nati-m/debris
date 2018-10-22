@@ -99,7 +99,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
                     messageAboutPermit.setText(messagePermitIsRequired);
                     messageAboutPermit.setTextColor(getResources().getColor(R.color.colorPrimary));
                     permitPrice = 20.00 * Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered();
-                    focusScrollViewToBottom();
+                    Control.CONTROL.focusScrollViewToBottom(scrollView);
                     //price.setText("£" + permitPrice + "0"); //This doesn't change now as price TextView is just View.GONE when other button pressed
                 }
             });
@@ -119,7 +119,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
                     messageAboutPermit.setText(messagePermitIsNotRequired);
                     messageAboutPermit.setTextColor(getResources().getColor(R.color.greenConfirm));
                     permitPrice = 0;
-                    focusScrollViewToBottom();
+                    Control.CONTROL.focusScrollViewToBottom(scrollView);
                 }
             });
 
@@ -145,25 +145,6 @@ public class HireIsPermitRequired extends AppCompatActivity {
             }
         });
     }
-
-    /*
-    This means that, when text is added or taken away from the page, it will be in focus at the bottom of the ScrollView
-    which comprises all of the page except the button at the bottom.
-     */
-    private void focusScrollViewToBottom(){
-
-        scrollView.post(new Runnable() {
-            @Override
-            public void run() {
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-            }
-        });
-    }
-
-    
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

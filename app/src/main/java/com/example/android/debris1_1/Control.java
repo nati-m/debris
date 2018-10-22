@@ -1,5 +1,7 @@
 package com.example.android.debris1_1;
 
+import android.widget.ScrollView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
@@ -158,6 +160,23 @@ public class Control {
     public String moneyFormat(double amount){
         return "£" + String.format(Locale.UK, "%.2f", amount );
     }
+
+    /*
+   When called this function scrolls to the bottom of the ScrollView added as an argument.
+   It is used when text is added to (or taken away from) a page, it will be in focus at the bottom of the ScrollView
+    */
+    protected void focusScrollViewToBottom(ScrollView scrollView){
+
+        final ScrollView scrollView1 = scrollView;
+
+        scrollView1.post(new Runnable() {
+            @Override
+            public void run() {
+                scrollView1.fullScroll(ScrollView.FOCUS_DOWN);
+            }
+        });
+    }
+
 
 
 

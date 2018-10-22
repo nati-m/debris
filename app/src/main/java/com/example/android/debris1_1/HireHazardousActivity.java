@@ -99,7 +99,7 @@ public class HireHazardousActivity extends AppCompatActivity {
                     wasteType.setText("Illegal");
                     wasteType.setTextColor(getResources().getColor(R.color.colorPrimary));
                     gasCanistersLinearLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                    focusScrollViewToBottom();
+                    Control.CONTROL.focusScrollViewToBottom(scrollView);
                     isIllegal = true;
                 }
                 else
@@ -112,7 +112,7 @@ public class HireHazardousActivity extends AppCompatActivity {
                     wasteType.setText("Hazardous");
                     wasteType.setTextColor(getResources().getColor(R.color.black));
                     gasCanistersLinearLayout.setBackgroundColor(getResources().getColor(R.color.cyan));
-                    focusScrollViewToBottom();
+                    Control.CONTROL.focusScrollViewToBottom(scrollView);
                     isIllegal = false;
                 }
             }
@@ -142,19 +142,6 @@ public class HireHazardousActivity extends AppCompatActivity {
     }
 
 
-    /*
-    This means that, when text is added or taken away from the page, it will be in focus at the bottom of the ScrollView
-    which comprises all of the page except the button at the bottom.
-     */
-    private void focusScrollViewToBottom(){
-
-        scrollView.post(new Runnable() {
-            @Override
-            public void run() {
-                scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-            }
-        });
-    }
 
 
     @Override

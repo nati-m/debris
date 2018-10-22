@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -27,7 +28,7 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
     TextView whatWasOrdered;
     TextView wasteType;
     TextView subtotalTextView;
-
+    ScrollView scrollView;
     double subtotal;
 
     @Override
@@ -48,6 +49,7 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
         isInert = false;
         String message;
         String otherGeneralWaste;
+        scrollView = findViewById(R.id.scrollView_hire_non_hazardous);
 
         if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
             if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
@@ -79,6 +81,7 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
                 checkBoxOnlyInertItems.setChecked(false);
                 isInert = false;
                 workOutAndDisplaySubtotal();
+                Control.CONTROL.focusScrollViewToBottom(scrollView);
             }
         });
 
@@ -91,6 +94,7 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
                 checkBoxOnlyInertItems.setChecked(true);
                 isInert = true;
                 workOutAndDisplaySubtotal();
+                Control.CONTROL.focusScrollViewToBottom(scrollView);
             }
         });
 

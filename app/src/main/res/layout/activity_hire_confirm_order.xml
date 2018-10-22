@@ -8,6 +8,8 @@
     android:background="@color/background"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,6 +54,15 @@
 
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="260dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,34 +75,41 @@
 You may choose your collection date now, or easily do so later, after ordering. You may keep your skip(s) for up to 28 days.
 We will make every attempt to remind you to select a collection date. However, we will collect 14 days after the delivery date if we do no hear from you."/>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content">
+
+        <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorAccent"
         android:text="Read the terms and conditions here"/>
 
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp">
-
-        <CheckBox
-            android:id="@+id/terms_and_conditions_check_box_confirm_order"
-            android:layout_width="wrap_content"
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:checked="true"/>
+            android:layout_width="match_parent"
+            android:layout_marginLeft="4dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="I have read and accept the Terms and Conditions"/>
+            <CheckBox
+                android:id="@+id/terms_and_conditions_check_box_confirm_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:checked="true"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                android:text="I have read and accept the Terms and Conditions"/>
+
+        </LinearLayout>
     </LinearLayout>
+
 
     <TextView
         android:layout_width="match_parent"
@@ -102,6 +120,9 @@ We will make every attempt to remind you to select a collection date. However, w
         android:textColor="@color/black"
         android:textSize="12sp"
         android:text="We will take one third (33%) of the payment upon order, and the balance payment upon skip collection. We reserve the right to take the extra balance due if any incorrect information has been supplied."/>
+
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
