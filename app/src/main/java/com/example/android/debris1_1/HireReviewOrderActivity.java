@@ -75,8 +75,8 @@ public class HireReviewOrderActivity extends AppCompatActivity {
         skipTypeAndNumberTextView.setText(skipTypeAndNumber);
 
 
-        double priceMinusVAT = Control.CONTROL.getCurrentOrder().getPrice() * Control.VAT_REMOVAL_PERCENTAGE / 100;
-        priceMinusVAT = Math.round(priceMinusVAT * 1.00d); //This rounds the price to 2 decimal places
+        double priceMinusVAT = Control.CONTROL.removeVAT(Control.CONTROL.getCurrentOrder().getPrice());
+
         String priceMinusVATString = Control.CONTROL.moneyFormat(priceMinusVAT);
         subtotalBeforeVAT.setText(priceMinusVATString);
 

@@ -104,6 +104,7 @@ We will make every attempt to remind you to select a collection date. However, w
                 android:layout_width="wrap_content"
                 android:layout_height="70dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
                 android:textColor="@color/black"
                 android:text="I have read and accept the Terms and Conditions"/>
 

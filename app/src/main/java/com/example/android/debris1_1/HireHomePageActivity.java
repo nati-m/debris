@@ -267,11 +267,11 @@ public class HireHomePageActivity extends AppCompatActivity {
     public void updateSkipImage(){
         String skipSizeString = skipSizeSpinner.getSelectedItem().toString();
         if (skipSizeString == "Maxi Skip (8yd³)") {
-            skipImageView.setImageResource(R.drawable.maxi);
+            skipImageView.setImageResource(R.drawable.skip8yds);
         } else if (skipSizeString == "Midi Skip (4yd³)") {
-            skipImageView.setImageResource(R.drawable.midi);
+            skipImageView.setImageResource(R.drawable.skip4yds);
         } else if (skipSizeString == "Mini Skip (2yd³)") {
-            skipImageView.setImageResource(R.drawable.mini);
+            skipImageView.setImageResource(R.drawable.skip2yds);
         } else if (skipSizeString == "Skip Bag"){
             skipImageView.setImageResource(R.drawable.skipbag);
 

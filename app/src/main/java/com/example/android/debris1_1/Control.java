@@ -64,6 +64,17 @@ public class Control {
         currentOrder = order;
     }
 
+    /*
+    This method removes the VAT from a double amount.
+    The VAT_REMOVAL_PERCENTAGE in Control must be changed manually if VAT is no longer 20%.
+    It also rounds the answer to two decimal places.
+     */
+    protected double removeVAT(double fromThisDouble){
+        fromThisDouble = fromThisDouble * Control.VAT_REMOVAL_PERCENTAGE / 100;
+        fromThisDouble = Math.round(fromThisDouble * 1.00d); //This rounds the price to 2 decimal places
+        return fromThisDouble;
+    }
+
 
     public ArrayList<Order> getOrdersFromThisUser() {
         return currentUser.getThisUsersOrders();
@@ -125,6 +136,10 @@ public class Control {
         return calendar;
     }
 
+    /*
+    This changes the format of a postcode String into an upper case postcode with a space in the correct
+    place and no space at the end.
+     */
     protected String formatPostcode(String postcode){
         //CHANGE THE FORMAT OF POSTCODE TO UPPER CASE AND WITH A SPACE IN THE MIDDLE
         postcode = postcode.toUpperCase(); //sets the postcode to upper case
