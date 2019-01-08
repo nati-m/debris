@@ -121,6 +121,7 @@ public class HireHomePageActivity extends AppCompatActivity {
         skipSizeSpinnerCategories.add("Midi Skip (4yd³)");
         skipSizeSpinnerCategories.add("Mini Skip (2yd³)");
         skipSizeSpinnerCategories.add("Skip Bag");
+        skipSizeSpinnerCategories.add("Wo/Man With a Van");
 
         // Creating adapters for spinner
         ArrayAdapter<Integer> dateAdapterForNumberOfSkipsWantedSpinner = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_item, numberOfSkipsWantedSpinnerCategories);
@@ -236,6 +237,8 @@ public class HireHomePageActivity extends AppCompatActivity {
                 skip = Skip.MINI_SKIP;
             } else if (skipSizeString == "Skip Bag"){
                 skip = Skip.DUMPY_BAG;
+            } else if (skipSizeString == "Wo/Man With a Van"){
+                skip = Skip.WO_MAN_WITH_VAN;
             }
 
             for(int i = 0; i < numberOfSkipsInt; i++){
@@ -274,7 +277,8 @@ public class HireHomePageActivity extends AppCompatActivity {
             skipImageView.setImageResource(R.drawable.skip2yds);
         } else if (skipSizeString == "Skip Bag"){
             skipImageView.setImageResource(R.drawable.skipbag);
-
+        } else if (skipSizeString == "Wo/Man With a Van"){
+            skipImageView.setImageResource(R.drawable.van);
         }
     }
 

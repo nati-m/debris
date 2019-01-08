@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * There are only 4 instances of Skip: MAXI_SKIP, MIDI_SKIP, MINI_SKIP and DUMPY_BAG.
+ * There are only 5 instances of Skip: MAXI_SKIP, MIDI_SKIP, MINI_SKIP, DUMPY_BAG and
+ * WO_MAN_WITH_VAN. The final one represents a "wo/man with a van", the others skip types.
+ * These are the 5 options a user can purchase.
  * These can be accessed by static methods with their specific names, or by the static method
  * getSkipByIntSize, which allows a Skip object to be returned depending on size specified.
  * There are static size ints for each Skip size which should be used to this end.
@@ -20,8 +22,9 @@ public class Skip {
     public static final int MIDI_SKIP_4YD = 4;
     public static final int MINI_SKIP_2YD = 2;
     public static final int DUMPY_BAG_SMALLEST = 1;
+    public static final int WO_MAN_WITH_VAN_INT = 100;
 
-    //There are only 4 instances of Skip, and they can't be edited.
+    //There are only 5 instances of Skip, and they can't be edited.
     //Every ArrayList of Skips will contain only copies of these objects.
     //This avoids unnecessary memory use and the possibility to initialise a Skip Object
     //with an incompatible size.
@@ -29,6 +32,7 @@ public class Skip {
     public static final Skip MIDI_SKIP = new Skip(MIDI_SKIP_4YD);
     public static final Skip MINI_SKIP = new Skip(MINI_SKIP_2YD);
     public static final Skip DUMPY_BAG = new Skip(DUMPY_BAG_SMALLEST);
+    public static final Skip WO_MAN_WITH_VAN = new Skip(WO_MAN_WITH_VAN_INT);
 
     private Skip (int skipType8Maxi4Midi2Mini1DumpyBag){
         skipType = skipType8Maxi4Midi2Mini1DumpyBag;
@@ -47,6 +51,9 @@ public class Skip {
         }
         else if (skipType == DUMPY_BAG_SMALLEST){
             return DUMPY_BAG;
+        }
+        else if (skipType == WO_MAN_WITH_VAN_INT){
+            return WO_MAN_WITH_VAN;
         }
         return null;
     }
@@ -67,6 +74,8 @@ public class Skip {
         return DUMPY_BAG;
     }
 
+    public static Skip getWoManWithVan() {return WO_MAN_WITH_VAN;}
+
     public void setSkipTypeStringFromIntType(){
         if (skipType == MAXI_SKIP_8YD){
             skipTypeString = "Maxi Skip (8yd³)";
@@ -79,6 +88,9 @@ public class Skip {
         }
         else if (skipType == DUMPY_BAG_SMALLEST){
             skipTypeString = "Skip Bag";
+        }
+        else if (skipType == WO_MAN_WITH_VAN_INT){
+            skipTypeString = "Wo/Man with a Van";
         }
         else {
             skipTypeString = "No real size selected";
@@ -101,6 +113,9 @@ public class Skip {
         }
         if (skipType == DUMPY_BAG_SMALLEST){
             return "SKIPBAG";
+        }
+        if (skipType == WO_MAN_WITH_VAN_INT){
+            return "VAN";
         }
         return "No real size selected";
     }
