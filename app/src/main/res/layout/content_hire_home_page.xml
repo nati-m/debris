@@ -50,6 +50,7 @@
                 />
 
             <TextView
+                android:id="@+id/skips_or_vans_hire_home_page"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"

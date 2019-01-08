@@ -27,6 +27,7 @@ public class HireSelectSkipContentsActivity extends AppCompatActivity {
     CheckBox checkBoxOneOrMorePresent;
 
     TextView skipWillContain;
+    TextView dontPanic;
 
     Button continueButton;
 
@@ -44,21 +45,30 @@ public class HireSelectSkipContentsActivity extends AppCompatActivity {
         checkBoxOneOrMorePresent = findViewById(R.id.check_box_one_or_more_items_present_skip_content);
 
         skipWillContain = findViewById(R.id.skips_will_contain_select_skip_contents);
+        dontPanic = findViewById(R.id.dont_panic_skip_contents);
 
         continueButton = findViewById(R.id.continue_button_select_skip_contents);
 
-        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
+        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG && Control.CONTROL.getCurrentOrder().getSkipType() != Skip.WO_MAN_WITH_VAN) {
             if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
                 skipWillContain.setText("I confirm that, unless the switch below is marked as such, my skips will contain none of the following:");
             } else {
                 skipWillContain.setText("I confirm that, unless the switch below is marked as such, my skip will contain none of the following:");
             }
-        } else {
+        } else if (Control.CONTROL.getCurrentOrder().getSkipType() == Skip.DUMPY_BAG){
             if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
                 skipWillContain.setText("I confirm that, unless the switch below is marked as such, my skip bags will contain none of the following:");
             } else {
                 skipWillContain.setText("I confirm that, unless the switch below is marked as such, my skip bag will contain none of the following:");
             }
+        }
+        else { //This means it's a van, and the don't panic footnote wording is changed too
+            if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
+                skipWillContain.setText("I confirm that, unless the switch below is marked as such, my filled vans will contain none of the following:");
+            } else {
+                skipWillContain.setText("I confirm that, unless the switch below is marked as such, my filled van will contain none of the following:");
+            }
+            dontPanic.setText("(*Don’t panic if it does, we just need this information to keep your order compliant and to get you the right van provider.)");
         }
 
         continueButton.setOnClickListener(new View.OnClickListener() {

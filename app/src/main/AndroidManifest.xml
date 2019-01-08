@@ -84,7 +84,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".HireSelectSkipContentsActivity"
-            android:label="Select Skip Contents"
+            android:label="Select Contents"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".HireSkipArrivalTimeChoosingActivity"

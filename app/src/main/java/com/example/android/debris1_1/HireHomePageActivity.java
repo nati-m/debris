@@ -41,13 +41,14 @@ public class HireHomePageActivity extends AppCompatActivity {
     Spinner skipSizeSpinner;
     ArrayList<Integer> numberOfSkipsWantedSpinnerCategories;
     ArrayList<String> skipSizeSpinnerCategories;
-
+    Button getASkip;
     LinearLayout usersAddressLinearLayout;
     LinearLayout selectAddressLinearLayout;
     Button chooseDifferentAddress;
     boolean useDefaultAddress;
     TextView usersAddress;
     ImageView skipImageView;
+    TextView skipsOrVans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +60,14 @@ public class HireHomePageActivity extends AppCompatActivity {
         enterAddressLine1 = findViewById(R.id.enter_address_line_1_hire_home_page);
         enterAddressLine2 = findViewById(R.id.enter_address_line_2_hire_home_page);
         enterPostcode =  findViewById(R.id.enter_postcode_hire_home_page);
-
+        getASkip = (Button) findViewById(R.id.button_get_a_skip);
         usersAddressLinearLayout = findViewById(R.id.default_user_address_linear_layout_hire_home_page);
         selectAddressLinearLayout = findViewById(R.id.choose_new_address_linear_layout_hire_home_page);
         chooseDifferentAddress = findViewById(R.id.use_different_address_button_hire_home_page);
         useDefaultAddress = true;
         usersAddress = findViewById(R.id.users_address_text_view_hire_home_page);
         skipImageView = findViewById(R.id.skip_picture_hire_home_page);
+        skipsOrVans = findViewById(R.id.skips_or_vans_hire_home_page);
 
         //This view disappears unless the user presses a button to select a different address
         selectAddressLinearLayout.setVisibility(View.GONE);
@@ -96,7 +98,6 @@ public class HireHomePageActivity extends AppCompatActivity {
         //Sets the button Get A Skip's form entry parameters. Errors will be displayed if
         //address line 1 or postcode are blank, or if the entered text is invalid.
         // TODO Make the postcode checker
-        Button getASkip = (Button) findViewById(R.id.button_get_a_skip);
         getASkip.setOnClickListener(new View.OnClickListener() {
             @Override
             //This code will be run when the button is clicked on.
@@ -265,20 +266,30 @@ public class HireHomePageActivity extends AppCompatActivity {
     /*
     This checks which option is selected in the Skip Size drop down menu and changes the image of a skip accordingly.
     It is called when the user selects something from the drop down menu.
-    The images used are from beefysskips.com/skip-sizes/ and should NOT be used in the final version.
+    It also changes the wording of some of the page if the van is selected.
      */
     public void updateSkipImage(){
         String skipSizeString = skipSizeSpinner.getSelectedItem().toString();
         if (skipSizeString == "Maxi Skip (8yd³)") {
             skipImageView.setImageResource(R.drawable.skip8yds);
+            skipsOrVans.setText("Skip(s)");
+            getASkip.setText("GET A SKIP!");
         } else if (skipSizeString == "Midi Skip (4yd³)") {
             skipImageView.setImageResource(R.drawable.skip4yds);
+            skipsOrVans.setText("Skip(s)");
+            getASkip.setText("GET A SKIP!");
         } else if (skipSizeString == "Mini Skip (2yd³)") {
             skipImageView.setImageResource(R.drawable.skip2yds);
+            skipsOrVans.setText("Skip(s)");
+            getASkip.setText("GET A SKIP!");
         } else if (skipSizeString == "Skip Bag"){
             skipImageView.setImageResource(R.drawable.skipbag);
+            skipsOrVans.setText("Skip Bag(s)");
+            getASkip.setText("GET A SKIP!");
         } else if (skipSizeString == "Wo/Man With a Van"){
             skipImageView.setImageResource(R.drawable.van);
+            skipsOrVans.setText("Van(s)");
+            getASkip.setText("GET A VAN!");
         }
     }
 
