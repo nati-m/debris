@@ -51,6 +51,10 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
             }
         });
 
+        if (Control.CONTROL.getCurrentOrder().getSkipType() == Skip.WO_MAN_WITH_VAN){
+            chooseCollectionDateButton.setVisibility(View.GONE);
+        }
+
 
     }
 }

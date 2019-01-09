@@ -62,17 +62,24 @@ public class HireIsPermitRequired extends AppCompatActivity {
             messagePermitIsNotRequired = "As your skips will be placed on private land, a permit is not required.";
         }
 
-        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
-            permitForXSkips.setText(numberOfSkips);
+        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG && Control.CONTROL.getCurrentOrder().getSkipType() != Skip.WO_MAN_WITH_VAN) {
             messageAboutPermit.setText(messagePermitIsRequired);
-        } else {
+        } else if(Control.CONTROL.getCurrentOrder().getSkipType() == Skip.DUMPY_BAG) {
             if(Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() == 1){
                 numberOfSkips = "Permit for 1 Skip Bag: ";
             } else {
                 numberOfSkips = "Permits for "  + Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() + " Skip Bags: ";
             }
-            permitForXSkips.setText(numberOfSkips);
+
+        } else {
+            if(Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() == 1){
+                numberOfSkips = "Permit for 1 Van: ";
+            } else {
+                numberOfSkips = "Permits for "  + Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() + " Vans: ";
+            }
         }
+        permitForXSkips.setText(numberOfSkips);
+
 
         permitRequiredCheckBox = findViewById(R.id.check_box_permit_required_is_permit_required);
         permitRequiredLinearLayout = findViewById(R.id.linear_layout_permit_required_is_permit_required);
@@ -83,7 +90,7 @@ public class HireIsPermitRequired extends AppCompatActivity {
         String permitPriceString = Control.CONTROL.moneyFormat(permitPrice);
         price.setText(permitPriceString);
 
-        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
+        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG && Control.CONTROL.getCurrentOrder().getSkipType() != Skip.WO_MAN_WITH_VAN) {
 
             permitRequiredLinearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,7 +137,11 @@ public class HireIsPermitRequired extends AppCompatActivity {
             permitRequired = false;
             permitPrice = 0;
             messageAboutPermit.setTextColor(getResources().getColor(R.color.greenConfirm));
-            messageAboutPermit.setText("Luckily, permits are not required for Skip Bags (phew).\n\nPress button below to continue your order.");
+            if (Control.CONTROL.getCurrentOrder().getSkipType() == Skip.DUMPY_BAG) {
+                messageAboutPermit.setText("Luckily, permits are not required for Skip Bags (phew).\n\nPress button below to continue your order.");
+            } else {
+                messageAboutPermit.setText("Luckily, permits are not required for Vans (phew).\n\nPress button below to continue your order.");
+            }
         }
 
         acceptAndContinue.setOnClickListener(new View.OnClickListener() {

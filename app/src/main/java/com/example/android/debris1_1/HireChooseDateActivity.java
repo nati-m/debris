@@ -68,8 +68,12 @@ public class HireChooseDateActivity extends AppCompatActivity {
 
         //Set date to default 5 days after the current date on both the  date display button
         //and the calendarWithDateOfSkipArrival variable, which is the one the user edits for their order.
+        //If 5 days after the current date is a Sunday, another day is added to make it Monday.
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, 5);
+        if(isItSunday(calendar)){
+            calendar.add(Calendar.DATE, 1);
+        }
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH);
         day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -102,7 +106,22 @@ public class HireChooseDateActivity extends AppCompatActivity {
         return false;
     }
 
+    private boolean isItSunday(Calendar calendar){
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        //Sunday has the static value of 1, so dayOfWeek will equal Calendar.SATURDAY if Calender.DAY_OF_WEEK returned 7
+        if (dayOfWeek == Calendar.SUNDAY){
+            return true;
+        }
+        return false;
+    }
+
     private void updateSkipArrivingTextView(){
+
+        if(isItSunday(calenderWithDateOfSkipArrival)){
+            skipArrivingTextView.setText("Sundays are not allowed. Please choose again.");
+            return;
+        }
+
         String message = "Arriving " + dayOfWeekIncludingSimpleDateFormat.format(calenderWithDateOfSkipArrival.getTime()) + ",";
 
         if (selectedTime.isEmpty()){
@@ -198,16 +217,30 @@ public class HireChooseDateActivity extends AppCompatActivity {
 
     private void resetChooseTimeRecyclerView(){
         times = new ArrayList<>();
-        times.add("Don't mind"); times.add("Morning");
-        if(!isItSaturday(calenderWithDateOfSkipArrival)){
-            times.add("Afternoon");
-        }
-        times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
-        //if it is not Saturday, three more times are added
-        if(!isItSaturday(calenderWithDateOfSkipArrival)) {
-            times.add("1pm-3pm");
-            times.add("2pm-4pm");
-            times.add("3pm-5pm");
+
+        if(!isItSunday(calenderWithDateOfSkipArrival)) {
+
+
+
+            times.add("Don't mind");
+            times.add("Morning");
+            if (!isItSaturday(calenderWithDateOfSkipArrival)) {
+                times.add("Afternoon");
+            }
+            times.add("8am-10am");
+            times.add("9am-11am");
+            times.add("10am-12pm");
+            times.add("11am-1pm");
+            times.add("12pm-2pm");
+            //if it is not Saturday, three more times are added
+            if (!isItSaturday(calenderWithDateOfSkipArrival)) {
+                times.add("1pm-3pm");
+                times.add("2pm-4pm");
+                times.add("3pm-5pm");
+            }
+
+        } else {
+            times.add("Sunday is not allowed.");
         }
 
         chooseTimeArrayAdapter = new ChooseTimeArrayAdapter(times, this);
@@ -243,6 +276,12 @@ public class HireChooseDateActivity extends AppCompatActivity {
     private void attemptContinue(){
 
         skipArrivingTextView.setError(null);
+
+        if(isItSunday(calenderWithDateOfSkipArrival)){
+            Snackbar.make(skipArrivingTextView, "Sundays are not allowed.", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+            return;
+        }
 
         if(selectedTime.isEmpty()){
             skipArrivingTextView.setError("Time choice required!");

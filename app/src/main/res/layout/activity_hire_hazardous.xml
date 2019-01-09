@@ -49,7 +49,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:textStyle="bold"
-        android:text="Furthermore, it is ILLEGAL to dispose of Gas Canisters in a skip."/>
+        android:text="Furthermore, it is ILLEGAL to dispose of Gas Canisters in a skip or hired van."/>
 
     <TextView
         android:id="@+id/confirm_no_gas_canisters_text_view_hazardous"

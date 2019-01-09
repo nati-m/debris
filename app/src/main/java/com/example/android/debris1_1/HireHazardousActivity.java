@@ -50,7 +50,7 @@ public class HireHazardousActivity extends AppCompatActivity {
         scrollView = findViewById(R.id.scrollView_hire_hazardous);
 
         String message; String confirmNoGas;
-        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
+        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG && Control.CONTROL.getCurrentOrder().getSkipType() != Skip.WO_MAN_WITH_VAN ) {
             if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
                 message = "Your skips contain hazardous waste.";
                 confirmNoGas = "Confirm below that your skips will not contain Gas Canisters / Bottles:";
@@ -58,12 +58,20 @@ public class HireHazardousActivity extends AppCompatActivity {
                 message = "Your skip contains hazardous waste.";
                 confirmNoGas = "Confirm below that your skip will not contain Gas Canisters / Bottles:";
             }
-        } else {
+        } else if(Control.CONTROL.getCurrentOrder().getSkipType() == Skip.DUMPY_BAG){
             if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
                 message = "Your skip bags contain hazardous waste.";
                 confirmNoGas = "Confirm below that your skip bags will not contain Gas Canisters / Bottles:";
             } else {
                 message = "Your skip bag contains hazardous waste.";
+                confirmNoGas = "Confirm below that your skip bag will not contain Gas Canisters / Bottles:";
+            }
+        } else {
+            if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
+                message = "Your vans contain hazardous waste.";
+                confirmNoGas = "Confirm below that your skip bags will not contain Gas Canisters / Bottles:";
+            } else {
+                message = "Your van contains hazardous waste.";
                 confirmNoGas = "Confirm below that your skip bag will not contain Gas Canisters / Bottles:";
             }
         }
@@ -80,9 +88,12 @@ public class HireHazardousActivity extends AppCompatActivity {
         } else if (Control.CONTROL.getCurrentOrder().getSkipType() == Skip.MINI_SKIP){
             subtotal = 510;
             ordered += "Mini Skip";
-        } else {
+        } else if (Control.CONTROL.getCurrentOrder().getSkipType() == Skip.DUMPY_BAG){
             subtotal = 240;
             ordered += "Skip Bag";
+        } else {
+            subtotal = 300;
+            ordered += "Van";
         }
         whatWasOrdered.setText(ordered);
 
