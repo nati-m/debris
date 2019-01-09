@@ -80,9 +80,13 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
 
         //Sets the default skip collection date to 2 days after the skip arrives.
         //Displays this date on the dateDisplayButton.
+        //If the default skip collection date is Sunday, another day is added to make it Monday.
         calendarWithDateOfSkipCollection = Calendar.getInstance();
         calendarWithDateOfSkipCollection.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
         calendarWithDateOfSkipCollection.add(Calendar.DATE, 5);
+        if(isItSunday(calendarWithDateOfSkipCollection)){
+            calendarWithDateOfSkipCollection.add(Calendar.DATE, 1);
+        }
         year = calendarWithDateOfSkipCollection.get(Calendar.YEAR);
         month = calendarWithDateOfSkipCollection.get(Calendar.MONTH);
         day = calendarWithDateOfSkipCollection.get(Calendar.DAY_OF_MONTH);
@@ -118,7 +122,23 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
         return false;
     }
 
+    private boolean isItSunday(Calendar calendar){
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        //Sunday has the static value of 1, so dayOfWeek will equal Calendar.SATURDAY if Calender.DAY_OF_WEEK returned 7
+        if (dayOfWeek == Calendar.SUNDAY){
+            return true;
+        }
+        return false;
+    }
+
     private void updateSkipCollectionTextView(){
+
+        if(isItSunday(calendarWithDateOfSkipCollection)){
+            skipCollectionTextView.setText("Sundays are not allowed. Please choose again.");
+            return;
+        }
+
+
         String message = "Collection " + dayOfWeekIncludingSimpleDateFormat.format(calendarWithDateOfSkipCollection.getTime()) + ",";
 
         if (selectedTime.isEmpty()){
@@ -209,16 +229,27 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
 
     private void resetChooseTimeRecyclerView(){
         times = new ArrayList<>();
-        times.add("Don't mind"); times.add("Morning");
-        if(!isItSaturday(calendarWithDateOfSkipCollection)){
-            times.add("Afternoon");
-        }
-        times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
-        //if it is not Saturday, three more times are added
-        if(!isItSaturday(calendarWithDateOfSkipCollection)) {
-            times.add("1pm-3pm");
-            times.add("2pm-4pm");
-            times.add("3pm-5pm");
+
+        if(!isItSunday(calendarWithDateOfSkipCollection)) {
+
+            times.add("Don't mind");
+            times.add("Morning");
+            if (!isItSaturday(calendarWithDateOfSkipCollection)) {
+                times.add("Afternoon");
+            }
+            times.add("8am-10am");
+            times.add("9am-11am");
+            times.add("10am-12pm");
+            times.add("11am-1pm");
+            times.add("12pm-2pm");
+            //if it is not Saturday, three more times are added
+            if (!isItSaturday(calendarWithDateOfSkipCollection)) {
+                times.add("1pm-3pm");
+                times.add("2pm-4pm");
+                times.add("3pm-5pm");
+            }
+        } else {
+            times.add("Sunday is not allowed.");
         }
 
         chooseTimeArrayAdapter = new ChooseTimeArrayAdapter(times, this);
@@ -255,6 +286,12 @@ public class HireOptionalChooseCollectionDateActivity extends AppCompatActivity 
     private void attemptContinue(){
 
         skipCollectionTextView.setError(null);
+
+        if(isItSunday(calendarWithDateOfSkipCollection)){
+            Snackbar.make(skipCollectionTextView, "Sundays are not allowed.", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+            return;
+        }
 
         if(selectedTime.isEmpty()){
             skipCollectionTextView.setError("Time choice required!");
