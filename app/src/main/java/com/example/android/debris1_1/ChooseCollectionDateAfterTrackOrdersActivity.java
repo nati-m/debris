@@ -104,10 +104,16 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
         if(calendarWithDateOfSkipCollection.getTime().before(testy.getTime())){
             calendarWithDateOfSkipCollection.setTime(Control.CONTROL.getCurrentOrder().getDateOfSkipArrival().getTime());
             calendarWithDateOfSkipCollection.add(Calendar.DATE, 2);
+            if(isItSunday(calendarWithDateOfSkipCollection)){
+                calendarWithDateOfSkipCollection.add(Calendar.DATE, 1);
+            }
         }
         else {
-            //This simply sets it to 2 days after today
+            //This simply sets it to 2 days after today, or 3 if 2 days after is Sunday
             calendarWithDateOfSkipCollection.add(Calendar.DATE, 2);
+            if(isItSunday(calendarWithDateOfSkipCollection)){
+                calendarWithDateOfSkipCollection.add(Calendar.DATE, 1);
+            }
         }
 
         //This checks that the suggested date is not more than 28 days away from the skip arrival date,
@@ -153,8 +159,25 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
         return false;
     }
 
+    private boolean isItSunday(Calendar calendar){
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        //Sunday has the static value of 1, so dayOfWeek will equal Calendar.SATURDAY if Calender.DAY_OF_WEEK returned 7
+        if (dayOfWeek == Calendar.SUNDAY){
+            return true;
+        }
+        return false;
+    }
+
     private void updateSkipCollectionTextView(){
+
+        if(isItSunday(calendarWithDateOfSkipCollection)){
+            skipCollectionTextView.setText("Sundays are not allowed. Please choose again.");
+            return;
+        }
+
         String message = "Collection " + dayOfWeekIncludingSimpleDateFormat.format(calendarWithDateOfSkipCollection.getTime()) + ",";
+
+
 
         if (selectedTime.isEmpty()){
             message += " Select Time";
@@ -250,16 +273,26 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
 
     private void resetChooseTimeRecyclerView(){
         times = new ArrayList<>();
-        times.add("Don't mind"); times.add("Morning");
-        if(!isItSaturday(calendarWithDateOfSkipCollection)){
-            times.add("Afternoon");
-        }
-        times.add("8am-10am"); times.add("9am-11am"); times.add("10am-12pm"); times.add("11am-1pm"); times.add("12pm-2pm");
-        //if it is not Saturday, three more times are added
-        if(!isItSaturday(calendarWithDateOfSkipCollection)) {
-            times.add("1pm-3pm");
-            times.add("2pm-4pm");
-            times.add("3pm-5pm");
+
+        if(!isItSunday(calendarWithDateOfSkipCollection)) {
+            times.add("Don't mind");
+            times.add("Morning");
+            if (!isItSaturday(calendarWithDateOfSkipCollection)) {
+                times.add("Afternoon");
+            }
+            times.add("8am-10am");
+            times.add("9am-11am");
+            times.add("10am-12pm");
+            times.add("11am-1pm");
+            times.add("12pm-2pm");
+            //if it is not Saturday, three more times are added
+            if (!isItSaturday(calendarWithDateOfSkipCollection)) {
+                times.add("1pm-3pm");
+                times.add("2pm-4pm");
+                times.add("3pm-5pm");
+            }
+        } else {
+            times.add("Sunday is not allowed");
         }
 
         chooseTimeArrayAdapter = new ChooseTimeArrayAdapter(times, this);
@@ -296,6 +329,13 @@ public class ChooseCollectionDateAfterTrackOrdersActivity extends AppCompatActiv
     private void attemptContinue(){
 
         skipCollectionTextView.setError(null);
+
+        if(isItSunday(calendarWithDateOfSkipCollection)){
+            Snackbar.make(skipCollectionTextView, "Sundays are not allowed.", Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+            return;
+        }
+
 
         if(selectedTime.isEmpty()){
             skipCollectionTextView.setError("Time choice required!");
