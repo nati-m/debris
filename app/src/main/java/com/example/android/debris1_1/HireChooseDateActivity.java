@@ -295,6 +295,12 @@ public class HireChooseDateActivity extends AppCompatActivity {
         Control.CONTROL.getCurrentOrder().setDateOfSkipArrival(calenderWithDateOfSkipArrival);
         Control.CONTROL.getCurrentOrder().setTimeOfArrival(selectedTime);
 
+        //If it's a van, the time of arrival and removal will be the same day and time, so this is updated here
+        if(Control.CONTROL.getCurrentOrder().getSkipType() == Skip.WO_MAN_WITH_VAN){
+            Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(calenderWithDateOfSkipArrival);
+            Control.CONTROL.getCurrentOrder().setTimeOfCollection(selectedTime);
+        }
+
         Intent nextPageIntent = new Intent(HireChooseDateActivity.this, HireDriverMessageActivity.class);
         startActivity(nextPageIntent);
 

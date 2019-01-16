@@ -29,8 +29,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 
 import static android.view.View.GONE;
@@ -48,6 +51,9 @@ public class TrackOrdersActivity extends AppCompatActivity {
     TrackOrdersRecyclerViewAdapter trackOrdersRecyclerViewAdapter;
     Context contextForArrayAdapter;
 
+    Calendar oneMonthAgo;
+    Calendar c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,10 @@ public class TrackOrdersActivity extends AppCompatActivity {
         youHaveNoOrders = findViewById(R.id.you_have_no_orders_track_orders);
         sortOrdersByTextView = findViewById(R.id.sort_by_date_of_skip_arrival_track_orders);
         sortOrdersBy = findViewById(R.id.spinner_sort_orders_by_track_orders);
+
+        oneMonthAgo = Calendar.getInstance();
+        oneMonthAgo.add( Calendar.DAY_OF_MONTH, -31);
+        c = Calendar.getInstance();
 
         //getOrdersForThisUserFromFirebase();
 
@@ -75,7 +85,26 @@ public class TrackOrdersActivity extends AppCompatActivity {
 
                             Order order = child.getValue(Order.class);
                             order.setOrderUIDakaFirebaseDatabaseKey(child.getKey());
-                            ordersFromThisUser.add(order);
+
+                            //The orders are only added if they were made 31 days ago or sooner. Older ones are not shown.
+                            //First the Calendar object in the order must be created from the string version
+                            //as Firebase can't store Calendar objects.
+
+                            try {
+                                Date date = new Date();
+                                date.setTime(Control.CONTROL.getSimpleDateFormat().parse(order.getDateOfSkipArrivalString()).getTime());
+                                 c.setTime(date);
+                                order.setDateOfSkipArrival(c);
+
+                                if(order.getDateOfSkipArrival().after(oneMonthAgo)) {
+                                    ordersFromThisUser.add(order);
+                                }
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                ordersFromThisUser.add(order);
+                            }
+
                         }
                         //When the data is finished loading, THEN render the page
                         render();

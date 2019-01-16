@@ -51,7 +51,7 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
         String otherGeneralWaste;
         scrollView = findViewById(R.id.scrollView_hire_non_hazardous);
 
-        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG) {
+        if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.DUMPY_BAG && Control.CONTROL.getCurrentOrder().getSkipType() != Skip.WO_MAN_WITH_VAN) {
             if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
                 message = "GOOD. Your skips contain no hazardous waste!!";
                 otherGeneralWaste = "Skips include other general waste";
@@ -59,13 +59,21 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
                 message = "GOOD. Your skip contains no hazardous waste!!";
                 otherGeneralWaste = "Skip includes other general waste";
             }
-        } else {
+        } else if (Control.CONTROL.getCurrentOrder().getSkipType() == Skip.DUMPY_BAG) {
             if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
                 message = "GOOD. Your skip bags contain no hazardous waste!!";
                 otherGeneralWaste = "Skip bags include other general waste";
                  } else {
                 message = "GOOD. Your skip bag contains no hazardous waste!!";
                 otherGeneralWaste = "Skip bag includes other general waste";
+            }
+        } else  {
+            if (Control.CONTROL.getCurrentOrder().getNumberOfSkipsOrdered() > 1) {
+                message = "GOOD. Your vans contain no hazardous waste!!";
+                otherGeneralWaste = "Vans include other general waste";
+            } else {
+                message = "GOOD. Your van contains no hazardous waste!!";
+                otherGeneralWaste = "Van includes other general waste";
             }
         }
 
@@ -139,6 +147,9 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
             } else if (skip==Skip.DUMPY_BAG){
                 skipType = "Skip Bag";
                 subtotal = 80;
+            } else {
+                skipType = "Van";
+                subtotal = 100;
             }
         } else {
             wasteTypeString = "Inert";
@@ -155,6 +166,9 @@ public class HireNonHazardousOrInertActivity extends AppCompatActivity {
             } else if (skip==Skip.DUMPY_BAG){
                 skipType = "Skip Bag";
                 subtotal = 60;
+            } else {
+                skipType = "Van";
+                subtotal = 80;
             }
         }
 

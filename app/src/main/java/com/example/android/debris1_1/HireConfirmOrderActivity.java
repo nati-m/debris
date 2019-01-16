@@ -34,9 +34,12 @@ public class HireConfirmOrderActivity extends AppCompatActivity {
                 //This sets the value of Skip collection date and time to null.
                 //This resets the values if the user chose to select their collection date/time and then changed
                 //their mind by pressing the back button.
-                Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(null);
-                Control.CONTROL.getCurrentOrder().setTimeOfCollection(null);
-                Control.CONTROL.getCurrentOrder().setSurchargeForLongHire(0);
+                //Vans are collected on the same day so this is skipped for them.
+                if(Control.CONTROL.getCurrentOrder().getSkipType() != Skip.WO_MAN_WITH_VAN) {
+                    Control.CONTROL.getCurrentOrder().setDateOfSkipCollection(null);
+                    Control.CONTROL.getCurrentOrder().setTimeOfCollection(null);
+                    Control.CONTROL.getCurrentOrder().setSurchargeForLongHire(0);
+                }
 
                 Intent nextPageIntent = new Intent(HireConfirmOrderActivity.this, HirePaymentActivity.class);
                 startActivity(nextPageIntent);

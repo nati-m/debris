@@ -31,6 +31,7 @@ public class HireReviewOrderActivity extends AppCompatActivity {
     TextView totalPrice;
     //TextView skipCollectionDateAndTime;
     TextView skipPointsNumber;
+    TextView thisFigureIsBasedOn;
 
     SimpleDateFormat simpleDateFormat;
 
@@ -55,6 +56,12 @@ public class HireReviewOrderActivity extends AppCompatActivity {
         VAT = findViewById(R.id.VAT_review_order);
         permitPrice = findViewById(R.id.permit_price_review_order);
         skipPointsNumber = findViewById(R.id.skip_points_amount_review_order);
+        thisFigureIsBasedOn = findViewById(R.id.this_figure_is_based_on_hire_review_order);
+
+        if (Control.CONTROL.getCurrentOrder().getSkipType() == Skip.WO_MAN_WITH_VAN){
+            thisFigureIsBasedOn.setText
+                    ("*This figure is based on the van contents as described by you. Should the contents differ from your declaration, we reserve the right to make additional charges in accordance with our terms and conditions.\n");
+        }
 
         String fullAddress = (Control.CONTROL.getCurrentOrderAddressAsString());
         addressTextView.setText(fullAddress);

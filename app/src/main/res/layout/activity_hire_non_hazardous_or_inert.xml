@@ -42,7 +42,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/black"
-        android:text="Will your skip contain "/>
+        android:text="Will your waste comprise of "/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,7 +75,7 @@ bricks, concrete or tiles?"/>
         android:textColor="@color/black"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:text="(Skips with only these items are classed as INERT, and for tax reasons cost a little less to dispose of)"/>
+        android:text="(Skips/vans with only these items are classed as INERT, and for tax reasons cost a little less to dispose of)"/>
 
 
     <LinearLayout
